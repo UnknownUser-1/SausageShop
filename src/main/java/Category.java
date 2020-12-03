@@ -8,8 +8,8 @@ public class Category {
     private ArrayList<Product> products;
     private String title;
 
-    public Category(ArrayList<Product> products, String title){
-        this.products = products;
+    public Category(String title) {
+        this.products = new ArrayList<>();
         this.title = title;
     }
 
@@ -27,5 +27,21 @@ public class Category {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    /**
+     * Just for debug
+     */
+    public void print() {
+        System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
+        System.out.println(getTitle());
+        System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
+        products.forEach(new Consumer<Product>() {
+            @Override
+            public void accept(Product p) {
+                System.out.println(p.getName() + "  " + p.getPrice() + "  Рейтинг: " + p.getRating());
+            }
+        });
+        System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
     }
 }
