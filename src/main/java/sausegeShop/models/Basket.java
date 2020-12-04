@@ -1,6 +1,7 @@
-package java;
+package sausegeShop.models;
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class Basket {
 
@@ -43,7 +44,7 @@ public class Basket {
 
     public void purchase() {
         for (BasketCrutch product : products) {
-            product.getP().purchase(product.getCount(), product.getRating());
+            product.getProduct().purchase(product.getCount(), product.getRating());
         }
     }
 
@@ -51,7 +52,7 @@ public class Basket {
         double price = 0;
         for (BasketCrutch product : products) {
             for (int i = 0; i < product.getCount(); i++) {
-                price += product.getP().getPrice();
+                price += product.getProduct().getPrice();
             }
         }
         return price;
@@ -71,7 +72,7 @@ public class Basket {
         products.forEach(new Consumer<BasketCrutch>() {
             @Override
             public void accept(BasketCrutch b) {
-                System.out.println(b.getP().getName() + "  " + b.getP().getPrice() + "  Кол-во в заказе: " + b.getCount() + "  Ваша оценка: " + b.getRating());
+                System.out.println(b.getProduct().getName() + "  " + b.getProduct().getPrice() + "  Кол-во в заказе: " + b.getCount() + "  Ваша оценка: " + b.getRating());
             }
         });
         System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
@@ -99,7 +100,7 @@ class BasketCrutch {
         this.rating = rating;
     }
 
-    public Product getP() {
+    public Product getProduct() {
         return p;
     }
 

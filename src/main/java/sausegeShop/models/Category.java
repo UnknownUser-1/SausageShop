@@ -1,7 +1,8 @@
-package java;
+package sausegeShop.models;
 
 
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 public class Category {
 

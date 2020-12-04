@@ -1,4 +1,6 @@
-package java;
+package sausegeShop.models;
+
+import java.util.ArrayList;
 
 public class Product {
 
@@ -114,6 +116,7 @@ public class Product {
         }
         cat.getProducts().add(this);
         this.cat = cat;
+
     }
 
     public String getCategoryTitle() {
