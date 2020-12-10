@@ -1,7 +1,7 @@
-package sausegeShop.controllers;
+package sausageShop.controllers;
 
 import java.io.Serializable;
-import sausegeShop.models.Category;
+import sausageShop.models.Category;
 import java.util.ArrayList;
 
 public class CategoryController implements Serializable{

@@ -1,6 +1,6 @@
-package sausegeShop.controllers;
+package sausageShop.controllers;
 
-import sausegeShop.models.Basket;
+import sausageShop.models.Basket;
 
 public class BasketController {
 
