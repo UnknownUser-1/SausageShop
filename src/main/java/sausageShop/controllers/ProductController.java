@@ -1,6 +1,6 @@
-package sausegeShop.controllers;
+package sausageShop.controllers;
 
-import sausegeShop.models.Product;
+import sausageShop.models.Product;
 import java.util.ArrayList;
 
 public class ProductController {

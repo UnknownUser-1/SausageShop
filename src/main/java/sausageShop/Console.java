@@ -1,15 +1,15 @@
-package sausegeShop;
+package sausageShop;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import sausegeShop.controllers.BasketController;
-import sausegeShop.controllers.CategoryController;
-import sausegeShop.controllers.ProductController;
-import sausegeShop.models.Basket;
-import sausegeShop.models.Category;
-import sausegeShop.models.Product;
+import sausageShop.controllers.BasketController;
+import sausageShop.controllers.CategoryController;
+import sausageShop.controllers.ProductController;
+import sausageShop.models.Basket;
+import sausageShop.models.Category;
+import sausageShop.models.Product;
 import java.util.Scanner;
 
 public class Console {
