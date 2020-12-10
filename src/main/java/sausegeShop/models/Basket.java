@@ -5,22 +5,23 @@ import java.util.function.Consumer;
 
 public class Basket {
 
-/**
- * ArrayList with params
- * <br>{@link  BasketCrutch#p} Product
- * <br>{@link BasketCrutch#count} buying amount
- * <br>{@link BasketCrutch#rating} rating
- * <br>We store all the Basket Information here
- */
+    /**
+     * ArrayList with params
+     * <br>{@link  BasketCrutch#p} Product
+     * <br>{@link BasketCrutch#count} buying amount
+     * <br>{@link BasketCrutch#rating} rating
+     * <br>We store all the Basket Information here
+     */
     private ArrayList<BasketCrutch> products;
 
     public Basket() {
         this.products = new ArrayList<>();
     }
-    
+
     /**
-     * 
-     * We need to create a some sort o a method that can return massive or smth like that.
+     *
+     * We need to create a some sort o a method that can return massive or smth
+     * like that.
      */
     public ArrayList<BasketCrutch> getBasket() {
         return products;
@@ -28,6 +29,10 @@ public class Basket {
 
     public void delete(int indx) {
         products.remove(indx);
+    }
+
+    public void deleteAll() {
+        products.removeAll(products);
     }
 
     public void add(Product pr, int count, double rat) {
@@ -62,7 +67,7 @@ public class Basket {
      * Printing basket information
      */
     public void print() {
-        if(products.isEmpty()){
+        if (products.isEmpty()) {
             System.out.println("Корзина пуста");
             return;
         }
@@ -78,15 +83,22 @@ public class Basket {
         System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
     }
 
+    public void printUser() {
+        int g = 3;
+        for (int i = 0; i < getBasket().size(); i++) {
+            System.out.println(g + ". " + getBasket().get(i).getProduct().getName());
+            g++;
+        }
+    }
+
 }
 
-
 /**
- * WARNING 
+ * WARNING
  * <br> Чудовищный костыль
  * <br>
  * <br>
- * <br> It need for this {@link products} ArrayList creation 
+ * <br> It needed for this {@link products} ArrayList creation
  */
 class BasketCrutch {
 
@@ -104,7 +116,7 @@ class BasketCrutch {
         return p;
     }
 
-    public void setP(Product p) {
+    public void setProduct(Product p) {
         this.p = p;
     }
 

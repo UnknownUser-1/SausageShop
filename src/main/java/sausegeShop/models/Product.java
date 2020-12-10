@@ -1,8 +1,9 @@
 package sausegeShop.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Product {
+public class Product implements Serializable{
 
     /**
      * Product name

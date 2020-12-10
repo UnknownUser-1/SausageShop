@@ -1,10 +1,11 @@
 package sausegeShop.models;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-public class Category {
+public class Category implements Serializable {
 
     private ArrayList<Product> products;
     private String title;

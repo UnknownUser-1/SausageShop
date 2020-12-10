@@ -1,9 +1,10 @@
 package sausegeShop.controllers;
 
+import java.io.Serializable;
 import sausegeShop.models.Category;
 import java.util.ArrayList;
 
-public class CategoryController {
+public class CategoryController implements Serializable{
 
     private ArrayList<Category> categories = new ArrayList<>();
 
