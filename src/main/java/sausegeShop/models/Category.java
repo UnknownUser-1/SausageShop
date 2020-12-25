@@ -31,6 +31,14 @@ public class Category implements Serializable {
         this.title = title;
     }
 
+    public int getSize(){
+        return this.products.size();
+    }
+
+    public Product getProduct(int number){
+        return this.products.get(number);
+    }
+
     /**
      * Just for debug
      */

@@ -34,6 +34,12 @@ public class CategoryController implements Serializable{
         this.categories.add(number,category);
     }
 
+    public void deleteCategories(int number) {
+        if (number<0||number>size())
+            throw  new IllegalArgumentException("Что-то пошло не так");
+        this.categories.remove(number);
+    }
+
     public int size(){
         return categories.size();
     }

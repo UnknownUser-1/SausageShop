@@ -4,7 +4,6 @@ import sausegeShop.models.Product;
 import java.util.ArrayList;
 
 public class ProductController {
-
     private ArrayList<Product> product = new ArrayList<>();
 
 
@@ -32,6 +31,12 @@ public class ProductController {
         if (product==null||number<0)
             throw new IllegalArgumentException("Что-то погло не так");
         this.product.add(number,product);
+    }
+
+    public void deleteProduct(int number){
+        if (number<0||number>size())
+            throw  new IllegalArgumentException("Что-то пошло не так");
+        this.product.remove(number);
     }
 
     public int size(){
