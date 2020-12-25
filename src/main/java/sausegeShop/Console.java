@@ -171,8 +171,21 @@ public class Console {
     public static void showAllCategories(){
         System.out.println("");
         System.out.println("Все категории");
+        for(int k = 0; k<categoryController.size();k++)
+            System.out.println(k+". "+ categoryController.getCategories(k).getTitle());
+        System.out.println("");
+        System.out.println("Подроднее о категориях");
         for(int i = 0; i<categoryController.size();i++){
             System.out.println(i+". "+ categoryController.getCategories(i).getTitle());
+            if(categoryController.getCategories(i).getSize() == 0)
+                System.out.println("В данной категории не содержится товаров");
+            else {
+                System.out.println("В данной категории содержится");
+                for (int j = 0; j < categoryController.getCategories(i).getSize(); j++) {
+                    System.out.println(j + ". " + categoryController.getCategories(i).getProduct(j).getName());
+                }
+            }
+            System.out.println("");
         }
         adminMenu(2);
     }
