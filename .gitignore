@@ -24,6 +24,7 @@ out
 target
 
 ### NetBeans ###
+/out.bin
 /nbproject/private/
 /nbbuild/
 /dist/
