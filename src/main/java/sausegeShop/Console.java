@@ -221,6 +221,7 @@ public class Console {
         System.out.println("1. Категории");
         System.out.println("2. Корзина");
         System.out.println("3. Выход");
+        System.out.println("4. Вернуться на уровень выше");
         switch (new Scanner(System.in).nextInt()) {
             case (1):
                 categoryMenu();
@@ -230,6 +231,9 @@ public class Console {
                 break;
             case (3):
                 System.exit(0);
+                break;
+            case(4):
+                selectionMenu();
                 break;
         }
     }
