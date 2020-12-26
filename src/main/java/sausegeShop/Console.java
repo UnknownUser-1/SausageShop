@@ -4,12 +4,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import sausegeShop.controllers.BasketController;
 import sausegeShop.controllers.CategoryController;
 import sausegeShop.controllers.ProductController;
 import sausegeShop.models.Basket;
 import sausegeShop.models.Category;
 import sausegeShop.models.Product;
+
 import java.util.Scanner;
 
 public class Console {
@@ -35,12 +37,12 @@ public class Console {
         Product jerky = Product.productFactory("Вяленое мясо", 800, "Оно вкусное", "200% вяленого мяса", meat);
         Product jerky2 = Product.productFactory("Копченное мясо", 683, "Оно стоит 683 рубля", "Его ингридиенты стоили 683 рубля", meat);
         Product jerky3 = Product.productFactory("Мяско для шашлычка", 550, "Шашлычка для пивка", "Лотерея: говядина или свинина или сюрприз", meat);
-        productController.addProduct(sausage,0);
-        productController.addProduct(cervelat,1);
-        productController.addProduct(cervelat2,2);
-        productController.addProduct(jerky,3);
-        productController.addProduct(jerky2,4);
-        productController.addProduct(jerky3,5);
+        productController.addProduct(sausage, 0);
+        productController.addProduct(cervelat, 1);
+        productController.addProduct(cervelat2, 2);
+        productController.addProduct(jerky, 3);
+        productController.addProduct(jerky2, 4);
+        productController.addProduct(jerky3, 5);
         try (
                 FileOutputStream fos = new FileOutputStream("out.bin")) {
             Serialize.serializeDatabase(categoryController, fos);
@@ -48,13 +50,13 @@ public class Console {
         selectionMenu();
     }
 
-    public static void selectionMenu(){
+    public static void selectionMenu() {
         System.out.println("");
         System.out.println("Кем бы вы хотели зайти в систему?");
         System.out.println("1. Администратор");
         System.out.println("2. Пользователь");
         System.out.println("3. Ой а что я тут делаю");
-        switch (new Scanner(System.in).nextInt()){
+        switch (new Scanner(System.in).nextInt()) {
             case (1):
                 adminMenu(1);
                 break;
@@ -67,11 +69,11 @@ public class Console {
         }
     }
 
-    public static void adminMenu(int whatTime){
-        if (whatTime==1){
+    public static void adminMenu(int whatTime) {
+        if (whatTime == 1) {
             System.out.println("");
             System.out.println("Введите пароль");
-            if (new Scanner(System.in).nextInt()== 1337)
+            if (new Scanner(System.in).nextInt() == 1337)
                 adminMenu(2);
             else
                 selectionMenu();
@@ -86,7 +88,7 @@ public class Console {
         System.out.println("5. Показать все товары");
         System.out.println("6. Показать все категории");
         System.out.println("7. Вернуться на меню выше");
-        switch (new Scanner(System.in).nextInt()){
+        switch (new Scanner(System.in).nextInt()) {
             case (1):
                 changeCategories(1);
                 break;
@@ -111,25 +113,25 @@ public class Console {
         }
     }
 
-    public static void changeCategories(int whatAction){
-        if(whatAction == 1){
+    public static void changeCategories(int whatAction) {
+        if (whatAction == 1) {
             System.out.println("");
             System.out.println("Введите название категории");
-            categoryController.addCategories(new Category(new Scanner(System.in).next()),categoryController.size());
+            categoryController.addCategories(new Category(new Scanner(System.in).next()), categoryController.size());
             adminMenu(2);
-        } else if(whatAction == 2){
+        } else if (whatAction == 2) {
             System.out.println("");
             System.out.println("Введите номер категории которую хотите удалить");
-            for(int i = 0; i<categoryController.size();i++){
-                System.out.println(i+". "+ categoryController.getCategories(i).getTitle());
+            for (int i = 0; i < categoryController.size(); i++) {
+                System.out.println(i + ". " + categoryController.getCategories(i).getTitle());
             }
             categoryController.deleteCategories(new Scanner(System.in).nextInt());
             adminMenu(2);
         }
     }
 
-    public static void changeProduct(int whatAction){
-        if(whatAction == 1){
+    public static void changeProduct(int whatAction) {
+        if (whatAction == 1) {
             System.out.println("");
             System.out.print("Введите название товара:");
             String name = new Scanner(System.in).next();
@@ -140,44 +142,43 @@ public class Console {
             System.out.print("Введите состав товара:");
             String composition = new Scanner(System.in).next();
             System.out.println("Выберите к какой категории отнести товар");
-            for(int i = 0; i<categoryController.size();i++){
-                System.out.println(i+". "+ categoryController.getCategories(i).getTitle());
+            for (int i = 0; i < categoryController.size(); i++) {
+                System.out.println(i + ". " + categoryController.getCategories(i).getTitle());
             }
             Category category = categoryController.getCategories(new Scanner(System.in).nextInt());
-            productController.addProduct(Product.productFactory(name,price,description,composition,category), productController.size());
+            productController.addProduct(Product.productFactory(name, price, description, composition, category), productController.size());
             adminMenu(2);
-        }
-        else if(whatAction == 2){
+        } else if (whatAction == 2) {
             System.out.println("");
             System.out.println("Введите номер товара который хотите удалить");
-            for(int i = 0; i<productController.size();i++){
-                System.out.println(i+". "+ productController.getProduct(i).getName());
+            for (int i = 0; i < productController.size(); i++) {
+                System.out.println(i + ". " + productController.getProduct(i).getName());
             }
             productController.deleteProduct(new Scanner(System.in).nextInt());
             adminMenu(2);
         }
     }
 
-    public static void showAllProduct(){
+    public static void showAllProduct() {
         System.out.println("");
         System.out.println("Все товары");
-        for(int i=0;i<productController.size();i++)
-            System.out.println(i+". "+ productController.getProduct(i).getName()+" " + productController.getProduct(i).getPrice()
-            + " " + productController.getProduct(i).getDescription() + " " + productController.getProduct(i).getComposition()
-            + " " + productController.getProduct(i).getCategoryTitle());
+        for (int i = 0; i < productController.size(); i++)
+            System.out.println(i + ". " + productController.getProduct(i).getName() + " " + productController.getProduct(i).getPrice()
+                    + " " + productController.getProduct(i).getDescription() + " " + productController.getProduct(i).getComposition()
+                    + " " + productController.getProduct(i).getCategoryTitle());
         adminMenu(2);
     }
 
-    public static void showAllCategories(){
+    public static void showAllCategories() {
         System.out.println("");
         System.out.println("Все категории");
-        for(int k = 0; k<categoryController.size();k++)
-            System.out.println(k+". "+ categoryController.getCategories(k).getTitle());
+        for (int k = 0; k < categoryController.size(); k++)
+            System.out.println(k + ". " + categoryController.getCategories(k).getTitle());
         System.out.println("");
         System.out.println("Подроднее о категориях");
-        for(int i = 0; i<categoryController.size();i++){
-            System.out.println(i+". "+ categoryController.getCategories(i).getTitle());
-            if(categoryController.getCategories(i).getSize() == 0)
+        for (int i = 0; i < categoryController.size(); i++) {
+            System.out.println(i + ". " + categoryController.getCategories(i).getTitle());
+            if (categoryController.getCategories(i).getSize() == 0)
                 System.out.println("В данной категории не содержится товаров");
             else {
                 System.out.println("В данной категории содержится");
@@ -220,8 +221,9 @@ public class Console {
         System.out.println("Введите число");
         System.out.println("1. Категории");
         System.out.println("2. Корзина");
-        System.out.println("3. Выход");
-        System.out.println("4. Вернуться на уровень выше");
+        System.out.println("3. Поиск по товарам");
+        System.out.println("4. Выход");
+        System.out.println("5. Вернуться на уровень выше");
         switch (new Scanner(System.in).nextInt()) {
             case (1):
                 categoryMenu();
@@ -230,10 +232,51 @@ public class Console {
                 basketMenu();
                 break;
             case (3):
+                searchProductMenu();
+                break;
+            case (4):
                 System.exit(0);
                 break;
-            case(4):
+            case (5):
                 selectionMenu();
+                break;
+        }
+    }
+
+    public static void searchProductMenu() {
+        System.out.println("");
+        System.out.print("Введите название продукта который хотите найти: ");
+        String productToSearch = new Scanner(System.in).next();
+        for (int i = 0; i < productController.size(); i++) {
+            if (productController.getProduct(i).getName().equals(productToSearch)) {
+                productMenu(i);
+            }
+        }
+        System.out.println("Такого продукта у нас нету");
+        userMenu();
+    }
+
+    public static void productMenu(int numberProduct) {
+        System.out.println("");
+        productController.getProduct(numberProduct).print();
+        // product.getProduct(numberProduct).print();
+        System.out.println("");
+        System.out.println("1. В меню");
+        System.out.println("2. Добавить в корзину");
+        int key = new Scanner(System.in).nextInt();
+        switch (key) {
+            case (1):
+                userMenu();
+                break;
+            case (2):
+                System.out.println("Введит количество");
+                int count = new Scanner(System.in).nextInt();
+                System.out.println("Введите вашу оценку");
+                double rat = new Scanner(System.in).nextDouble();
+                // basket.getBasket().add(product.getProduct(numberProduct), count, rat);
+                //Изменил, чтобы всё работало. Не уверен как это сделать с контроллерами
+                basketController.getBasket().add(productController.getProduct(numberProduct), count, rat);
+                basketMenu();
                 break;
         }
     }
