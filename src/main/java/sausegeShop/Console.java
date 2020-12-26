@@ -87,7 +87,9 @@ public class Console {
         System.out.println("4. Удалить товар");
         System.out.println("5. Показать все товары");
         System.out.println("6. Показать все категории");
-        System.out.println("7. Вернуться на меню выше");
+        System.out.println("7. Сохранить данный набор товаров и категорий");
+        System.out.println("8. Загрузить последний набор товаров и категорий");
+        System.out.println("9. Вернуться на меню выше");
         switch (new Scanner(System.in).nextInt()) {
             case (1):
                 changeCategories(1);
@@ -108,6 +110,21 @@ public class Console {
                 showAllCategories();
                 break;
             case (7):
+                try (
+                        FileOutputStream fos = new FileOutputStream("out.bin")) {
+                    Serialize.serializeDatabase(categoryController, fos);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case (8):
+                try (FileInputStream fis = new FileInputStream("out.bin")) {
+                    categoryController = Serialize.deserializeDatabase(fis);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case (9):
                 selectionMenu();
                 break;
         }
@@ -117,7 +134,7 @@ public class Console {
         if (whatAction == 1) {
             System.out.println("");
             System.out.println("Введите название категории");
-            categoryController.addCategories(new Category(new Scanner(System.in).next()), categoryController.size());
+            categoryController.addCategories(new Category(new Scanner(System.in).nextLine()), categoryController.size());
             adminMenu(2);
         } else if (whatAction == 2) {
             System.out.println("");
@@ -134,13 +151,13 @@ public class Console {
         if (whatAction == 1) {
             System.out.println("");
             System.out.print("Введите название товара:");
-            String name = new Scanner(System.in).next();
+            String name = new Scanner(System.in).nextLine();
             System.out.print("Введите цену товара:");
             double price = new Scanner(System.in).nextDouble();
             System.out.print("Введите описание товара:");
-            String description = new Scanner(System.in).next();
+            String description = new Scanner(System.in).nextLine();
             System.out.print("Введите состав товара:");
-            String composition = new Scanner(System.in).next();
+            String composition = new Scanner(System.in).nextLine();
             System.out.println("Выберите к какой категории отнести товар");
             for (int i = 0; i < categoryController.size(); i++) {
                 System.out.println(i + ". " + categoryController.getCategories(i).getTitle());
