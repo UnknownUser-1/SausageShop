@@ -66,6 +66,10 @@ public class Console {
             case (3):
                 System.exit(0);
                 break;
+            default:
+                System.out.println("Введите число ");
+                selectionMenu();
+                break;
         }
     }
 
@@ -126,6 +130,10 @@ public class Console {
                 break;
             case (9):
                 selectionMenu();
+                break;
+            default:
+                System.out.println("Введите число");
+                adminMenu(2);
                 break;
         }
     }
@@ -229,6 +237,10 @@ public class Console {
             case (2):
                 secondLaunch();
                 break;
+            default:
+                System.out.println("Введите число");
+                predMainMenu();
+                break;
         }
     }
 
@@ -257,6 +269,10 @@ public class Console {
             case (5):
                 selectionMenu();
                 break;
+            default:
+                System.out.println("Введите число");
+                userMenu();
+                break;
         }
     }
 
@@ -265,12 +281,16 @@ public class Console {
         System.out.print("Введите название продукта который хотите найти: ");
         String productToSearch = new Scanner(System.in).next();
         for (int i = 0; i < productController.size(); i++) {
-            if (productController.getProduct(i).getName().equals(productToSearch)) {
-                productMenu(i);
+            if (productController.getProduct(i).getName().toLowerCase().equals(productToSearch.toLowerCase())) {
+                System.out.println(i + ". " + productController.getProduct(i).getName());
             }
         }
-        System.out.println("Такого продукта у нас нету");
-        userMenu();
+        System.out.println("0. Вернуться назад");
+        System.out.print("Укажите номер конкретного товара: ");
+        int numberProduct = new Scanner(System.in).nextInt();
+        if(numberProduct == 0)
+            userMenu();
+        productMenu(numberProduct);
     }
 
     public static void productMenu(int numberProduct) {
@@ -294,6 +314,10 @@ public class Console {
                 //Изменил, чтобы всё работало. Не уверен как это сделать с контроллерами
                 basketController.getBasket().add(productController.getProduct(numberProduct), count, rat);
                 basketMenu();
+                break;
+            default:
+                System.out.println("Введите число");
+                productMenu(numberProduct);
                 break;
         }
     }
@@ -319,6 +343,10 @@ public class Console {
 //Изменил, чтобы всё работало. Не уверен как это сделать с контроллерами
                 basketController.getBasket().add(categoryController.getCategories(numberCategory).getProducts().get(numberProduct), count, rat);
                 basketMenu();
+                break;
+            default:
+                System.out.println("Введите число");
+                productMenu(numberProduct, numberCategory);
                 break;
         }
     }
@@ -399,6 +427,10 @@ public class Console {
                 System.out.println("Введите оценку");
                 basketController.getBasket().changeRating(indx, new Scanner(System.in).nextDouble());
                 basketMenu();
+                break;
+            default:
+                System.out.println("Введите число ");
+                productBasket(indx);
                 break;
         }
     }
