@@ -47,6 +47,10 @@ public class Console {
                 FileOutputStream fos = new FileOutputStream("out.bin")) {
             Serialize.serializeDatabase(categoryController, fos);
         }
+        try (
+                FileOutputStream fos = new FileOutputStream("out1.bin")) {
+            Serialize.serializeProductController(productController, fos);
+        }
         selectionMenu();
     }
 
@@ -110,9 +114,14 @@ public class Console {
                 showAllCategories();
                 break;
             case (7):
-                try (
-                        FileOutputStream fos = new FileOutputStream("out.bin")) {
+                try
+                        (FileOutputStream fos = new FileOutputStream("out.bin")) {
                     Serialize.serializeDatabase(categoryController, fos);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try (FileOutputStream fos = new FileOutputStream("out1.bin")) {
+                    Serialize.serializeProductController(productController,fos);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -120,6 +129,11 @@ public class Console {
             case (8):
                 try (FileInputStream fis = new FileInputStream("out.bin")) {
                     categoryController = Serialize.deserializeDatabase(fis);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                try (FileInputStream fis = new FileInputStream("out1.bin")) {
+                    productController = Serialize.deserializeProductController(fis);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -208,10 +222,13 @@ public class Console {
         adminMenu(2);
     }
 
-    public static void secondLaunch() throws FileNotFoundException, IOException {
+    public static void secondLaunch() throws IOException {
 
         try (FileInputStream fis = new FileInputStream("out.bin")) {
             categoryController = Serialize.deserializeDatabase(fis);
+        }
+        try (FileInputStream fis = new FileInputStream("out1.bin")) {
+            productController = Serialize.deserializeProductController(fis);
         }
         selectionMenu();
     }

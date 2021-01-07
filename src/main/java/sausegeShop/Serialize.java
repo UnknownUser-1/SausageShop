@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import sausegeShop.controllers.CategoryController;
+import sausegeShop.controllers.ProductController;
 
 /**
  *
@@ -26,10 +27,30 @@ public class Serialize {
         }
     }
 
+    public static void serializeProductController(ProductController base, OutputStream out){
+        try (out; ObjectOutputStream OOS = new ObjectOutputStream(out)) {
+            OOS.writeObject(base);
+        } catch (IOException ex) {
+            System.out.println("Oozhos occurred");
+        }
+    }
+
     public static CategoryController deserializeDatabase(InputStream in) {
         CategoryController base;
         try (in; ObjectInputStream OIS = new ObjectInputStream(in)) {
             return base = (CategoryController) OIS.readObject();
+        } catch (IOException ex) {
+            System.out.println("Oozhos occurred");
+        } catch (ClassNotFoundException e) {
+            System.out.println("Wrong object type");
+        }
+        return null;
+    }
+
+    public static ProductController deserializeProductController(InputStream in1){
+        ProductController base;
+        try (in1; ObjectInputStream OIS = new ObjectInputStream(in1)) {
+            return base = (ProductController) OIS.readObject();
         } catch (IOException ex) {
             System.out.println("Oozhos occurred");
         } catch (ClassNotFoundException e) {
