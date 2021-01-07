@@ -1,9 +1,11 @@
 package sausegeShop.controllers;
 
 import sausegeShop.models.Product;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ProductController {
+public class ProductController implements Serializable {
     private ArrayList<Product> product = new ArrayList<>();
 
 
