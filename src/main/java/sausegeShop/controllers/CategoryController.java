@@ -16,13 +16,21 @@ public class CategoryController implements Serializable{
 
     public CategoryController(){}
 
-    public Category getCategories(int number) {
+    public ArrayList<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(ArrayList<Category> categories) {
+        this.categories = categories;
+    }
+    
+    public Category getСategory(int number) {
         if(number<0||number>categories.size())
             throw new IllegalArgumentException("Такой категории не существует");
         return categories.get(number);
     }
 
-    public void setCategories(Category category,int number) {
+    public void setСategory(Category category,int number) {
         if(category == null || number<0)
             throw new IllegalArgumentException("Что-то пошло не так");
         this.categories.set(number,category);

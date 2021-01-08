@@ -47,14 +47,10 @@ public class Console {
                 FileOutputStream fos = new FileOutputStream("out.bin")) {
             Serialize.serializeDatabase(categoryController, fos);
         }
-        try (
-                FileOutputStream fos = new FileOutputStream("out1.bin")) {
-            Serialize.serializeProductController(productController, fos);
-        }
         selectionMenu();
     }
 
-    public static void selectionMenu() {
+    public static void selectionMenu() throws FileNotFoundException, IOException {
         System.out.println("");
         System.out.println("Кем бы вы хотели зайти в систему?");
         System.out.println("1. Администратор");
@@ -77,14 +73,15 @@ public class Console {
         }
     }
 
-    public static void adminMenu(int whatTime) {
+    public static void adminMenu(int whatTime) throws FileNotFoundException, IOException {
         if (whatTime == 1) {
             System.out.println("");
             System.out.println("Введите пароль");
-            if (new Scanner(System.in).nextInt() == 1337)
+            if (new Scanner(System.in).nextInt() == 1337) {
                 adminMenu(2);
-            else
+            } else {
                 selectionMenu();
+            }
         }
         System.out.println("");
         System.out.println("Приветсвуем тебя Dungeon Master");
@@ -118,30 +115,15 @@ public class Console {
                 showAllCategories();
                 break;
             case (7):
-                try
-                        (FileOutputStream fos = new FileOutputStream("out.bin")) {
-                    Serialize.serializeDatabase(categoryController, fos);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try (FileOutputStream fos = new FileOutputStream("out1.bin")) {
-                    Serialize.serializeProductController(productController,fos);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
+                try (FileOutputStream fos = new FileOutputStream("out.bin")) {
+                Serialize.serializeDatabase(categoryController, fos);
+            }
+            break;
             case (8):
                 try (FileInputStream fis = new FileInputStream("out.bin")) {
-                    categoryController = Serialize.deserializeDatabase(fis);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                try (FileInputStream fis = new FileInputStream("out1.bin")) {
-                    productController = Serialize.deserializeProductController(fis);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                break;
+                Serialize.deserializeDatabase(categoryController, fis);
+            }
+            break;
             case (9):
                 selectionMenu();
                 break;
@@ -152,7 +134,7 @@ public class Console {
         }
     }
 
-    public static void changeCategories(int whatAction) {
+    public static void changeCategories(int whatAction) throws FileNotFoundException, IOException {
         if (whatAction == 1) {
             System.out.println("");
             System.out.println("Введите название категории");
@@ -162,14 +144,14 @@ public class Console {
             System.out.println("");
             System.out.println("Введите номер категории которую хотите удалить");
             for (int i = 0; i < categoryController.size(); i++) {
-                System.out.println(i + ". " + categoryController.getCategories(i).getTitle());
+                System.out.println(i + ". " + categoryController.getСategory(i).getTitle());
             }
             categoryController.deleteCategories(new Scanner(System.in).nextInt());
             adminMenu(2);
         }
     }
 
-    public static void changeProduct(int whatAction) {
+    public static void changeProduct(int whatAction) throws IOException {
         if (whatAction == 1) {
             System.out.println("");
             System.out.print("Введите название товара:");
@@ -182,9 +164,9 @@ public class Console {
             String composition = new Scanner(System.in).nextLine();
             System.out.println("Выберите к какой категории отнести товар");
             for (int i = 0; i < categoryController.size(); i++) {
-                System.out.println(i + ". " + categoryController.getCategories(i).getTitle());
+                System.out.println(i + ". " + categoryController.getСategory(i).getTitle());
             }
-            Category category = categoryController.getCategories(new Scanner(System.in).nextInt());
+            Category category = categoryController.getСategory(new Scanner(System.in).nextInt());
             productController.addProduct(Product.productFactory(name, price, description, composition, category), productController.size());
             adminMenu(2);
         } else if (whatAction == 2) {
@@ -198,31 +180,33 @@ public class Console {
         }
     }
 
-    public static void showAllProduct() {
+    public static void showAllProduct() throws IOException {
         System.out.println("");
         System.out.println("Все товары");
-        for (int i = 0; i < productController.size(); i++)
+        for (int i = 0; i < productController.size(); i++) {
             System.out.println(i + ". " + productController.getProduct(i).getName() + " " + productController.getProduct(i).getPrice()
                     + " " + productController.getProduct(i).getDescription() + " " + productController.getProduct(i).getComposition()
                     + " " + productController.getProduct(i).getCategoryTitle());
+        }
         adminMenu(2);
     }
 
-    public static void showAllCategories() {
+    public static void showAllCategories() throws IOException {
         System.out.println("");
         System.out.println("Все категории");
-        for (int k = 0; k < categoryController.size(); k++)
-            System.out.println(k + ". " + categoryController.getCategories(k).getTitle());
+        for (int k = 0; k < categoryController.size(); k++) {
+            System.out.println(k + ". " + categoryController.getСategory(k).getTitle());
+        }
         System.out.println("");
         System.out.println("Подроднее о категориях");
         for (int i = 0; i < categoryController.size(); i++) {
-            System.out.println(i + ". " + categoryController.getCategories(i).getTitle());
-            if (categoryController.getCategories(i).getSize() == 0)
+            System.out.println(i + ". " + categoryController.getСategory(i).getTitle());
+            if (categoryController.getСategory(i).getSize() == 0) {
                 System.out.println("В данной категории не содержится товаров");
-            else {
+            } else {
                 System.out.println("В данной категории содержится");
-                for (int j = 0; j < categoryController.getCategories(i).getSize(); j++) {
-                    System.out.println(j + ". " + categoryController.getCategories(i).getProduct(j).getName());
+                for (int j = 0; j < categoryController.getСategory(i).getSize(); j++) {
+                    System.out.println(j + ". " + categoryController.getСategory(i).getProduct(j).getName());
                 }
             }
             System.out.println("");
@@ -231,12 +215,8 @@ public class Console {
     }
 
     public static void secondLaunch() throws IOException {
-
         try (FileInputStream fis = new FileInputStream("out.bin")) {
-            categoryController = Serialize.deserializeDatabase(fis);
-        }
-        try (FileInputStream fis = new FileInputStream("out1.bin")) {
-            productController = Serialize.deserializeProductController(fis);
+            Serialize.deserializeDatabase(categoryController, fis);
         }
         selectionMenu();
     }
@@ -261,7 +241,7 @@ public class Console {
         }
     }
 
-    public static void userMenu() {
+    public static void userMenu() throws IOException {
         System.out.println("");
         System.out.println("Добро пожаловать в мясной уровень интернета!!!");
         System.out.println("Введите число");
@@ -293,7 +273,7 @@ public class Console {
         }
     }
 
-    public static void searchProductMenu() {
+    public static void searchProductMenu() throws IOException {
         System.out.println("");
         System.out.print("Введите название продукта который хотите найти: ");
         String productToSearch = new Scanner(System.in).next();
@@ -305,12 +285,13 @@ public class Console {
         System.out.println("0. Вернуться назад");
         System.out.print("Укажите номер конкретного товара: ");
         int numberProduct = new Scanner(System.in).nextInt();
-        if(numberProduct == 0)
+        if (numberProduct == 0) {
             userMenu();
+        }
         productMenu(numberProduct);
     }
 
-    public static void productMenu(int numberProduct) {
+    public static void productMenu(int numberProduct) throws IOException {
         System.out.println("");
         productController.getProduct(numberProduct).print();
         // product.getProduct(numberProduct).print();
@@ -339,9 +320,9 @@ public class Console {
         }
     }
 
-    public static void productMenu(int numberProduct, int numberCategory) {
+    public static void productMenu(int numberProduct, int numberCategory) throws IOException {
         System.out.println("");
-        categoryController.getCategories(numberCategory).getProducts().get(numberProduct).print();
+        categoryController.getСategory(numberCategory).getProducts().get(numberProduct).print();
         // product.getProduct(numberProduct).print();
         System.out.println("");
         System.out.println("1. Назад");
@@ -358,7 +339,7 @@ public class Console {
                 double rat = new Scanner(System.in).nextDouble();
                 // basket.getBasket().add(product.getProduct(numberProduct), count, rat);
 //Изменил, чтобы всё работало. Не уверен как это сделать с контроллерами
-                basketController.getBasket().add(categoryController.getCategories(numberCategory).getProducts().get(numberProduct), count, rat);
+                basketController.getBasket().add(categoryController.getСategory(numberCategory).getProducts().get(numberProduct), count, rat);
                 basketMenu();
                 break;
             default:
@@ -368,13 +349,13 @@ public class Console {
         }
     }
 
-    public static void categoryMenu() {
+    public static void categoryMenu() throws IOException {
         System.out.println("");
         System.out.println("1. Назад");
         int g = 1;
         for (int i = 0; i < categoryController.size(); i++) {
             g++;
-            System.out.println(g + ". " + categoryController.getCategories(i).getTitle());
+            System.out.println(g + ". " + categoryController.getСategory(i).getTitle());
         }
         int key = new Scanner(System.in).nextInt();
         if (key == 1) {
@@ -384,14 +365,14 @@ public class Console {
         }
     }
 
-    public static void realCategoryMenu(int category) {
+    public static void realCategoryMenu(int category) throws IOException {
         System.out.println("");
-        System.out.println(categoryController.getCategories(category).getTitle());
+        System.out.println(categoryController.getСategory(category).getTitle());
         System.out.println("1. Назад");
         int g = 1;
-        for (int i = 0; i < categoryController.getCategories(category).getProducts().size(); i++) {
+        for (int i = 0; i < categoryController.getСategory(category).getProducts().size(); i++) {
             g++;
-            System.out.println(g + ". " + categoryController.getCategories(category).getProducts().get(i).getName());
+            System.out.println(g + ". " + categoryController.getСategory(category).getProducts().get(i).getName());
         }
         int key = new Scanner(System.in).nextInt();
         if (key == 1) {
@@ -401,7 +382,7 @@ public class Console {
         }
     }
 
-    public static void basketMenu() {
+    public static void basketMenu() throws IOException {
         System.out.println("");
         basketController.getBasket().print();
         System.out.println("Общая цена:                                   " + basketController.getBasket().getPrice());
@@ -425,7 +406,7 @@ public class Console {
         }
     }
 
-    public static void productBasket(int indx) {
+    public static void productBasket(int indx) throws IOException {
         System.out.println("");
         System.out.println("1. Назад");
         System.out.println("2. Изменить количество");
