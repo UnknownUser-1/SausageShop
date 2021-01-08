@@ -60,7 +60,7 @@ public class Console {
         System.out.println("1. Администратор");
         System.out.println("2. Пользователь");
         System.out.println("3. Ой а что я тут делаю");
-        switch (new Scanner(System.in).nextInt()) {
+        switch (checkNumber()) {
             case (1):
                 adminMenu(1);
                 break;
@@ -71,7 +71,7 @@ public class Console {
                 System.exit(0);
                 break;
             default:
-                System.out.println("Введите число ");
+                System.out.println("Введите число из списка ");
                 selectionMenu();
                 break;
         }
@@ -98,7 +98,7 @@ public class Console {
         System.out.println("7. Сохранить данный набор товаров и категорий");
         System.out.println("8. Загрузить последний набор товаров и категорий");
         System.out.println("9. Вернуться на меню выше");
-        switch (new Scanner(System.in).nextInt()) {
+        switch (checkNumber()) {
             case (1):
                 changeCategories(1);
                 break;
@@ -125,7 +125,7 @@ public class Console {
                     e.printStackTrace();
                 }
                 try (FileOutputStream fos = new FileOutputStream("out1.bin")) {
-                    Serialize.serializeProductController(productController,fos);
+                    Serialize.serializeProductController(productController, fos);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -146,7 +146,7 @@ public class Console {
                 selectionMenu();
                 break;
             default:
-                System.out.println("Введите число");
+                System.out.println("Введите число из списка");
                 adminMenu(2);
                 break;
         }
@@ -164,7 +164,7 @@ public class Console {
             for (int i = 0; i < categoryController.size(); i++) {
                 System.out.println(i + ". " + categoryController.getCategories(i).getTitle());
             }
-            categoryController.deleteCategories(new Scanner(System.in).nextInt());
+            categoryController.deleteCategories(checkNumber());
             adminMenu(2);
         }
     }
@@ -173,18 +173,18 @@ public class Console {
         if (whatAction == 1) {
             System.out.println("");
             System.out.print("Введите название товара:");
-            String name = new Scanner(System.in).nextLine();
+            String name = checkString();
             System.out.print("Введите цену товара:");
             double price = new Scanner(System.in).nextDouble();
             System.out.print("Введите описание товара:");
-            String description = new Scanner(System.in).nextLine();
+            String description = checkString();
             System.out.print("Введите состав товара:");
-            String composition = new Scanner(System.in).nextLine();
+            String composition = checkString();
             System.out.println("Выберите к какой категории отнести товар");
             for (int i = 0; i < categoryController.size(); i++) {
                 System.out.println(i + ". " + categoryController.getCategories(i).getTitle());
             }
-            Category category = categoryController.getCategories(new Scanner(System.in).nextInt());
+            Category category = categoryController.getCategories(checkNumber());
             productController.addProduct(Product.productFactory(name, price, description, composition, category), productController.size());
             adminMenu(2);
         } else if (whatAction == 2) {
@@ -247,7 +247,7 @@ public class Console {
         System.out.println("Введите число");
         System.out.println("1. Первый запуск");
         System.out.println("2. Подгрузить базу");
-        switch (new Scanner(System.in).nextInt()) {
+        switch (checkNumber()) {
             case (1):
                 firstLaunch();
                 break;
@@ -255,7 +255,7 @@ public class Console {
                 secondLaunch();
                 break;
             default:
-                System.out.println("Введите число");
+                System.out.println("Введите число из списка");
                 predMainMenu();
                 break;
         }
@@ -270,7 +270,7 @@ public class Console {
         System.out.println("3. Поиск по товарам");
         System.out.println("4. Выход");
         System.out.println("5. Вернуться на уровень выше");
-        switch (new Scanner(System.in).nextInt()) {
+        switch (checkNumber()) {
             case (1):
                 categoryMenu();
                 break;
@@ -287,7 +287,7 @@ public class Console {
                 selectionMenu();
                 break;
             default:
-                System.out.println("Введите число");
+                System.out.println("Введите число из списка");
                 userMenu();
                 break;
         }
@@ -305,7 +305,7 @@ public class Console {
         System.out.println("0. Вернуться назад");
         System.out.print("Укажите номер конкретного товара: ");
         int numberProduct = new Scanner(System.in).nextInt();
-        if(numberProduct == 0)
+        if (numberProduct == 0)
             userMenu();
         productMenu(numberProduct);
     }
@@ -317,8 +317,7 @@ public class Console {
         System.out.println("");
         System.out.println("1. В меню");
         System.out.println("2. Добавить в корзину");
-        int key = new Scanner(System.in).nextInt();
-        switch (key) {
+        switch (checkNumber()) {
             case (1):
                 userMenu();
                 break;
@@ -333,7 +332,7 @@ public class Console {
                 basketMenu();
                 break;
             default:
-                System.out.println("Введите число");
+                System.out.println("Введите число из списка");
                 productMenu(numberProduct);
                 break;
         }
@@ -346,8 +345,7 @@ public class Console {
         System.out.println("");
         System.out.println("1. Назад");
         System.out.println("2. Добавить в корзину");
-        int key = new Scanner(System.in).nextInt();
-        switch (key) {
+        switch (checkNumber()) {
             case (1):
                 realCategoryMenu(numberCategory);
                 break;
@@ -362,7 +360,7 @@ public class Console {
                 basketMenu();
                 break;
             default:
-                System.out.println("Введите число");
+                System.out.println("Введите число из списка");
                 productMenu(numberProduct, numberCategory);
                 break;
         }
@@ -407,9 +405,9 @@ public class Console {
         System.out.println("Общая цена:                                   " + basketController.getBasket().getPrice());
         System.out.println("1. Главное меню");
         System.out.println("2. Купить");
-        System.out.println("Изменить что-то:");
+        System.out.println("3. Изменить что-то:");
         basketController.getBasket().printUser();
-        int key = new Scanner(System.in).nextInt();
+        int key = checkNumber();
         switch (key) {
             case (1):
                 userMenu();
@@ -429,15 +427,14 @@ public class Console {
         System.out.println("");
         System.out.println("1. Назад");
         System.out.println("2. Изменить количество");
-        System.out.println("3. Изменить оценку");
-        int key = new Scanner(System.in).nextInt();
-        switch (key) {
+        System.out.println("Изменить оценку");
+        switch (checkNumber()) {
             case (1):
                 basketMenu();
                 break;
             case (2):
                 System.out.println("Введите количество");
-                basketController.getBasket().changeCount(indx, new Scanner(System.in).nextInt());
+                basketController.getBasket().changeCount(indx, checkNumber());
                 basketMenu();
                 break;
             case (3):
@@ -446,9 +443,28 @@ public class Console {
                 basketMenu();
                 break;
             default:
-                System.out.println("Введите число ");
+                System.out.println("Введите число из списка ");
                 productBasket(indx);
                 break;
         }
+    }
+
+    public static int checkNumber() {
+        Scanner sc = new Scanner(System.in);
+        if (sc.hasNextInt()) {
+            return sc.nextInt();
+        } else {
+            System.out.println("Вы ввели не целое число");
+        }
+        return 99999999;
+    }
+
+    public static String checkString() {
+        Scanner sc = new Scanner(System.in);
+        if (sc.hasNextLine()) {
+            return sc.nextLine();
+        } else
+            System.out.println("Вы ввели не строку");
+        return null;
     }
 }
