@@ -33,7 +33,7 @@ public class Serialize {
 
     public static void deserializeDatabase(CategoryController base, InputStream in) {
         try (in; ObjectInputStream OIS = new ObjectInputStream(in)) {
-            base.setCategories(new ArrayList<Category>(Arrays.asList((Category[]) OIS.readObject())));
+            base.setCategories(new ArrayList<>(Arrays.asList((Category[]) OIS.readObject())));
         } catch (IOException ex) {
             System.out.println("Oozhos occurred");
         } catch (ClassNotFoundException e) {
