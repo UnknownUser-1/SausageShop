@@ -30,7 +30,7 @@ public class CategoryController implements Serializable{
         return categories.get(number);
     }
 
-    public void setСategory(Category category,int number) {
+    public void setCategory(Category category,int number) {
         if(category == null || number<0)
             throw new IllegalArgumentException("Что-то пошло не так");
         this.categories.set(number,category);
