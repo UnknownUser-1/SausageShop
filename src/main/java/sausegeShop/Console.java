@@ -116,14 +116,14 @@ public class Console {
                 break;
             case (7):
                 try (FileOutputStream fos = new FileOutputStream("out.bin")) {
-                Serialize.serializeDatabase(categoryController, fos);
-            }
-            break;
+                    Serialize.serializeDatabase(categoryController, fos);
+                }
+                break;
             case (8):
                 try (FileInputStream fis = new FileInputStream("out.bin")) {
-                Serialize.deserializeDatabase(categoryController, fis);
-            }
-            break;
+                    Serialize.deserializeDatabase(categoryController, fis);
+                }
+                break;
             case (9):
                 selectionMenu();
                 break;
@@ -152,12 +152,13 @@ public class Console {
     }
 
     public static void changeProduct(int whatAction) throws IOException {
+        Scanner sc = new Scanner(System.in);
         if (whatAction == 1) {
             System.out.println("");
-            System.out.print("Введите название товара:");
-            String name = new Scanner(System.in).nextLine();
             System.out.print("Введите цену товара:");
             double price = new Scanner(System.in).nextDouble();
+            System.out.print("Введите название товара:");
+            String name = new Scanner(System.in).nextLine();
             System.out.print("Введите описание товара:");
             String description = new Scanner(System.in).nextLine();
             System.out.print("Введите состав товара:");
@@ -166,9 +167,15 @@ public class Console {
             for (int i = 0; i < categoryController.size(); i++) {
                 System.out.println(i + ". " + categoryController.getCategory(i).getTitle());
             }
-            Category category = categoryController.getCategory(new Scanner(System.in).nextInt());
-            productController.addProduct(Product.productFactory(name, price, description, composition, category), productController.size());
-            adminMenu(2);
+            if (price < 0) {
+                System.out.println("Введите не отрицательную цену");
+                changeProduct(1);
+            }
+            else {
+                Category category = categoryController.getCategory(new Scanner(System.in).nextInt());
+                productController.addProduct(Product.productFactory(name, price, description, composition, category), productController.size());
+                adminMenu(2);
+            }
         } else if (whatAction == 2) {
             System.out.println("");
             System.out.println("Введите номер товара который хотите удалить");
@@ -235,7 +242,7 @@ public class Console {
                 secondLaunch();
                 break;
             default:
-                System.out.println("������� �����");
+                System.out.println("Введите число из списка");
                 predMainMenu();
                 break;
         }
@@ -292,6 +299,8 @@ public class Console {
     }
 
     public static void productMenu(int numberProduct) throws IOException {
+        int count;
+        double rat;
         System.out.println("");
         productController.getProduct(numberProduct).print();
         // product.getProduct(numberProduct).print();
@@ -304,10 +313,14 @@ public class Console {
                 userMenu();
                 break;
             case (2):
-                System.out.println("Введит количество");
-                int count = new Scanner(System.in).nextInt();
-                System.out.println("Введите вашу оценку");
-                double rat = new Scanner(System.in).nextDouble();
+                do {
+                    System.out.println("Введите количество");
+                    count = new Scanner(System.in).nextInt();
+                } while (count>0);
+                do {
+                    System.out.println("Введите вашу оценку");
+                    rat = new Scanner(System.in).nextDouble();
+                } while(rat>0);
                 // basket.getBasket().add(product.getProduct(numberProduct), count, rat);
                 //�������, ����� �� ��������. �� ������ ��� ��� ������� � �������������
                 basketController.getBasket().add(productController.getProduct(numberProduct), count, rat);
@@ -435,7 +448,7 @@ public class Console {
 
     public static int checkNumber() {
         Scanner sc = new Scanner(System.in);
-        if (sc.hasNextInt() && sc.nextInt()>0) {
+        if (sc.hasNextInt()) {
             return sc.nextInt();
         } else {
             System.out.println("Вы ввели не целое число");
