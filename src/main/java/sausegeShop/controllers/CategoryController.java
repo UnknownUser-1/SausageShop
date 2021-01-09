@@ -24,7 +24,7 @@ public class CategoryController implements Serializable{
         this.categories = categories;
     }
     
-    public Category getСategory(int number) {
+    public Category get�ategory(int number) {
         if(number<0||number>categories.size())
             throw new IllegalArgumentException("Такой категории не существует");
         return categories.get(number);
