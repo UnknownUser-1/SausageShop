@@ -27,16 +27,16 @@ public class Console {
     public static void firstLaunch() throws FileNotFoundException, IOException {
         categoryController = new CategoryController();
         productController = new ProductController();
-        Category kolbasky = new Category("Колбаски");
-        Category meat = new Category("Мяско");
+        Category kolbasky = new Category("РљРѕР»Р±Р°СЃРєРё");
+        Category meat = new Category("РњСЏСЃРєРѕ");
         categoryController.addCategories(kolbasky, 0);
         categoryController.addCategories(meat, 1);
-        Product sausage = Product.productFactory("Сосиски", 100, "Небольшие вкусные штучки", "100% курица", kolbasky);
-        Product cervelat = Product.productFactory("Сервелат", 500, "Классная копченая колбаска", "Кто-то умер, чтобы попасть туда", kolbasky);
-        Product cervelat2 = Product.productFactory("Останки финна", 280, "Откопанный из вечной мерзлоты солдат после Советско-Финской", "Чистокровный финн", kolbasky);
-        Product jerky = Product.productFactory("Вяленое мясо", 800, "Оно вкусное", "200% вяленого мяса", meat);
-        Product jerky2 = Product.productFactory("Копченное мясо", 683, "Оно стоит 683 рубля", "Его ингридиенты стоили 683 рубля", meat);
-        Product jerky3 = Product.productFactory("Мяско для шашлычка", 550, "Шашлычка для пивка", "Лотерея: говядина или свинина или сюрприз", meat);
+        Product sausage = Product.productFactory("РЎРѕСЃРёСЃРєРё", 100, "РќРµР±РѕР»СЊС€РёРµ РІРєСѓСЃРЅС‹Рµ С€С‚СѓС‡РєРё", "100% РєСѓСЂРёС†Р°", kolbasky);
+        Product cervelat = Product.productFactory("РЎРµСЂРІРµР»Р°С‚", 500, "РљР»Р°СЃСЃРЅР°СЏ РєРѕРїС‡РµРЅР°СЏ РєРѕР»Р±Р°СЃРєР°", "РљС‚Рѕ-С‚Рѕ СѓРјРµСЂ, С‡С‚РѕР±С‹ РїРѕРїР°СЃС‚СЊ С‚СѓРґР°", kolbasky);
+        Product cervelat2 = Product.productFactory("РћСЃС‚Р°РЅРєРё С„РёРЅРЅР°", 280, "РћС‚РєРѕРїР°РЅРЅС‹Р№ РёР· РІРµС‡РЅРѕР№ РјРµСЂР·Р»РѕС‚С‹ СЃРѕР»РґР°С‚ РїРѕСЃР»Рµ РЎРѕРІРµС‚СЃРєРѕ-Р¤РёРЅСЃРєРѕР№", "Р§РёСЃС‚РѕРєСЂРѕРІРЅС‹Р№ С„РёРЅРЅ", kolbasky);
+        Product jerky = Product.productFactory("Р’СЏР»РµРЅРѕРµ РјСЏСЃРѕ", 800, "РћРЅРѕ РІРєСѓСЃРЅРѕРµ", "200% РІСЏР»РµРЅРѕРіРѕ РјСЏСЃР°", meat);
+        Product jerky2 = Product.productFactory("РљРѕРїС‡РµРЅРЅРѕРµ РјСЏСЃРѕ", 683, "РћРЅРѕ СЃС‚РѕРёС‚ 683 СЂСѓР±Р»СЏ", "Р•РіРѕ РёРЅРіСЂРёРґРёРµРЅС‚С‹ СЃС‚РѕРёР»Рё 683 СЂСѓР±Р»СЏ", meat);
+        Product jerky3 = Product.productFactory("РњСЏСЃРєРѕ РґР»СЏ С€Р°С€Р»С‹С‡РєР°", 550, "РЁР°С€Р»С‹С‡РєР° РґР»СЏ РїРёРІРєР°", "Р›РѕС‚РµСЂРµСЏ: РіРѕРІСЏРґРёРЅР° РёР»Рё СЃРІРёРЅРёРЅР° РёР»Рё СЃСЋСЂРїСЂРёР·", meat);
         productController.addProduct(sausage, 0);
         productController.addProduct(cervelat, 1);
         productController.addProduct(cervelat2, 2);
@@ -52,11 +52,11 @@ public class Console {
 
     public static void selectionMenu() throws FileNotFoundException, IOException {
         System.out.println("");
-        System.out.println("Кем бы вы хотели зайти в систему?");
-        System.out.println("1. Администратор");
-        System.out.println("2. Пользователь");
-        System.out.println("3. Ой а что я тут делаю");
-        switch (new Scanner(System.in).nextInt()) {
+        System.out.println("РљРµРј Р±С‹ РІС‹ С…РѕС‚РµР»Рё Р·Р°Р№С‚Рё РІ СЃРёСЃС‚РµРјСѓ?");
+        System.out.println("1. РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂ");
+        System.out.println("2. РџРѕР»СЊР·РѕРІР°С‚РµР»СЊ");
+        System.out.println("3. РћР№ Р° С‡С‚Рѕ СЏ С‚СѓС‚ РґРµР»Р°СЋ");
+        switch (checkNumber()) {
             case (1):
                 adminMenu(1);
                 break;
@@ -67,7 +67,7 @@ public class Console {
                 System.exit(0);
                 break;
             default:
-                System.out.println("Введите число ");
+                System.out.println("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РёР· СЃРїРёСЃРєР° ");
                 selectionMenu();
                 break;
         }
@@ -76,7 +76,7 @@ public class Console {
     public static void adminMenu(int whatTime) throws FileNotFoundException, IOException {
         if (whatTime == 1) {
             System.out.println("");
-            System.out.println("Введите пароль");
+            System.out.println("Р’РІРµРґРёС‚Рµ РїР°СЂРѕР»СЊ");
             if (new Scanner(System.in).nextInt() == 1337) {
                 adminMenu(2);
             } else {
@@ -84,18 +84,18 @@ public class Console {
             }
         }
         System.out.println("");
-        System.out.println("Приветсвуем тебя Dungeon Master");
-        System.out.println("Что хотите сделать?");
-        System.out.println("1. Добавить категорию");
-        System.out.println("2. Удалить категорию");
-        System.out.println("3. Добавить товар");
-        System.out.println("4. Удалить товар");
-        System.out.println("5. Показать все товары");
-        System.out.println("6. Показать все категории");
-        System.out.println("7. Сохранить данный набор товаров и категорий");
-        System.out.println("8. Загрузить последний набор товаров и категорий");
-        System.out.println("9. Вернуться на меню выше");
-        switch (new Scanner(System.in).nextInt()) {
+        System.out.println("РџСЂРёРІРµС‚СЃРІСѓРµРј С‚РµР±СЏ Dungeon Master");
+        System.out.println("Р§С‚Рѕ С…РѕС‚РёС‚Рµ СЃРґРµР»Р°С‚СЊ?");
+        System.out.println("1. Р”РѕР±Р°РІРёС‚СЊ РєР°С‚РµРіРѕСЂРёСЋ");
+        System.out.println("2. РЈРґР°Р»РёС‚СЊ РєР°С‚РµРіРѕСЂРёСЋ");
+        System.out.println("3. Р”РѕР±Р°РІРёС‚СЊ С‚РѕРІР°СЂ");
+        System.out.println("4. РЈРґР°Р»РёС‚СЊ С‚РѕРІР°СЂ");
+        System.out.println("5. РџРѕРєР°Р·Р°С‚СЊ РІСЃРµ С‚РѕРІР°СЂС‹");
+        System.out.println("6. РџРѕРєР°Р·Р°С‚СЊ РІСЃРµ РєР°С‚РµРіРѕСЂРёРё");
+        System.out.println("7. РЎРѕС…СЂР°РЅРёС‚СЊ РґР°РЅРЅС‹Р№ РЅР°Р±РѕСЂ С‚РѕРІР°СЂРѕРІ Рё РєР°С‚РµРіРѕСЂРёР№");
+        System.out.println("8. Р—Р°РіСЂСѓР·РёС‚СЊ РїРѕСЃР»РµРґРЅРёР№ РЅР°Р±РѕСЂ С‚РѕРІР°СЂРѕРІ Рё РєР°С‚РµРіРѕСЂРёР№");
+        System.out.println("9. Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР° РјРµРЅСЋ РІС‹С€Рµ");
+        switch (checkNumber()) {
             case (1):
                 changeCategories(1);
                 break;
@@ -128,7 +128,7 @@ public class Console {
                 selectionMenu();
                 break;
             default:
-                System.out.println("Введите число");
+                System.out.println("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РёР· СЃРїРёСЃРєР°");
                 adminMenu(2);
                 break;
         }
@@ -137,14 +137,14 @@ public class Console {
     public static void changeCategories(int whatAction) throws FileNotFoundException, IOException {
         if (whatAction == 1) {
             System.out.println("");
-            System.out.println("Введите название категории");
+            System.out.println("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РєР°С‚РµРіРѕСЂРёРё");
             categoryController.addCategories(new Category(new Scanner(System.in).nextLine()), categoryController.size());
             adminMenu(2);
         } else if (whatAction == 2) {
             System.out.println("");
-            System.out.println("Введите номер категории которую хотите удалить");
+            System.out.println("Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РєР°С‚РµРіРѕСЂРёРё РєРѕС‚РѕСЂСѓСЋ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ");
             for (int i = 0; i < categoryController.size(); i++) {
-                System.out.println(i + ". " + categoryController.getСategory(i).getTitle());
+                System.out.println(i + ". " + categoryController.getCategory(i).getTitle());
             }
             categoryController.deleteCategories(new Scanner(System.in).nextInt());
             adminMenu(2);
@@ -154,24 +154,24 @@ public class Console {
     public static void changeProduct(int whatAction) throws IOException {
         if (whatAction == 1) {
             System.out.println("");
-            System.out.print("Введите название товара:");
+            System.out.print("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ С‚РѕРІР°СЂР°:");
             String name = new Scanner(System.in).nextLine();
-            System.out.print("Введите цену товара:");
+            System.out.print("Р’РІРµРґРёС‚Рµ С†РµРЅСѓ С‚РѕРІР°СЂР°:");
             double price = new Scanner(System.in).nextDouble();
-            System.out.print("Введите описание товара:");
+            System.out.print("Р’РІРµРґРёС‚Рµ РѕРїРёСЃР°РЅРёРµ С‚РѕРІР°СЂР°:");
             String description = new Scanner(System.in).nextLine();
-            System.out.print("Введите состав товара:");
+            System.out.print("Р’РІРµРґРёС‚Рµ СЃРѕСЃС‚Р°РІ С‚РѕРІР°СЂР°:");
             String composition = new Scanner(System.in).nextLine();
-            System.out.println("Выберите к какой категории отнести товар");
+            System.out.println("Р’С‹Р±РµСЂРёС‚Рµ Рє РєР°РєРѕР№ РєР°С‚РµРіРѕСЂРёРё РѕС‚РЅРµСЃС‚Рё С‚РѕРІР°СЂ");
             for (int i = 0; i < categoryController.size(); i++) {
-                System.out.println(i + ". " + categoryController.getСategory(i).getTitle());
+                System.out.println(i + ". " + categoryController.getCategory(i).getTitle());
             }
-            Category category = categoryController.getСategory(new Scanner(System.in).nextInt());
+            Category category = categoryController.getCategory(new Scanner(System.in).nextInt());
             productController.addProduct(Product.productFactory(name, price, description, composition, category), productController.size());
             adminMenu(2);
         } else if (whatAction == 2) {
             System.out.println("");
-            System.out.println("Введите номер товара который хотите удалить");
+            System.out.println("Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ С‚РѕРІР°СЂР° РєРѕС‚РѕСЂС‹Р№ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ");
             for (int i = 0; i < productController.size(); i++) {
                 System.out.println(i + ". " + productController.getProduct(i).getName());
             }
@@ -182,7 +182,7 @@ public class Console {
 
     public static void showAllProduct() throws IOException {
         System.out.println("");
-        System.out.println("Все товары");
+        System.out.println("Р’СЃРµ С‚РѕРІР°СЂС‹");
         for (int i = 0; i < productController.size(); i++) {
             System.out.println(i + ". " + productController.getProduct(i).getName() + " " + productController.getProduct(i).getPrice()
                     + " " + productController.getProduct(i).getDescription() + " " + productController.getProduct(i).getComposition()
@@ -193,20 +193,20 @@ public class Console {
 
     public static void showAllCategories() throws IOException {
         System.out.println("");
-        System.out.println("Все категории");
+        System.out.println("Р’СЃРµ РєР°С‚РµРіРѕСЂРёРё");
         for (int k = 0; k < categoryController.size(); k++) {
-            System.out.println(k + ". " + categoryController.getСategory(k).getTitle());
+            System.out.println(k + ". " + categoryController.getCategory(k).getTitle());
         }
         System.out.println("");
-        System.out.println("Подроднее о категориях");
+        System.out.println("РџРѕРґСЂРѕРґРЅРµРµ Рѕ РєР°С‚РµРіРѕСЂРёСЏС…");
         for (int i = 0; i < categoryController.size(); i++) {
-            System.out.println(i + ". " + categoryController.getСategory(i).getTitle());
-            if (categoryController.getСategory(i).getSize() == 0) {
-                System.out.println("В данной категории не содержится товаров");
+            System.out.println(i + ". " + categoryController.getCategory(i).getTitle());
+            if (categoryController.getCategory(i).getSize() == 0) {
+                System.out.println("Р’ РґР°РЅРЅРѕР№ РєР°С‚РµРіРѕСЂРёРё РЅРµ СЃРѕРґРµСЂР¶РёС‚СЃСЏ С‚РѕРІР°СЂРѕРІ");
             } else {
-                System.out.println("В данной категории содержится");
-                for (int j = 0; j < categoryController.getСategory(i).getSize(); j++) {
-                    System.out.println(j + ". " + categoryController.getСategory(i).getProduct(j).getName());
+                System.out.println("Р’ РґР°РЅРЅРѕР№ РєР°С‚РµРіРѕСЂРёРё СЃРѕРґРµСЂР¶РёС‚СЃСЏ");
+                for (int j = 0; j < categoryController.getCategory(i).getSize(); j++) {
+                    System.out.println(j + ". " + categoryController.getCategory(i).getProduct(j).getName());
                 }
             }
             System.out.println("");
@@ -223,11 +223,11 @@ public class Console {
 
     public static void predMainMenu() throws IOException {
         System.out.println("");
-        System.out.println("Что делать то!!!");
-        System.out.println("Введите число");
-        System.out.println("1. Первый запуск");
-        System.out.println("2. Подгрузить базу");
-        switch (new Scanner(System.in).nextInt()) {
+        System.out.println("Р§С‚Рѕ РґРµР»Р°С‚СЊ С‚Рѕ!!!");
+        System.out.println("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ");
+        System.out.println("1. РџРµСЂРІС‹Р№ Р·Р°РїСѓСЃРє");
+        System.out.println("2. РџРѕРґРіСЂСѓР·РёС‚СЊ Р±Р°Р·Сѓ");
+        switch (checkNumber()) {
             case (1):
                 firstLaunch();
                 break;
@@ -235,7 +235,7 @@ public class Console {
                 secondLaunch();
                 break;
             default:
-                System.out.println("Введите число");
+                System.out.println("пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ");
                 predMainMenu();
                 break;
         }
@@ -243,14 +243,14 @@ public class Console {
 
     public static void userMenu() throws IOException {
         System.out.println("");
-        System.out.println("Добро пожаловать в мясной уровень интернета!!!");
-        System.out.println("Введите число");
-        System.out.println("1. Категории");
-        System.out.println("2. Корзина");
-        System.out.println("3. Поиск по товарам");
-        System.out.println("4. Выход");
-        System.out.println("5. Вернуться на уровень выше");
-        switch (new Scanner(System.in).nextInt()) {
+        System.out.println("Р”РѕР±СЂРѕ РїРѕР¶Р°Р»РѕРІР°С‚СЊ РІ РјСЏСЃРЅРѕР№ СѓСЂРѕРІРµРЅСЊ РёРЅС‚РµСЂРЅРµС‚Р°!!!");
+        System.out.println("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ");
+        System.out.println("1. РљР°С‚РµРіРѕСЂРёРё");
+        System.out.println("2. РљРѕСЂР·РёРЅР°");
+        System.out.println("3. РџРѕРёСЃРє РїРѕ С‚РѕРІР°СЂР°Рј");
+        System.out.println("4. Р’С‹С…РѕРґ");
+        System.out.println("5. Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР° СѓСЂРѕРІРµРЅСЊ РІС‹С€Рµ");
+        switch (checkNumber()) {
             case (1):
                 categoryMenu();
                 break;
@@ -267,7 +267,7 @@ public class Console {
                 selectionMenu();
                 break;
             default:
-                System.out.println("Введите число");
+                System.out.println("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РёР· СЃРїРёСЃРєР°");
                 userMenu();
                 break;
         }
@@ -275,15 +275,15 @@ public class Console {
 
     public static void searchProductMenu() throws IOException {
         System.out.println("");
-        System.out.print("Введите название продукта который хотите найти: ");
+        System.out.print("Р’РІРµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ РїСЂРѕРґСѓРєС‚Р° РєРѕС‚РѕСЂС‹Р№ С…РѕС‚РёС‚Рµ РЅР°Р№С‚Рё: ");
         String productToSearch = new Scanner(System.in).next();
         for (int i = 0; i < productController.size(); i++) {
             if (productController.getProduct(i).getName().toLowerCase().contains(productToSearch.toLowerCase())) {
                 System.out.println(i + ". " + productController.getProduct(i).getName());
             }
         }
-        System.out.println("0. Вернуться назад");
-        System.out.print("Укажите номер конкретного товара: ");
+        System.out.println("0. Р’РµСЂРЅСѓС‚СЊСЃСЏ РЅР°Р·Р°Рґ");
+        System.out.print("РЈРєР°Р¶РёС‚Рµ РЅРѕРјРµСЂ РєРѕРЅРєСЂРµС‚РЅРѕРіРѕ С‚РѕРІР°СЂР°: ");
         int numberProduct = new Scanner(System.in).nextInt();
         if (numberProduct == 0) {
             userMenu();
@@ -296,25 +296,25 @@ public class Console {
         productController.getProduct(numberProduct).print();
         // product.getProduct(numberProduct).print();
         System.out.println("");
-        System.out.println("1. В меню");
-        System.out.println("2. Добавить в корзину");
-        int key = new Scanner(System.in).nextInt();
+        System.out.println("1. Р’ РјРµРЅСЋ");
+        System.out.println("2. Р”РѕР±Р°РІРёС‚СЊ РІ РєРѕСЂР·РёРЅСѓ");
+        int key = checkNumber();
         switch (key) {
             case (1):
                 userMenu();
                 break;
             case (2):
-                System.out.println("Введит количество");
+                System.out.println("Р’РІРµРґРёС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ");
                 int count = new Scanner(System.in).nextInt();
-                System.out.println("Введите вашу оценку");
+                System.out.println("Р’РІРµРґРёС‚Рµ РІР°С€Сѓ РѕС†РµРЅРєСѓ");
                 double rat = new Scanner(System.in).nextDouble();
                 // basket.getBasket().add(product.getProduct(numberProduct), count, rat);
-                //Изменил, чтобы всё работало. Не уверен как это сделать с контроллерами
+                //пїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
                 basketController.getBasket().add(productController.getProduct(numberProduct), count, rat);
                 basketMenu();
                 break;
             default:
-                System.out.println("Введите число");
+                System.out.println("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РёР· СЃРїРёСЃРєР°");
                 productMenu(numberProduct);
                 break;
         }
@@ -322,28 +322,28 @@ public class Console {
 
     public static void productMenu(int numberProduct, int numberCategory) throws IOException {
         System.out.println("");
-        categoryController.getСategory(numberCategory).getProducts().get(numberProduct).print();
+        categoryController.getCategory(numberCategory).getProducts().get(numberProduct).print();
         // product.getProduct(numberProduct).print();
         System.out.println("");
-        System.out.println("1. Назад");
-        System.out.println("2. Добавить в корзину");
-        int key = new Scanner(System.in).nextInt();
+        System.out.println("1. РќР°Р·Р°Рґ");
+        System.out.println("2. Р”РѕР±Р°РІРёС‚СЊ РІ РєРѕСЂР·РёРЅСѓ");
+        int key = checkNumber();
         switch (key) {
             case (1):
                 realCategoryMenu(numberCategory);
                 break;
             case (2):
-                System.out.println("Введит количество");
+                System.out.println("Р’РІРµРґРёС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ");
                 int count = new Scanner(System.in).nextInt();
-                System.out.println("Введите вашу оценку");
+                System.out.println("Р’РІРµРґРёС‚Рµ РІР°С€Сѓ РѕС†РµРЅРєСѓ");
                 double rat = new Scanner(System.in).nextDouble();
                 // basket.getBasket().add(product.getProduct(numberProduct), count, rat);
-//Изменил, чтобы всё работало. Не уверен как это сделать с контроллерами
-                basketController.getBasket().add(categoryController.getСategory(numberCategory).getProducts().get(numberProduct), count, rat);
+//РР·РјРµРЅРёР», С‡С‚РѕР±С‹ РІСЃС‘ СЂР°Р±РѕС‚Р°Р»Рѕ. РќРµ СѓРІРµСЂРµРЅ РєР°Рє СЌС‚Рѕ СЃРґРµР»Р°С‚СЊ СЃ РєРѕРЅС‚СЂРѕР»Р»РµСЂР°РјРё
+                basketController.getBasket().add(categoryController.getCategory(numberCategory).getProducts().get(numberProduct), count, rat);
                 basketMenu();
                 break;
             default:
-                System.out.println("Введите число");
+                System.out.println("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РёР· СЃРїРёСЃРєР°");
                 productMenu(numberProduct, numberCategory);
                 break;
         }
@@ -351,11 +351,11 @@ public class Console {
 
     public static void categoryMenu() throws IOException {
         System.out.println("");
-        System.out.println("1. Назад");
+        System.out.println("1. РќР°Р·Р°Рґ");
         int g = 1;
         for (int i = 0; i < categoryController.size(); i++) {
             g++;
-            System.out.println(g + ". " + categoryController.getСategory(i).getTitle());
+            System.out.println(g + ". " + categoryController.getCategory(i).getTitle());
         }
         int key = new Scanner(System.in).nextInt();
         if (key == 1) {
@@ -367,12 +367,12 @@ public class Console {
 
     public static void realCategoryMenu(int category) throws IOException {
         System.out.println("");
-        System.out.println(categoryController.getСategory(category).getTitle());
-        System.out.println("1. Назад");
+        System.out.println(categoryController.getCategory(category).getTitle());
+        System.out.println("1. РќР°Р·Р°Рґ");
         int g = 1;
-        for (int i = 0; i < categoryController.getСategory(category).getProducts().size(); i++) {
+        for (int i = 0; i < categoryController.getCategory(category).getProducts().size(); i++) {
             g++;
-            System.out.println(g + ". " + categoryController.getСategory(category).getProducts().get(i).getName());
+            System.out.println(g + ". " + categoryController.getCategory(category).getProducts().get(i).getName());
         }
         int key = new Scanner(System.in).nextInt();
         if (key == 1) {
@@ -385,19 +385,19 @@ public class Console {
     public static void basketMenu() throws IOException {
         System.out.println("");
         basketController.getBasket().print();
-        System.out.println("Общая цена:                                   " + basketController.getBasket().getPrice());
-        System.out.println("1. Главное меню");
-        System.out.println("2. Купить");
-        System.out.println("Изменить что-то:");
+        System.out.println("РћР±С‰Р°СЏ С†РµРЅР°:                                   " + basketController.getBasket().getPrice());
+        System.out.println("1. Р“Р»Р°РІРЅРѕРµ РјРµРЅСЋ");
+        System.out.println("2. РљСѓРїРёС‚СЊ");
+        System.out.println("3. РР·РјРµРЅРёС‚СЊ С‡С‚Рѕ-С‚Рѕ:");
         basketController.getBasket().printUser();
-        int key = new Scanner(System.in).nextInt();
+        int key = checkNumber();
         switch (key) {
             case (1):
                 userMenu();
                 break;
             case (2):
                 basketController.getBasket().purchase();
-                System.out.println("Пасиба!!");
+                System.out.println("пїЅпїЅпїЅпїЅпїЅпїЅ!!");
                 basketController.getBasket().deleteAll();
                 userMenu();
                 break;
@@ -408,28 +408,38 @@ public class Console {
 
     public static void productBasket(int indx) throws IOException {
         System.out.println("");
-        System.out.println("1. Назад");
-        System.out.println("2. Изменить количество");
-        System.out.println("3. Изменить оценку");
-        int key = new Scanner(System.in).nextInt();
+        System.out.println("1. РќР°Р·Р°Рґ");
+        System.out.println("2. РР·РјРµРЅРёС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ");
+        System.out.println("РР·РјРµРЅРёС‚СЊ РѕС†РµРЅРєСѓ");
+        int key = checkNumber();
         switch (key) {
             case (1):
                 basketMenu();
                 break;
             case (2):
-                System.out.println("Введите количество");
+                System.out.println("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ");
                 basketController.getBasket().changeCount(indx, new Scanner(System.in).nextInt());
                 basketMenu();
                 break;
             case (3):
-                System.out.println("Введите оценку");
+                System.out.println("Р’РІРµРґРёС‚Рµ РѕС†РµРЅРєСѓ");
                 basketController.getBasket().changeRating(indx, new Scanner(System.in).nextDouble());
                 basketMenu();
                 break;
             default:
-                System.out.println("Введите число ");
+                System.out.println("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РёР· СЃРїРёСЃРєР° ");
                 productBasket(indx);
                 break;
         }
+    }
+
+    public static int checkNumber() {
+        Scanner sc = new Scanner(System.in);
+        if (sc.hasNextInt() && sc.nextInt()>0) {
+            return sc.nextInt();
+        } else {
+            System.out.println("Р’С‹ РІРІРµР»Рё РЅРµ С†РµР»РѕРµ С‡РёСЃР»Рѕ");
+        }
+        return 99999999;
     }
 }
