@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Locale;
 
 import sausegeShop.controllers.BasketController;
 import sausegeShop.controllers.CategoryController;
@@ -13,9 +15,11 @@ import sausegeShop.models.Category;
 import sausegeShop.models.Product;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Console {
 
+    static ArrayList<Category> data = new ArrayList<>();
     static CategoryController categoryController = new CategoryController();
     static BasketController basketController = new BasketController(new Basket());
     static ProductController productController = new ProductController();
@@ -25,8 +29,7 @@ public class Console {
     }
 
     public static void firstLaunch() throws FileNotFoundException, IOException {
-        categoryController = new CategoryController();
-        productController = new ProductController();
+        categoryController.setCategories(data);
         Category kolbasky = new Category("Колбаски");
         Category meat = new Category("Мяско");
         categoryController.addCategories(kolbasky, 0);
@@ -45,7 +48,7 @@ public class Console {
         productController.addProduct(jerky3, 5);
         try (
                 FileOutputStream fos = new FileOutputStream("out.bin")) {
-            Serialize.serializeDatabase(categoryController, fos);
+            Serialize.serializeDatabase(data, fos);
         }
         selectionMenu();
     }
@@ -116,14 +119,14 @@ public class Console {
                 break;
             case (7):
                 try (FileOutputStream fos = new FileOutputStream("out.bin")) {
-                    Serialize.serializeDatabase(categoryController, fos);
-                }
-                break;
+                Serialize.serializeDatabase(data, fos);
+            }
+            break;
             case (8):
                 try (FileInputStream fis = new FileInputStream("out.bin")) {
-                    Serialize.deserializeDatabase(categoryController, fis);
-                }
-                break;
+                data = Serialize.deserializeDatabase(fis);
+            }
+            break;
             case (9):
                 selectionMenu();
                 break;
@@ -170,8 +173,7 @@ public class Console {
             if (price < 0) {
                 System.out.println("Введите не отрицательную цену");
                 changeProduct(1);
-            }
-            else {
+            } else {
                 Category category = categoryController.getCategory(new Scanner(System.in).nextInt());
                 productController.addProduct(Product.productFactory(name, price, description, composition, category), productController.size());
                 adminMenu(2);
@@ -223,7 +225,16 @@ public class Console {
 
     public static void secondLaunch() throws IOException {
         try (FileInputStream fis = new FileInputStream("out.bin")) {
-            Serialize.deserializeDatabase(categoryController, fis);
+            data = Serialize.deserializeDatabase(fis);
+        }
+        int k = 0;
+        categoryController.setCategories(data);
+        for (int i = 0; i < data.size(); i++) {
+            data.get(i);
+            for (int j = 0; j < data.get(i).getSize(); j++) {
+                productController.addProduct(data.get(i).getProduct(j), k);
+                k++;
+            }
         }
         selectionMenu();
     }
@@ -283,14 +294,23 @@ public class Console {
     public static void searchProductMenu() throws IOException {
         System.out.println("");
         System.out.print("Введите название продукта который хотите найти: ");
-        String productToSearch = new Scanner(System.in).next();
-        for (int i = 0; i < productController.size(); i++) {
-            if (productController.getProduct(i).getName().toLowerCase().contains(productToSearch.toLowerCase())) {
-                System.out.println(i + ". " + productController.getProduct(i).getName());
+        String productToSearch = new Scanner(System.in).nextLine();
+        System.out.println("0. Вернуться назад");
+        if (productToSearch.contains("?")) {
+            String actualSearch = productToSearch.substring(0, productToSearch.indexOf("?"));
+            actualSearch = actualSearch + ".+?.";
+            for (int i = 0; i < productController.size(); i++) {
+                if (Pattern.matches(actualSearch, productController.getProduct(i).getName())) {
+                    System.out.println(i + ". " + productController.getProduct(i).getName());
+                }
+            }
+        } else {
+            for (int i = 0; i < productController.size(); i++) {
+                if (productController.getProduct(i).getName().toLowerCase().contains(productToSearch.toLowerCase())) {
+                    System.out.println(i + ". " + productController.getProduct(i).getName());
+                }
             }
         }
-        System.out.println("0. Вернуться назад");
-        System.out.print("Укажите номер конкретного товара: ");
         int numberProduct = new Scanner(System.in).nextInt();
         if (numberProduct == 0) {
             userMenu();
@@ -303,7 +323,6 @@ public class Console {
         double rat;
         System.out.println("");
         productController.getProduct(numberProduct).print();
-        // product.getProduct(numberProduct).print();
         System.out.println("");
         System.out.println("1. В меню");
         System.out.println("2. Добавить в корзину");
@@ -316,13 +335,11 @@ public class Console {
                 do {
                     System.out.println("Введите количество");
                     count = new Scanner(System.in).nextInt();
-                } while (count>0);
+                } while (count > 0);
                 do {
                     System.out.println("Введите вашу оценку");
                     rat = new Scanner(System.in).nextDouble();
-                } while(rat>0);
-                // basket.getBasket().add(product.getProduct(numberProduct), count, rat);
-                //�������, ����� �� ��������. �� ������ ��� ��� ������� � �������������
+                } while (rat > 0);
                 basketController.getBasket().add(productController.getProduct(numberProduct), count, rat);
                 basketMenu();
                 break;
@@ -336,7 +353,6 @@ public class Console {
     public static void productMenu(int numberProduct, int numberCategory) throws IOException {
         System.out.println("");
         categoryController.getCategory(numberCategory).getProducts().get(numberProduct).print();
-        // product.getProduct(numberProduct).print();
         System.out.println("");
         System.out.println("1. Назад");
         System.out.println("2. Добавить в корзину");
@@ -350,8 +366,6 @@ public class Console {
                 int count = new Scanner(System.in).nextInt();
                 System.out.println("Введите вашу оценку");
                 double rat = new Scanner(System.in).nextDouble();
-                // basket.getBasket().add(product.getProduct(numberProduct), count, rat);
-//Изменил, чтобы всё работало. Не уверен как это сделать с контроллерами
                 basketController.getBasket().add(categoryController.getCategory(numberCategory).getProducts().get(numberProduct), count, rat);
                 basketMenu();
                 break;
@@ -410,7 +424,7 @@ public class Console {
                 break;
             case (2):
                 basketController.getBasket().purchase();
-                System.out.println("������!!");
+                System.out.println("Пасиба!!");
                 basketController.getBasket().deleteAll();
                 userMenu();
                 break;
@@ -455,4 +469,5 @@ public class Console {
         }
         return 99999999;
     }
+
 }

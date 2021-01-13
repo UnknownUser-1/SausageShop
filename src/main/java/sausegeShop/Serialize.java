@@ -11,9 +11,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import sausegeShop.controllers.CategoryController;
-import sausegeShop.controllers.ProductController;
 import sausegeShop.models.Category;
 
 /**
@@ -22,22 +19,22 @@ import sausegeShop.models.Category;
  */
 public class Serialize {
 
-    public static void serializeDatabase(CategoryController base, OutputStream out) {
+    public static void serializeDatabase(ArrayList<Category> base, OutputStream out) {
         try (out; ObjectOutputStream OOS = new ObjectOutputStream(out)) {
-            Category[] tmp = base.getCategories().toArray(new Category[base.size()]);
-            OOS.writeObject(tmp);
+            OOS.writeObject(base);
         } catch (IOException ex) {
             System.out.println("Oozhos occurred");
         }
     }
 
-    public static void deserializeDatabase(CategoryController base, InputStream in) {
+    public static ArrayList<Category> deserializeDatabase(InputStream in) {
         try (in; ObjectInputStream OIS = new ObjectInputStream(in)) {
-            base.setCategories(new ArrayList<>(Arrays.asList((Category[]) OIS.readObject())));
+            return new ArrayList<>((ArrayList<Category>) OIS.readObject());
         } catch (IOException ex) {
             System.out.println("Oozhos occurred");
         } catch (ClassNotFoundException e) {
             System.out.println("Wrong object type");
         }
+        return null;
     }
 }
