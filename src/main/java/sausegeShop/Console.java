@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
+
 
 import sausegeShop.controllers.BasketController;
 import sausegeShop.controllers.CategoryController;
@@ -298,7 +298,7 @@ public class Console {
         System.out.println("0. Вернуться назад");
         if (productToSearch.contains("?")) {
             String actualSearch = productToSearch.substring(0, productToSearch.indexOf("?"));
-            actualSearch = actualSearch + ".+?.";
+            actualSearch = actualSearch + ".+.";
             for (int i = 0; i < productController.size(); i++) {
                 if (Pattern.matches(actualSearch, productController.getProduct(i).getName())) {
                     System.out.println(i + ". " + productController.getProduct(i).getName());
