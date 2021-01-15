@@ -1,10 +1,11 @@
 package sausageShop.controllers;
 
-import sausageShop.models.Product;
+import sausegeShop.models.Product;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ProductController {
-
+public class ProductController implements Serializable {
     private ArrayList<Product> product = new ArrayList<>();
 
 
@@ -32,6 +33,12 @@ public class ProductController {
         if (product==null||number<0)
             throw new IllegalArgumentException("Что-то погло не так");
         this.product.add(number,product);
+    }
+
+    public void deleteProduct(int number){
+        if (number<0||number>size())
+            throw  new IllegalArgumentException("Что-то пошло не так");
+        this.product.remove(number);
     }
 
     public int size(){

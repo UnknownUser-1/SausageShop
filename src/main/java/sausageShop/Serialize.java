@@ -10,7 +10,8 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import sausageShop.controllers.CategoryController;
+import java.util.ArrayList;
+import sausegeShop.models.Category;
 
 /**
  *
@@ -18,7 +19,7 @@ import sausageShop.controllers.CategoryController;
  */
 public class Serialize {
 
-    public static void serializeDatabase(CategoryController base, OutputStream out) {
+    public static void serializeDatabase(ArrayList<Category> base, OutputStream out) {
         try (out; ObjectOutputStream OOS = new ObjectOutputStream(out)) {
             OOS.writeObject(base);
         } catch (IOException ex) {
@@ -26,10 +27,9 @@ public class Serialize {
         }
     }
 
-    public static CategoryController deserializeDatabase(InputStream in) {
-        CategoryController base;
+    public static ArrayList<Category> deserializeDatabase(InputStream in) {
         try (in; ObjectInputStream OIS = new ObjectInputStream(in)) {
-            return base = (CategoryController) OIS.readObject();
+            return new ArrayList<>((ArrayList<Category>) OIS.readObject());
         } catch (IOException ex) {
             System.out.println("Oozhos occurred");
         } catch (ClassNotFoundException e) {
