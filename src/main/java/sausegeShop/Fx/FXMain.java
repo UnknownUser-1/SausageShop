@@ -9,14 +9,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -32,7 +28,7 @@ public class FXMain extends Application {
         loader.setLocation(xmlUrl);
         Parent root = loader.load();
         stage.setTitle("Мясной уровень интернета");
-        InputStream iconStream = getClass().getResourceAsStream("/pct/sas.png");
+        InputStream iconStream = getClass().getResourceAsStream("/pct/sos.png");
         Image image = new Image(iconStream);
         stage.getIcons().add(image);
         stage.setScene(new Scene(root));
