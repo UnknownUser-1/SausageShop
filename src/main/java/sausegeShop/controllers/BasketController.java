@@ -12,7 +12,8 @@ public class BasketController {
         this.basket = basket;
     }
 
-    public BasketController(){}
+    public BasketController(){
+        this.basket= new Basket();}
 
     public Basket getBasket() {
         if(basket == null)
