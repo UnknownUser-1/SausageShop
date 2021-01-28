@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sausegeShop.Fx.AdminMenu">
+   <children>
+      <Button layoutX="14.0" layoutY="100.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Добавить категорию" />
+      <Button layoutX="14.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Удалить категории" />
+      <Button layoutX="14.0" layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Добавить Товар" />
+      <Button layoutX="14.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Удалить Товар" />
+      <Button fx:id="enterToUser" layoutX="435.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Зайти за пользователя" />
+      <Button layoutX="14.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Показать все товары" />
+      <Button layoutX="14.0" layoutY="225.0" mnemonicParsing="false" text="Показать все категории" />
+      <Button layoutX="14.0" layoutY="250.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Сохрнаить данные" />
+      <Button layoutX="14.0" layoutY="275.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Загрузить данные" />
+   </children>
+</AnchorPane>
