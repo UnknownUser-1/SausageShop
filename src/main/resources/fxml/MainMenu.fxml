@@ -6,7 +6,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sausegeShop.Fx.MainMenu">
    <children>
       <Button fx:id="categories" layoutX="14.0" layoutY="110.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Категории" />
-      <Button layoutX="14.0" layoutY="135.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Корзина" />
+      <Button fx:id="cart" layoutX="14.0" layoutY="135.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Корзина" />
       <Button layoutX="14.0" layoutY="160.0" mnemonicParsing="false" text="Поиск по товарам" />
       <Button fx:id="adminMenu" layoutX="454.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Зайти за Админа" />
       <Button fx:id="exit" layoutX="14.0" layoutY="185.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Выход" />
