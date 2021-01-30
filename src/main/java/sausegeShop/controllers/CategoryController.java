@@ -10,35 +10,14 @@ public class CategoryController implements Serializable{
 
     private ArrayList<Category> categories = new ArrayList<>();
 
-    public CategoryController(ArrayList<Category> categories){
-        if(categories == null)
-            throw new IllegalArgumentException("Нельзя добавить пустые категории");
-        this.categories = categories;
-    }
+    private static CategoryController instance;
+    private CategoryController(){}
 
-    public CategoryController(){
-        Category kolbasky = new Category("Колбаски");
-        ArrayList<Product> products = new ArrayList<>();
-        Product sausage = Product.productFactory("Сосиски", 100, "Небольшие вкусные штучки", "100% курица",kolbasky);
-        Product cervelat = Product.productFactory("Сервелат", 500, "Классная копченая колбаска", "Кто-то умер, чтобы попасть туда", kolbasky);
-        Product cervelat2 = Product.productFactory("Останки финна", 280, "Откопанный из вечной мерзлоты солдат после Советско-Финской", "Чистокровный финн", kolbasky);
-        products.add(0,sausage);
-        products.add(1,cervelat);
-        products.add(2,cervelat2);
-        kolbasky.setProducts(products);
-        Category meat = new Category("Мяско");
-        Category salt = new Category("Соль");
-        Category kisloe = new Category("Кислое");
-        Category gorkoy = new Category("Горькое");
-        Category syroe = new Category("Сырое");
-        Category myagkoe = new Category("Мягкое");
-        addCategories(kolbasky, 0);
-        addCategories(meat, 1);
-        addCategories(salt,2);
-        addCategories(kisloe,3);
-        addCategories(gorkoy,4);
-        addCategories(syroe,5);
-        addCategories(myagkoe,6);
+    public static CategoryController getInstance(){
+        if(instance==null) {
+            instance = new CategoryController();
+        }
+        return instance;
     }
 
     public ArrayList<Category> getCategories() {

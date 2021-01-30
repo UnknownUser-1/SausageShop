@@ -10,11 +10,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sausegeShop.controllers.BasketController;
 import sausegeShop.controllers.CategoryController;
+import sausegeShop.controllers.ProductController;
 import sausegeShop.models.Category;
 import sausegeShop.models.Product;
 
 import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.regex.Pattern;
 
 public class MainMenu {
 
@@ -33,8 +34,15 @@ public class MainMenu {
     @FXML
     private Button cart;
 
-    private final CategoryController categoryController = new CategoryController();
-    private final BasketController basketController = new BasketController();
+    @FXML
+    private Button find;
+
+    @FXML
+    private TextField textToFind;
+
+    private final CategoryController categoryController = CategoryController.getInstance();
+    private final BasketController basketController = BasketController.getInstance();
+    private final ProductController productController = ProductController.getInstance();
 
     @FXML
     void initialize() {
@@ -42,11 +50,45 @@ public class MainMenu {
         exitWindow();
         showAllCategories();
         showBasket();
+        findProduct();
     }
 
     private void exitWindow() {
         exit.setOnAction(e -> {
             Platform.exit();
+        });
+    }
+
+    private void findProduct(){
+        find.setOnAction(actionEvent -> {
+            String product = textToFind.getText();
+            if (product.contains("?")) {
+                String actualSearch = product.substring(0, product.indexOf("?"));
+                actualSearch = actualSearch + ".+.";
+                for (int i = 0; i < productController.size(); i++) {
+                    if (Pattern.matches(actualSearch, productController.getProduct(i).getName())) {
+                        Button button = new Button(productController.getProduct(i).getName()+ "    "+ productController.getProduct(i).getPrice());
+                        button.setMinSize(375, 50);
+                        int finalI = i;
+                        button.setOnAction(actionEvent1 -> {
+                            showOneProduct(productController.getProduct(finalI));
+                        });
+                        showSome.getChildren().add(button);
+                    }
+                }
+            } else {
+                for (int i = 0; i < productController.size(); i++) {
+                    if (productController.getProduct(i).getName().toLowerCase().contains(product.toLowerCase())) {
+                        Button button = new Button(productController.getProduct(i).getName()+ "    "+ productController.getProduct(i).getPrice());
+                        int finalI = i;
+                        button.setMinSize(375, 50);
+                        button.setOnAction(actionEvent1 -> {
+                            showOneProduct(productController.getProduct(finalI));
+                        });
+                        showSome.getChildren().add(button);
+                    }
+                }
+            }
         });
     }
 
@@ -62,7 +104,7 @@ public class MainMenu {
                 Label rat = new Label("Рейтинг: " + basketController.getBasket().getRat(i));
                 Button remove = new Button("Удалить");
                 int finalI = i;
-                //Здесь происходит удаление товара, неправильно бирает надписи
+                //Здесь происходит удаление товара, неправильно убирает надписи
                 remove.setOnAction(actionEvent -> {
                     basketController.getBasket().delete(finalI);
                     if (finalI == 0)
@@ -122,7 +164,7 @@ public class MainMenu {
     }
 
     private void showProducts(Category category) {
-        showSome.getChildren().remove(0, categoryController.size());
+        showSome.getChildren().clear();
         for (int i = 0; i < category.getProducts().size(); i++) {
             Button button = new Button();
             int finalI = i;
@@ -137,7 +179,7 @@ public class MainMenu {
     }
 
     private void showOneProduct(Product product) {
-        showSome.getChildren().remove(0, product.getCategory().getSize());
+        showSome.getChildren().clear();
         Label name = new Label("Название: " + product.getName());
         Label price = new Label("Цена: " + product.getPrice());
         Label description = new Label("Описание: " + product.getDescription());
@@ -150,12 +192,19 @@ public class MainMenu {
         Button back = new Button("Назад");
         showSome.getChildren().addAll(name, price, description, composition, count, rat, buy, back);
         buy.setOnAction(actionEvent -> {
-            basketController.getBasket().add(product, Integer.parseInt(count.getText()), Integer.parseInt(rat.getText()));
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Спасибо");
-            alert.setContentText("Товар добавлен в корзину");
-            alert.showAndWait();
-            showSome.getChildren().remove(0, 8);
+            if (!count.getText().equals("") && !rat.getText().equals("")) {
+                basketController.getBasket().add(product, Integer.parseInt(count.getText()), Integer.parseInt(rat.getText()));
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Спасибо");
+                alert.setContentText("Товар добавлен в корзину");
+                alert.showAndWait();
+                showSome.getChildren().remove(0, 8);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Внимание");
+                alert.setContentText("Добавьте рейтинг или же количество");
+                alert.showAndWait();
+            }
         });
         back.setOnAction(actionEvent -> {
             showProducts(product.getCategory());
