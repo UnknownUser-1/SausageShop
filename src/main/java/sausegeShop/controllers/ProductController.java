@@ -6,16 +6,19 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ProductController implements Serializable {
+
     private ArrayList<Product> product = new ArrayList<>();
+    private static ProductController instance;
 
+    private ProductController(){}
 
-    public ProductController(ArrayList<Product> product){
-        if(product == null)
-            throw new IllegalArgumentException("Список пуст");
-        this.product = product;
+    public static ProductController getInstance(){
+        if(instance==null){
+            instance = new ProductController();
+        }
+        return instance;
     }
 
-    public ProductController(){}
 
     public Product getProduct(int number) {
         if(number>product.size() || number<0)
