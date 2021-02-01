@@ -15,6 +15,8 @@ public class Category implements Serializable {
         this.title = title;
     }
 
+    public Category(){}
+
     public String getTitle() {
         return title;
     }
