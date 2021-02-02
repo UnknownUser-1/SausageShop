@@ -127,6 +127,7 @@ public class MainMenu {
                     alert.setContentText("Спаибо за покупку");
                     alert.showAndWait();
                     basketController.getBasket().deleteAll();
+                    showSome.getChildren().clear();
                 });
                 showSome.getChildren().add(buyAll);
             }
