@@ -61,6 +61,7 @@ public class AdminMenu {
 
     private void showCategories(){
         showAllCategories.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
             for (int k = 0; k < categoryController.size(); k++) {
                 Button category = new Button(categoryController.getCategory(k).getTitle());
                 int finalK = k;
@@ -91,6 +92,7 @@ public class AdminMenu {
 
     private void showProduct(){
         showAllProducts.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
             for (int i = 0; i < productController.size(); i++) {
                 Button product = new Button(productController.getProduct(i).getName());
                 int finalI = i;
@@ -127,6 +129,7 @@ public class AdminMenu {
 
     private void addNewCategory(){
         addCategory.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
             TextField name = new TextField();
             name.setPromptText("Введите название категории");
             Button add = new Button("Добавить");
@@ -140,6 +143,7 @@ public class AdminMenu {
 
     private void addNewProduct(){
         addProduct.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
             AtomicInteger finalJ = new AtomicInteger();
             TextField name = new TextField();
             name.setPromptText("Введите название товара");
@@ -172,6 +176,7 @@ public class AdminMenu {
 
     private void deleteOldProduct(){
         deleteProduct.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
             for (int i =0; i< productController.size();i++){
                 Button button = new Button(productController.getProduct(i).getName());
                 int finalI = i;
