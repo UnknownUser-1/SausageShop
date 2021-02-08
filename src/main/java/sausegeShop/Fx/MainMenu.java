@@ -43,6 +43,8 @@ public class MainMenu {
     private final CategoryController categoryController = CategoryController.getInstance();
     private final BasketController basketController = BasketController.getInstance();
     private final ProductController productController = ProductController.getInstance();
+    private static final int length = 375;
+    private static final int width = 50;
 
     @FXML
     void initialize() {
@@ -68,7 +70,7 @@ public class MainMenu {
                 for (int i = 0; i < productController.size(); i++) {
                     if (Pattern.matches(actualSearch, productController.getProduct(i).getName())) {
                         Button button = new Button(productController.getProduct(i).getName() + "    " + productController.getProduct(i).getPrice());
-                        button.setMinSize(375, 50);
+                        button.setMinSize(length, width);
                         int finalI = i;
                         button.setOnAction(actionEvent1 -> {
                             showSome.getChildren().clear();
@@ -82,7 +84,7 @@ public class MainMenu {
                     if (productController.getProduct(i).getName().toLowerCase().contains(product.toLowerCase())) {
                         Button button = new Button(productController.getProduct(i).getName() + "    " + productController.getProduct(i).getPrice());
                         int finalI = i;
-                        button.setMinSize(375, 50);
+                        button.setMinSize(length, width);
                         button.setOnAction(actionEvent1 -> {
                             showSome.getChildren().clear();
                             showOneProduct(productController.getProduct(finalI));
@@ -95,13 +97,14 @@ public class MainMenu {
     }
 
     private void showBasket() {
-        showSome.getChildren().clear();
         cart.setOnAction(e -> {
+            showSome.getChildren().clear();
             if (basketController.getBasket().size() == 0) {
                 Label label = new Label("В коризине пусто");
                 showSome.getChildren().add(label);
             } else {
                 for (int i = 0; i < basketController.getBasket().size(); i++) {
+                    VBox product = new VBox();
                     Label name = new Label("Название: " + basketController.getBasket().getProducts(i).getName());
                     Label price = new Label("Цена: " + basketController.getBasket().getProducts(i).getPrice());
                     Label description = new Label("Описание: " + basketController.getBasket().getProducts(i).getDescription());
@@ -109,16 +112,17 @@ public class MainMenu {
                     Label count = new Label("Количество: " + basketController.getBasket().getCount(i));
                     Label rat = new Label("Рейтинг: " + basketController.getBasket().getRat(i));
                     Button remove = new Button("Удалить");
-                    int finalI = i;
-                    //Здесь происходит удаление товара, неправильно убирает надписи
+                    product.getChildren().addAll(name, price, description, composition, count, rat, remove);
                     remove.setOnAction(actionEvent -> {
-                        basketController.getBasket().delete(finalI);
-                        if (finalI == 0)
-                            showSome.getChildren().remove(0, 7);
-                        else
-                            showSome.getChildren().remove(7 * finalI, 7 * finalI + 7);
+                        if (basketController.getBasket().size() == 1)
+                            showSome.getChildren().clear();
+                        for (int j = 0; j < basketController.getBasket().size(); j++) {
+                            if (name.equals(basketController.getBasket().getProducts(j).getName()))
+                                basketController.getBasket().delete(j);
+                        }
+                        product.getChildren().clear();
                     });
-                    showSome.getChildren().addAll(name, price, description, composition, count, rat, remove);
+                    showSome.getChildren().add(product);
                 }
                 Button buyAll = new Button("Купить все");
                 buyAll.setOnAction(actionEvent -> {
@@ -156,8 +160,8 @@ public class MainMenu {
     }
 
     private void showAllCategories() {
-        showSome.getChildren().clear();
         categories.setOnAction(e -> {
+            showSome.getChildren().clear();
             for (int i = 0; i < categoryController.size(); i++) {
                 Button button = new Button();
                 int finalI = i;
@@ -167,7 +171,7 @@ public class MainMenu {
                 });
                 button.setId(String.valueOf(i));
                 button.setText(categoryController.getCategory(i).getTitle());
-                button.setMinSize(375, 50);
+                button.setMinSize(length, width);
                 showSome.getChildren().add(i, button);
             }
         });
@@ -184,7 +188,7 @@ public class MainMenu {
             });
             button.setId(String.valueOf(i));
             button.setText(category.getProduct(i).getName() + "       " + category.getProduct(i).getPrice());
-            button.setMinSize(375, 50);
+            button.setMinSize(length, width);
             showSome.getChildren().add(i, button);
         }
     }
