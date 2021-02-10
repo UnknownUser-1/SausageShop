@@ -23,6 +23,8 @@ public class AdminMenu {
 
     private static CategoryController categoryController = CategoryController.getInstance();
     private static ProductController productController = ProductController.getInstance();
+    private static final int length = 375;
+    private static final int width = 50;
 
     @FXML
     private Button enterToUser;
@@ -200,6 +202,7 @@ public class AdminMenu {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
+            stage.setTitle("Интернет магазин мясных изделий");
         });
     }
 }

@@ -43,6 +43,7 @@ public class PasswordCheck {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
+                stage.setTitle("Меню Администратора");
             } else {
                 showMessage.setText("Пароль неверный");
             }
@@ -62,6 +63,7 @@ public class PasswordCheck {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
+            stage.setTitle("Интернет магазин мясных изделий");
         });
     }
 }

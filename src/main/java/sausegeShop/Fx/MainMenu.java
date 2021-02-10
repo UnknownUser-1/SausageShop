@@ -43,6 +43,8 @@ public class MainMenu {
     private final CategoryController categoryController = CategoryController.getInstance();
     private final BasketController basketController = BasketController.getInstance();
     private final ProductController productController = ProductController.getInstance();
+    private static final int length = 375;
+    private static final int width = 50;
 
     @FXML
     void initialize() {
@@ -68,7 +70,7 @@ public class MainMenu {
                 for (int i = 0; i < productController.size(); i++) {
                     if (Pattern.matches(actualSearch, productController.getProduct(i).getName())) {
                         Button button = new Button(productController.getProduct(i).getName() + "    " + productController.getProduct(i).getPrice());
-                        button.setMinSize(375, 50);
+                        button.setMinSize(length, width);
                         int finalI = i;
                         button.setOnAction(actionEvent1 -> {
                             showSome.getChildren().clear();
@@ -82,7 +84,7 @@ public class MainMenu {
                     if (productController.getProduct(i).getName().toLowerCase().contains(product.toLowerCase())) {
                         Button button = new Button(productController.getProduct(i).getName() + "    " + productController.getProduct(i).getPrice());
                         int finalI = i;
-                        button.setMinSize(375, 50);
+                        button.setMinSize(length, width);
                         button.setOnAction(actionEvent1 -> {
                             showSome.getChildren().clear();
                             showOneProduct(productController.getProduct(finalI));
@@ -124,7 +126,7 @@ public class MainMenu {
                 buyAll.setOnAction(actionEvent -> {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Спасибо");
-                    alert.setContentText("Спаибо за покупку");
+                    alert.setContentText("Спасибо за покупку");
                     alert.showAndWait();
                     basketController.getBasket().deleteAll();
                     showSome.getChildren().clear();
@@ -141,6 +143,7 @@ public class MainMenu {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/PasswordCheck.fxml"));
 
+
             try {
                 loader.load();
             } catch (IOException exception) {
@@ -151,6 +154,7 @@ public class MainMenu {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
+            stage.setTitle("Меню авторизации");
         });
         exitWindow();
     }
@@ -167,7 +171,7 @@ public class MainMenu {
                 });
                 button.setId(String.valueOf(i));
                 button.setText(categoryController.getCategory(i).getTitle());
-                button.setMinSize(375, 50);
+                button.setMinSize(length, width);
                 showSome.getChildren().add(i, button);
             }
         });
@@ -184,7 +188,7 @@ public class MainMenu {
             });
             button.setId(String.valueOf(i));
             button.setText(category.getProduct(i).getName() + "       " + category.getProduct(i).getPrice());
-            button.setMinSize(375, 50);
+            button.setMinSize(length, width);
             showSome.getChildren().add(i, button);
         }
     }
