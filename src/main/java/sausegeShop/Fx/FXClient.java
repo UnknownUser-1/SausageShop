@@ -45,6 +45,8 @@ public class FXClient extends Application {
     private Stage primaryStage;
     private static CategoryController categoryController = CategoryController.getInstance();
     private static ProductController productController = ProductController.getInstance();
+    private static final int width = 650;
+    private static final int height = 400;
 
 
     public static void main(String[] args) {
@@ -85,6 +87,8 @@ public class FXClient extends Application {
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Интернет магазин мясных изделий");
+        primaryStage.setHeight(height);
+        primaryStage.setWidth(width);
         primaryStage.setResizable(false);
         showMainView();
     }
