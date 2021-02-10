@@ -85,6 +85,7 @@ public class FXClient extends Application {
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Интернет магазин мясных изделий");
+        primaryStage.setResizable(false);
         showMainView();
     }
 
