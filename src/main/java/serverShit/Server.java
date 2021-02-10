@@ -46,7 +46,7 @@ public class Server implements Runnable {
                 //Создается клиентская сессия
                 ClientSession clientSession = new ClientSession(clientSocket, this.context);
                 this.context.getSessionsManger().addSession(clientSession);
-                //Запуск логики работы с клиентом
+                //Запуск работы с клиентом
                 clientSession.run();
             }
 
