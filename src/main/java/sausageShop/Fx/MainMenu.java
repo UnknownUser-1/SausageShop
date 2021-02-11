@@ -1,4 +1,4 @@
-package sausegeShop.Fx;
+package sausageShop.Fx;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -8,11 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sausegeShop.controllers.BasketController;
-import sausegeShop.controllers.CategoryController;
-import sausegeShop.controllers.ProductController;
-import sausegeShop.models.Category;
-import sausegeShop.models.Product;
+import sausageShop.controllers.BasketController;
+import sausageShop.controllers.CategoryController;
+import sausageShop.controllers.ProductController;
+import sausageShop.models.Category;
+import sausageShop.models.Product;
 
 import java.io.IOException;
 import java.util.regex.Pattern;
@@ -44,7 +44,9 @@ public class MainMenu {
     private final BasketController basketController = BasketController.getInstance();
     private final ProductController productController = ProductController.getInstance();
     private static final int length = 375;
-    private static final int width = 50;
+    private static final int widthb = 50;
+    private static final int width = 400;
+    private static final int height = 200;
 
     @FXML
     void initialize() {
@@ -84,7 +86,7 @@ public class MainMenu {
                     if (productController.getProduct(i).getName().toLowerCase().contains(product.toLowerCase())) {
                         Button button = new Button(productController.getProduct(i).getName() + "    " + productController.getProduct(i).getPrice());
                         int finalI = i;
-                        button.setMinSize(length, width);
+                        button.setMinSize(length, widthb);
                         button.setOnAction(actionEvent1 -> {
                             showSome.getChildren().clear();
                             showOneProduct(productController.getProduct(finalI));
@@ -100,7 +102,7 @@ public class MainMenu {
         showSome.getChildren().clear();
         cart.setOnAction(e -> {
             if (basketController.getBasket().size() == 0) {
-                Label label = new Label("В коризине пусто");
+                Label label = new Label("В корзине пусто");
                 showSome.getChildren().add(label);
             } else {
                 for (int i = 0; i < basketController.getBasket().size(); i++) {
@@ -155,6 +157,9 @@ public class MainMenu {
             stage.setScene(new Scene(root));
             stage.show();
             stage.setTitle("Меню авторизации");
+            stage.setResizable(false);
+            stage.setWidth(width);
+            stage.setHeight(height);
         });
         exitWindow();
     }
@@ -171,7 +176,7 @@ public class MainMenu {
                 });
                 button.setId(String.valueOf(i));
                 button.setText(categoryController.getCategory(i).getTitle());
-                button.setMinSize(length, width);
+                button.setMinSize(length, widthb);
                 showSome.getChildren().add(i, button);
             }
         });
@@ -188,7 +193,7 @@ public class MainMenu {
             });
             button.setId(String.valueOf(i));
             button.setText(category.getProduct(i).getName() + "       " + category.getProduct(i).getPrice());
-            button.setMinSize(length, width);
+            button.setMinSize(length, widthb);
             showSome.getChildren().add(i, button);
         }
     }

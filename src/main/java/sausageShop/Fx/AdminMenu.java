@@ -1,20 +1,18 @@
-package sausegeShop.Fx;
+package sausageShop.Fx;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.skin.ButtonSkin;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sausegeShop.controllers.CategoryController;
-import sausegeShop.controllers.ProductController;
-import sausegeShop.models.Category;
-import sausegeShop.models.Product;
+import sausageShop.controllers.CategoryController;
+import sausageShop.controllers.ProductController;
+import sausageShop.models.Category;
+import sausageShop.models.Product;
 
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -24,7 +22,9 @@ public class AdminMenu {
     private static CategoryController categoryController = CategoryController.getInstance();
     private static ProductController productController = ProductController.getInstance();
     private static final int length = 375;
-    private static final int width = 50;
+    private static final int widthb = 50;
+    private static final int width = 650;
+    private static final int height = 400;
 
     @FXML
     private Button enterToUser;
@@ -155,6 +155,7 @@ public class AdminMenu {
             showSome.getChildren().addAll(name, price, description, composition, cat);
             for (int i = 0; i < categoryController.size(); i++) {
                 Button button = new Button(categoryController.getCategory(i).getTitle());
+                button.setMinSize(length, widthb);
                 int finalI = i;
                 button.setOnAction(actionEvent1 -> {
                     finalJ.set(finalI);
@@ -203,6 +204,9 @@ public class AdminMenu {
             stage.setScene(new Scene(root));
             stage.show();
             stage.setTitle("Интернет магазин мясных изделий");
+            stage.setResizable(false);
+            stage.setHeight(height);
+            stage.setWidth(width);
         });
     }
 }

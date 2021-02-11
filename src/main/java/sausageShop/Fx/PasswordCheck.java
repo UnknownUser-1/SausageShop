@@ -1,4 +1,4 @@
-package sausegeShop.Fx;
+package sausageShop.Fx;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +25,9 @@ public class PasswordCheck {
     @FXML
     private Label showMessage;
 
+    private static final int width = 650;
+    private static final int height = 400;
+
     @FXML
     void initialize() {
         enter.setOnAction(e -> {
@@ -44,6 +47,9 @@ public class PasswordCheck {
                 stage.setScene(new Scene(root));
                 stage.show();
                 stage.setTitle("Меню Администратора");
+                stage.setResizable(false);
+                stage.setHeight(height);
+                stage.setWidth(width);
             } else {
                 showMessage.setText("Пароль неверный");
             }
@@ -64,6 +70,9 @@ public class PasswordCheck {
             stage.setScene(new Scene(root));
             stage.show();
             stage.setTitle("Интернет магазин мясных изделий");
+            stage.setResizable(false);
+            stage.setHeight(height);
+            stage.setWidth(width);
         });
     }
 }

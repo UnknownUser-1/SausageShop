@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sausegeShop.Fx;
+package sausageShop.Fx;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -16,10 +14,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sausegeShop.controllers.CategoryController;
-import sausegeShop.controllers.ProductController;
-import sausegeShop.models.Category;
-import sausegeShop.models.Product;
+import sausageShop.controllers.CategoryController;
+import sausageShop.controllers.ProductController;
+import sausageShop.models.Category;
+import sausageShop.models.Product;
 
 
 public class FXClient extends Application {
@@ -87,9 +85,6 @@ public class FXClient extends Application {
     public void start(Stage primaryStage) throws IOException {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Интернет магазин мясных изделий");
-        primaryStage.setHeight(height);
-        primaryStage.setWidth(width);
-        primaryStage.setResizable(false);
         showMainView();
     }
 
@@ -100,6 +95,9 @@ public class FXClient extends Application {
         Scene scene = new Scene(mainLayout);
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.setResizable(false);
+        primaryStage.setHeight(height);
+        primaryStage.setWidth(width);
     }
 
 }

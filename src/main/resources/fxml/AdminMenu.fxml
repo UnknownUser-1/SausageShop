@@ -4,8 +4,8 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sausegeShop.Fx.AdminMenu">
+<AnchorPane prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="sausageShop.Fx.AdminMenu">
     <children>
         <Button fx:id="addCategory" layoutX="14.0" layoutY="100.0" mnemonicParsing="false" prefHeight="25.0"
                 prefWidth="147.0" text="Добавить категорию"/>
