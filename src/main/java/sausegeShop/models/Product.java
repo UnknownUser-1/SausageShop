@@ -139,6 +139,13 @@ public class Product implements Serializable{
     }
 
     /**
+     * Add rating
+     */
+    public void setRating(double rat){
+        rating.add(rat);
+    }
+
+    /**
      * @return You can get the number of purchasings throug calculating the size
      * of {@link rating} ArrayList
      */

@@ -40,6 +40,9 @@ public class MainMenu {
     @FXML
     private TextField textToFind;
 
+    @FXML
+    private MenuButton filterMenu;
+
     private final CategoryController categoryController = CategoryController.getInstance();
     private final BasketController basketController = BasketController.getInstance();
     private final ProductController productController = ProductController.getInstance();
@@ -53,6 +56,7 @@ public class MainMenu {
         showAllCategories();
         showBasket();
         findProduct();
+        filter();
     }
 
     private void exitWindow() {
@@ -130,6 +134,9 @@ public class MainMenu {
                     alert.setTitle("Спасибо");
                     alert.setContentText("Спаибо за покупку");
                     alert.showAndWait();
+                    for (int i = 0;i<basketController.getBasket().size();i++){
+                        basketController.getBasket().getProducts(i).setRating(basketController.getBasket().getRat(i));
+                    }
                     basketController.getBasket().deleteAll();
                     showSome.getChildren().clear();
                 });
@@ -137,7 +144,6 @@ public class MainMenu {
             }
         });
     }
-
 
     private void goToAdminMenu() {
         adminMenu.setOnAction(e -> {
@@ -170,7 +176,7 @@ public class MainMenu {
                     showProducts(categoryController.getCategory(finalI));
                 });
                 button.setId(String.valueOf(i));
-                button.setText(categoryController.getCategory(i).getTitle());
+                button.setText(categoryController.getCategory(i).getTitle() + "     количество товаров: " + categoryController.getCategory(i).getSize());
                 button.setMinSize(length, width);
                 showSome.getChildren().add(i, button);
             }
@@ -199,13 +205,14 @@ public class MainMenu {
         Label price = new Label("Цена: " + product.getPrice());
         Label description = new Label("Описание: " + product.getDescription());
         Label composition = new Label("Состав: " + product.getComposition());
+        Label rating = new Label("Рейтинг: " + product.getRating());
         TextField count = new TextField();
         TextField rat = new TextField();
         count.setPromptText("Введите количество");
         rat.setPromptText("Введите рейтинг");
         Button buy = new Button("Купить");
         Button back = new Button("Назад");
-        showSome.getChildren().addAll(name, price, description, composition, count, rat, buy, back);
+        showSome.getChildren().addAll(name, price, description, composition, rating, count, rat, buy, back);
         buy.setOnAction(actionEvent -> {
             if (!count.getText().equals("") && !rat.getText().equals("")) {
                 basketController.getBasket().add(product, Integer.parseInt(count.getText()), Integer.parseInt(rat.getText()));
@@ -213,7 +220,7 @@ public class MainMenu {
                 alert.setTitle("Спасибо");
                 alert.setContentText("Товар добавлен в корзину");
                 alert.showAndWait();
-                showSome.getChildren().remove(0, 8);
+                showSome.getChildren().remove(0,9);
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Внимание");
@@ -224,6 +231,21 @@ public class MainMenu {
         back.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
             showProducts(product.getCategory());
+        });
+    }
+
+    private void filter(){
+        MenuItem filterName = new MenuItem("По названию");
+        MenuItem filterCount = new MenuItem("По количеству");
+        filterMenu.getItems().clear();
+        filterMenu.getItems().addAll(filterName,filterCount);
+        filterName.setOnAction(actionEvent -> {
+            VBox gg = new VBox();
+            gg.getChildren().add(new Button("GG"));
+            this.showSome = gg;
+        });
+        filterCount.setOnAction(actionEvent -> {
+
         });
     }
 }
