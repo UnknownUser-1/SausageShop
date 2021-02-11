@@ -16,5 +16,9 @@
       </ScrollPane>
       <TextField fx:id="textToFind" layoutX="188.0" layoutY="27.0" prefHeight="25.0" prefWidth="158.0" promptText="Введите название товара" />
       <Button fx:id="find" layoutX="357.0" layoutY="27.0" mnemonicParsing="false" text="Найти" />
+      <MenuButton fx:id="filterMenu" layoutX="188.0" layoutY="60.0" mnemonicParsing="false" text="Фильтр">
+        <items>
+        </items>
+      </MenuButton>
    </children>
 </AnchorPane>
