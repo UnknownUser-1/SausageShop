@@ -1,4 +1,4 @@
-package sausegeShop.models;
+package sausageShop.models;
 
 import java.util.ArrayList;
 

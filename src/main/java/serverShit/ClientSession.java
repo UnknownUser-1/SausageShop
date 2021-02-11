@@ -11,8 +11,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
-import sausegeShop.Serialize;
-import sausegeShop.models.Category;
+import sausageShop.Serialize;
+import sausageShop.models.Category;
 
 /**
  *

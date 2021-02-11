@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import sausegeShop.Serialize;
+import sausageShop.Serialize;
 
 /**
  * @author pro56
