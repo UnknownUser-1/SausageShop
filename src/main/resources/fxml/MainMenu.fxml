@@ -20,5 +20,6 @@
         <items>
         </items>
       </MenuButton>
+      <Label fx:id="whatSortShow" layoutX="267.0" layoutY="64.0" />
    </children>
 </AnchorPane>

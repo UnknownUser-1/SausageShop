@@ -45,6 +45,9 @@ public class MainMenu {
     @FXML
     private MenuButton filterMenu;
 
+    @FXML
+    private Label whatSortShow;
+
     private final CategoryController categoryController = CategoryController.getInstance();
     private final BasketController basketController = BasketController.getInstance();
     private final ProductController productController = ProductController.getInstance();
@@ -68,6 +71,7 @@ public class MainMenu {
 
     private void findProduct() {
         find.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
             String product = textToFind.getText();
             if (product.contains("?")) {
                 String actualSearch = product.substring(0, product.indexOf("?"));
@@ -204,6 +208,7 @@ public class MainMenu {
 
     private void showOneProduct(Product product) {
         showSome.getChildren().clear();
+        whatSortShow.setText(" ");
         Label name = new Label("Название: " + product.getName());
         Label price = new Label("Цена: " + product.getPrice());
         Label description = new Label("Описание: " + product.getDescription());
@@ -238,32 +243,62 @@ public class MainMenu {
     }
 
     private void filterCategory(){
-        MenuItem filterName = new MenuItem("По названию");
-        MenuItem filterCount = new MenuItem("По количеству");
+        whatSortShow.setText(" ");
+        MenuItem filterName = new MenuItem("По названию от А до Я");
+        MenuItem filterNameReversed = new MenuItem("По названию от Я до А");
+        MenuItem filterCount = new MenuItem("По количеству от 0 до 100");
+        MenuItem filterCountReversed = new MenuItem("По количеству от 100 до 0");
         filterMenu.getItems().clear();
-        filterMenu.getItems().addAll(filterName,filterCount);
+        filterMenu.getItems().addAll(filterName,filterNameReversed,filterCount,filterCountReversed);
         filterName.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
+            whatSortShow.setText("Сортировка по названию категорий от А до Я");
             showAllCategories(UserComparator.compareCategoryName());
         });
         filterCount.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
+            whatSortShow.setText("Сортировка по количеству продуктов в категории от 0 до 100");
             showAllCategories(UserComparator.compareCategoryCount());
+        });
+        filterCountReversed.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
+            whatSortShow.setText("Сортировка по количеству продуктов в категории от 100 до 0");
+            showAllCategories(UserComparator.reversedCompareCategoryCount());
+        });
+        filterNameReversed.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
+            whatSortShow.setText("Сортировка по названию категорий от Я до А");
+            showAllCategories(UserComparator.reversedCompareCategoryName());
         });
     }
 
     private void filterProduct(Category category){
-        MenuItem filterName = new MenuItem("По названию");
-        MenuItem filterCount = new MenuItem("По цене");
+        whatSortShow.setText(" ");
+        MenuItem filterName = new MenuItem("По названию от А до Я");
+        MenuItem filterNameReversed = new MenuItem("По названию от Я до А");
+        MenuItem filterCount = new MenuItem("По цене от 0 до 100");
+        MenuItem filterCountReversed = new MenuItem("По цене от 100 до 0");
         filterMenu.getItems().clear();
-        filterMenu.getItems().addAll(filterName,filterCount);
+        filterMenu.getItems().addAll(filterName,filterNameReversed,filterCount,filterCountReversed);
         filterName.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
+            whatSortShow.setText("Сортировка по названию продуктов от А до Я");
             showProducts(UserComparator.compareProductName(category));
         });
         filterCount.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
+            whatSortShow.setText("Сортировка по цене товаров от 0 до 100");
             showProducts(UserComparator.compareProductPrice(category));
+        });
+        filterCountReversed.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
+            whatSortShow.setText("Сортировка по цене товаров от 100 до 0");
+            showProducts(UserComparator.reversedCompareProductPrice(category));
+        });
+        filterNameReversed.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
+            whatSortShow.setText("Сортировка по названию продуктов от Я до А");
+            showProducts(UserComparator.reversedCompareProductName(category));
         });
     }
 
