@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sausegeShop.UserComparator;
 import sausegeShop.controllers.BasketController;
 import sausegeShop.controllers.CategoryController;
 import sausegeShop.controllers.ProductController;
@@ -15,6 +16,7 @@ import sausegeShop.models.Category;
 import sausegeShop.models.Product;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class MainMenu {
@@ -56,7 +58,6 @@ public class MainMenu {
         showAllCategories();
         showBasket();
         findProduct();
-        filter();
     }
 
     private void exitWindow() {
@@ -167,35 +168,37 @@ public class MainMenu {
 
     private void showAllCategories() {
         categories.setOnAction(e -> {
+            filterCategory();
             showSome.getChildren().clear();
             for (int i = 0; i < categoryController.size(); i++) {
-                Button button = new Button();
+                Button category = new Button();
                 int finalI = i;
-                button.setOnAction(event -> {
+                category.setOnAction(event -> {
                     showSome.getChildren().clear();
                     showProducts(categoryController.getCategory(finalI));
                 });
-                button.setId(String.valueOf(i));
-                button.setText(categoryController.getCategory(i).getTitle() + "     количество товаров: " + categoryController.getCategory(i).getSize());
-                button.setMinSize(length, width);
-                showSome.getChildren().add(i, button);
+                category.setId(String.valueOf(i));
+                category.setText(categoryController.getCategory(i).getTitle() + "     количество товаров: " + categoryController.getCategory(i).getSize());
+                category.setMinSize(length, width);
+                showSome.getChildren().add(i, category);
             }
         });
     }
 
     private void showProducts(Category category) {
         showSome.getChildren().clear();
+        filterProduct(category);
         for (int i = 0; i < category.getProducts().size(); i++) {
-            Button button = new Button();
+            Button product = new Button();
             int finalI = i;
-            button.setOnAction(actionEvent -> {
+            product.setOnAction(actionEvent -> {
                 showSome.getChildren().clear();
                 showOneProduct(category.getProduct(finalI));
             });
-            button.setId(String.valueOf(i));
-            button.setText(category.getProduct(i).getName() + "       " + category.getProduct(i).getPrice());
-            button.setMinSize(length, width);
-            showSome.getChildren().add(i, button);
+            product.setId(String.valueOf(i));
+            product.setText(category.getProduct(i).getName() + "       " + category.getProduct(i).getPrice());
+            product.setMinSize(length, width);
+            showSome.getChildren().add(i, product);
         }
     }
 
@@ -234,18 +237,64 @@ public class MainMenu {
         });
     }
 
-    private void filter(){
+    private void filterCategory(){
         MenuItem filterName = new MenuItem("По названию");
         MenuItem filterCount = new MenuItem("По количеству");
         filterMenu.getItems().clear();
         filterMenu.getItems().addAll(filterName,filterCount);
         filterName.setOnAction(actionEvent -> {
-            VBox gg = new VBox();
-            gg.getChildren().add(new Button("GG"));
-            this.showSome = gg;
+            showSome.getChildren().clear();
+            showAllCategories(UserComparator.compareCategoryName());
         });
         filterCount.setOnAction(actionEvent -> {
-
+            showSome.getChildren().clear();
+            showAllCategories(UserComparator.compareCategoryCount());
         });
+    }
+
+    private void filterProduct(Category category){
+        MenuItem filterName = new MenuItem("По названию");
+        MenuItem filterCount = new MenuItem("По цене");
+        filterMenu.getItems().clear();
+        filterMenu.getItems().addAll(filterName,filterCount);
+        filterName.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
+            showProducts(UserComparator.compareProductName(category));
+        });
+        filterCount.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
+            showProducts(UserComparator.compareProductPrice(category));
+        });
+    }
+
+    private void showAllCategories(ArrayList<Category> categories){
+        for(int i = 0; i<categories.size();i++){
+            Button category = new Button();
+            int finalI = i;
+            category.setOnAction(event -> {
+                showSome.getChildren().clear();
+                showProducts(categories.get(finalI));
+            });
+            category.setId(String.valueOf(i));
+            category.setText(categories.get(finalI).getTitle() + "     количество товаров: " + categories.get(i).getSize());
+            category.setMinSize(length, width);
+            showSome.getChildren().add(i, category);
+        }
+    }
+
+    private void showProducts(ArrayList<Product> products) {
+        showSome.getChildren().clear();
+        for (int i = 0; i < products.size(); i++) {
+            Button product = new Button();
+            int finalI = i;
+            product.setOnAction(actionEvent -> {
+                showSome.getChildren().clear();
+                showOneProduct(products.get(finalI));
+            });
+            product.setId(String.valueOf(i));
+            product.setText(products.get(i).getName() + "       " + products.get(i).getPrice());
+            product.setMinSize(length, width);
+            showSome.getChildren().add(i, product);
+        }
     }
 }

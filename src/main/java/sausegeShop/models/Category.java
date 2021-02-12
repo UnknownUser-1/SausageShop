@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-public class Category implements Serializable {
+public class Category implements Serializable,Comparable<Category>{
 
     private ArrayList<Product> products;
     private String title;
@@ -55,5 +55,10 @@ public class Category implements Serializable {
             }
         });
         System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
+    }
+
+    @Override
+    public int compareTo(Category o) {
+        return (this.getSize()-o.getSize());
     }
 }
