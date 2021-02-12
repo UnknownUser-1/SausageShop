@@ -219,4 +219,6 @@ public class Product implements Serializable,Comparable<Product>{
     public int compareTo(Product o) {
         return (int)(this.getPrice() - o.getPrice());
     }
+
+
 }
