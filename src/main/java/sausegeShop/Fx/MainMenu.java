@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import sausegeShop.UserComparator;
 import sausegeShop.controllers.BasketController;
 import sausegeShop.controllers.CategoryController;
-import sausegeShop.controllers.ProductController;
 import sausegeShop.models.Category;
 import sausegeShop.models.Product;
 
@@ -50,7 +49,6 @@ public class MainMenu {
 
     private final CategoryController categoryController = CategoryController.getInstance();
     private final BasketController basketController = BasketController.getInstance();
-    private final ProductController productController = ProductController.getInstance();
     private static final int length = 375;
     private static final int width = 50;
 
@@ -76,30 +74,37 @@ public class MainMenu {
             if (product.contains("?")) {
                 String actualSearch = product.substring(0, product.indexOf("?"));
                 actualSearch = actualSearch + ".+.";
-                for (int i = 0; i < productController.size(); i++) {
-                    if (Pattern.matches(actualSearch, productController.getProduct(i).getName())) {
-                        Button button = new Button(productController.getProduct(i).getName() + "    " + productController.getProduct(i).getPrice());
-                        button.setMinSize(length, width);
-                        int finalI = i;
-                        button.setOnAction(actionEvent1 -> {
-                            showSome.getChildren().clear();
-                            showOneProduct(productController.getProduct(finalI));
-                        });
-                        showSome.getChildren().add(button);
+                for (int j = 0; j < categoryController.size(); j++) {
+                    for (int k = 0; k < categoryController.getCategory(j).getSize(); k++) {
+                        if (Pattern.matches(actualSearch, categoryController.getCategory(j).getProduct(k).getName())) {
+                            Button button = new Button(categoryController.getCategory(j).getProduct(k).getName() + "    " + categoryController.getCategory(j).getProduct(k).getName());
+                            button.setMinSize(length, width);
+                            int finalI = k;
+                            int finalJ = j;
+                            button.setOnAction(actionEvent1 -> {
+                                showSome.getChildren().clear();
+                                showOneProduct(categoryController.getCategory(finalJ).getProduct(finalI));
+                            });
+                            showSome.getChildren().add(button);
+                        }
                     }
                 }
             } else {
-                for (int i = 0; i < productController.size(); i++) {
-                    if (productController.getProduct(i).getName().toLowerCase().contains(product.toLowerCase())) {
-                        Button button = new Button(productController.getProduct(i).getName() + "    " + productController.getProduct(i).getPrice());
-                        int finalI = i;
-                        button.setMinSize(length, width);
-                        button.setOnAction(actionEvent1 -> {
-                            showSome.getChildren().clear();
-                            showOneProduct(productController.getProduct(finalI));
-                        });
-                        showSome.getChildren().add(button);
+                for (int j = 0; j < categoryController.size(); j++) {
+                    for (int k = 0; k < categoryController.getCategory(j).getSize(); k++) {
+                        if (categoryController.getCategory(j).getProduct(k).getName().toLowerCase().contains(product.toLowerCase())) {
+                            Button button = new Button(categoryController.getCategory(j).getProduct(k).getName() + "    " + categoryController.getCategory(j).getProduct(k).getPrice());
+                            int finalI = k;
+                            button.setMinSize(length, width);
+                            int finalJ = j;
+                            button.setOnAction(actionEvent1 -> {
+                                showSome.getChildren().clear();
+                                showOneProduct(categoryController.getCategory(finalJ).getProduct(finalI));
+                            });
+                            showSome.getChildren().add(button);
+                        }
                     }
+
                 }
             }
         });
@@ -139,7 +144,7 @@ public class MainMenu {
                     alert.setTitle("Спасибо");
                     alert.setContentText("Спаибо за покупку");
                     alert.showAndWait();
-                    for (int i = 0;i<basketController.getBasket().size();i++){
+                    for (int i = 0; i < basketController.getBasket().size(); i++) {
                         basketController.getBasket().getProducts(i).setRating(basketController.getBasket().getRat(i));
                     }
                     basketController.getBasket().deleteAll();
@@ -228,7 +233,7 @@ public class MainMenu {
                 alert.setTitle("Спасибо");
                 alert.setContentText("Товар добавлен в корзину");
                 alert.showAndWait();
-                showSome.getChildren().remove(0,9);
+                showSome.getChildren().remove(0, 9);
             } else {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Внимание");
@@ -242,14 +247,14 @@ public class MainMenu {
         });
     }
 
-    private void filterCategory(){
+    private void filterCategory() {
         whatSortShow.setText(" ");
         MenuItem filterName = new MenuItem("По названию от А до Я");
         MenuItem filterNameReversed = new MenuItem("По названию от Я до А");
         MenuItem filterCount = new MenuItem("По количеству от 0 до 100");
         MenuItem filterCountReversed = new MenuItem("По количеству от 100 до 0");
         filterMenu.getItems().clear();
-        filterMenu.getItems().addAll(filterName,filterNameReversed,filterCount,filterCountReversed);
+        filterMenu.getItems().addAll(filterName, filterNameReversed, filterCount, filterCountReversed);
         filterName.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
             whatSortShow.setText("Сортировка по названию категорий от А до Я");
@@ -272,14 +277,14 @@ public class MainMenu {
         });
     }
 
-    private void filterProduct(Category category){
+    private void filterProduct(Category category) {
         whatSortShow.setText(" ");
         MenuItem filterName = new MenuItem("По названию от А до Я");
         MenuItem filterNameReversed = new MenuItem("По названию от Я до А");
         MenuItem filterCount = new MenuItem("По цене от 0 до 100");
         MenuItem filterCountReversed = new MenuItem("По цене от 100 до 0");
         filterMenu.getItems().clear();
-        filterMenu.getItems().addAll(filterName,filterNameReversed,filterCount,filterCountReversed);
+        filterMenu.getItems().addAll(filterName, filterNameReversed, filterCount, filterCountReversed);
         filterName.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
             whatSortShow.setText("Сортировка по названию продуктов от А до Я");
@@ -302,8 +307,8 @@ public class MainMenu {
         });
     }
 
-    private void showAllCategories(ArrayList<Category> categories){
-        for(int i = 0; i<categories.size();i++){
+    private void showAllCategories(ArrayList<Category> categories) {
+        for (int i = 0; i < categories.size(); i++) {
             Button category = new Button();
             int finalI = i;
             category.setOnAction(event -> {

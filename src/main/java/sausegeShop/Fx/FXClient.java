@@ -6,9 +6,7 @@
 package sausegeShop.Fx;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 import javafx.application.Application;
@@ -17,7 +15,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sausegeShop.controllers.CategoryController;
-import sausegeShop.controllers.ProductController;
 import sausegeShop.models.Category;
 import sausegeShop.models.Product;
 
@@ -43,7 +40,6 @@ public class FXClient extends Application {
 
     private Stage primaryStage;
     private static CategoryController categoryController = CategoryController.getInstance();
-    private static ProductController productController = ProductController.getInstance();
 
 
     public static void main(String[] args) {
@@ -78,12 +74,6 @@ public class FXClient extends Application {
         Product jerky = Product.productFactory("Вяленое мясо", 800, "Оно вкусное", "200% вяленого мяса", meat);
         Product jerky2 = Product.productFactory("Копченное мясо", 683, "Оно стоит 683 рубля", "Его ингридиенты стоили 683 рубля", meat);
         Product jerky3 = Product.productFactory("Мяско для шашлычка", 550, "Шашлычка для пивка", "Лотерея: говядина или свинина или сюрприз", meat);
-        productController.addProduct(sausage, 0);
-        productController.addProduct(cervelat, 1);
-        productController.addProduct(cervelat2, 2);
-        productController.addProduct(jerky, 3);
-        productController.addProduct(jerky2, 4);
-        productController.addProduct(jerky3, 5);
         this.primaryStage.setTitle("Интернет магазин мясных изделий");
         showMainView();
     }

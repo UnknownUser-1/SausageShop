@@ -37,6 +37,14 @@ public class Category implements Serializable,Comparable<Category>{
         return this.products.size();
     }
 
+    public void addProduct(Product product){
+        this.products.add(product);
+    }
+
+    public void deleteProduct(int i){
+        this.products.remove(i);
+    }
+
     public Product getProduct(int number){
         return this.products.get(number);
     }
@@ -44,18 +52,7 @@ public class Category implements Serializable,Comparable<Category>{
     /**
      * Just for debug
      */
-    public void print() {
-        System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
-        System.out.println(getTitle());
-        System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
-        products.forEach(new Consumer<Product>() {
-            @Override
-            public void accept(Product p) {
-                System.out.println(p.getName() + "  " + p.getPrice() + "  Рейтинг: " + p.getRating());
-            }
-        });
-        System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
-    }
+
 
     @Override
     public int compareTo(Category o) {

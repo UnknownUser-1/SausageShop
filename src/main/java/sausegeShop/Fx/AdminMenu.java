@@ -4,15 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.skin.ButtonSkin;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sausegeShop.controllers.CategoryController;
-import sausegeShop.controllers.ProductController;
 import sausegeShop.models.Category;
 import sausegeShop.models.Product;
 
@@ -22,7 +17,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AdminMenu {
 
     private static CategoryController categoryController = CategoryController.getInstance();
-    private static ProductController productController = ProductController.getInstance();
 
     @FXML
     private Button enterToUser;
@@ -49,7 +43,7 @@ public class AdminMenu {
     private Button showAllCategories;
 
     @FXML
-    void initialize(){
+    void initialize() {
         goToUser();
         addNewProduct();
         deleteOldProduct();
@@ -59,7 +53,7 @@ public class AdminMenu {
         showCategories();
     }
 
-    private void showCategories(){
+    private void showCategories() {
         showAllCategories.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
             for (int k = 0; k < categoryController.size(); k++) {
@@ -67,7 +61,7 @@ public class AdminMenu {
                 int finalK = k;
                 category.setOnAction(actionEvent1 -> {
                     showSome.getChildren().clear();
-                    for(int i = 0; i<categoryController.getCategory(finalK).getProducts().size(); i++){
+                    for (int i = 0; i < categoryController.getCategory(finalK).getProducts().size(); i++) {
                         Button product = new Button(categoryController.getCategory(finalK).getProduct(i).getName());
                         int finalI = i;
                         product.setOnAction(actionEvent2 -> {
@@ -80,7 +74,7 @@ public class AdminMenu {
                             back.setOnAction(actionEvent3 -> {
                                 showSome.getChildren().clear();
                             });
-                            showSome.getChildren().addAll(name,price,description,composition,back);
+                            showSome.getChildren().addAll(name, price, description, composition, back);
                         });
                         showSome.getChildren().add(product);
                     }
@@ -90,32 +84,35 @@ public class AdminMenu {
         });
     }
 
-    private void showProduct(){
+    private void showProduct() {
         showAllProducts.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
-            for (int i = 0; i < productController.size(); i++) {
-                Button product = new Button(productController.getProduct(i).getName());
-                int finalI = i;
-                product.setOnAction(actionEvent1 -> {
-                    showSome.getChildren().clear();
-                    Label name = new Label("Название: " + productController.getProduct(finalI).getName());
-                    Label price = new Label("Цена: " + productController.getProduct(finalI).getPrice());
-                    Label description = new Label("Описание: " + productController.getProduct(finalI).getDescription());
-                    Label composition = new Label("Состав: " + productController.getProduct(finalI).getComposition());
-                    Button back = new Button("Выход");
-                    back.setOnAction(actionEvent2 -> {
+            for (int i = 0; i < categoryController.size(); i++) {
+                for (int j = 0; j < categoryController.getCategory(i).getSize(); j++) {
+                    Button product = new Button(categoryController.getCategory(i).getProduct(j).getName());
+                    int finalI = i;
+                    int finalJ = j;
+                    product.setOnAction(actionEvent1 -> {
                         showSome.getChildren().clear();
+                        Label name = new Label("Название: " + categoryController.getCategory(finalI).getProduct(finalJ).getName());
+                        Label price = new Label("Цена: " + categoryController.getCategory(finalI).getProduct(finalJ).getPrice());
+                        Label description = new Label("Описание: " + categoryController.getCategory(finalI).getProduct(finalJ).getDescription());
+                        Label composition = new Label("Состав: " + categoryController.getCategory(finalI).getProduct(finalJ).getComposition());
+                        Button back = new Button("Выход");
+                        back.setOnAction(actionEvent2 -> {
+                            showSome.getChildren().clear();
+                        });
+                        showSome.getChildren().addAll(name, price, description, composition, back);
                     });
-                    showSome.getChildren().addAll(name,price,description,composition,back);
-                });
-                showSome.getChildren().add(product);
+                    showSome.getChildren().add(product);
+                }
             }
         });
     }
 
-    private void deleteOldCategory(){
+    private void deleteOldCategory() {
         deleteCategory.setOnAction(actionEvent -> {
-            for (int i =0; i< categoryController.size();i++){
+            for (int i = 0; i < categoryController.size(); i++) {
                 Button button = new Button(categoryController.getCategory(i).getTitle());
                 int finalI = i;
                 button.setOnAction(actionEvent1 -> {
@@ -127,21 +124,25 @@ public class AdminMenu {
         });
     }
 
-    private void addNewCategory(){
+    private void addNewCategory() {
         addCategory.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
             TextField name = new TextField();
             name.setPromptText("Введите название категории");
             Button add = new Button("Добавить");
             add.setOnAction(actionEvent1 -> {
-                categoryController.addCategories(new Category(name.getText()), categoryController.size());
-                showSome.getChildren().clear();
+                for (int i = 0; i < categoryController.size(); i++) {
+                    if (categoryController.getCategory(i).getTitle().equals(name.getText())) {
+                        categoryController.addCategories(new Category(name.getText()), categoryController.size());
+                        showSome.getChildren().clear();
+                    }
+                }
             });
-            showSome.getChildren().addAll(name,add);
+            showSome.getChildren().addAll(name, add);
         });
     }
 
-    private void addNewProduct(){
+    private void addNewProduct() {
         addProduct.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
             AtomicInteger finalJ = new AtomicInteger();
@@ -154,8 +155,8 @@ public class AdminMenu {
             TextField composition = new TextField();
             composition.setPromptText("Введите состав");
             Label cat = new Label("Выберите к какой категории отнести товар");
-            showSome.getChildren().addAll(name,price,description,composition,cat);
-            for (int i =0; i< categoryController.size();i++){
+            showSome.getChildren().addAll(name, price, description, composition, cat);
+            for (int i = 0; i < categoryController.size(); i++) {
                 Button button = new Button(categoryController.getCategory(i).getTitle());
                 int finalI = i;
                 button.setOnAction(actionEvent1 -> {
@@ -166,31 +167,53 @@ public class AdminMenu {
             Button add = new Button("Добваить");
             showSome.getChildren().add(add);
             add.setOnAction(actionEvent1 -> {
-                if (!name.getText().equals("")&&!price.getText().equals("")&&!description.getText().equals("")&&!composition.getText().equals("")) {
-                    productController.addProduct(Product.productFactory(name.getText(), Double.parseDouble(price.getText()), description.getText(), composition.getText(), categoryController.getCategory(Integer.parseInt(String.valueOf(finalJ)))), productController.size());
-                    showSome.getChildren().clear();
+                for (int i = 0; i < categoryController.size(); i++) {
+                    for (int j = 0; j < categoryController.getCategory(i).getSize(); j++) {
+                        if (categoryController.getCategory(i).getProduct(j).getName().equals(name.getText())) {
+                            if (!name.getText().equals("") && !price.getText().equals("") && !description.getText().equals("") && !composition.getText().equals("")) {
+                                categoryController.getCategory(Integer.parseInt(String.valueOf(finalJ))).addProduct(Product.productFactory(name.getText(), Double.parseDouble(price.getText()), description.getText(), composition.getText(), categoryController.getCategory(Integer.parseInt(String.valueOf(finalJ)))));
+                                showSome.getChildren().clear();
+                            }
+                        }
+                    }
                 }
-                });
+            });
         });
     }
 
-    private void deleteOldProduct(){
-        deleteProduct.setOnAction(actionEvent -> {
+    private void deleteOldProduct()
+    {
+        deleteProduct.setOnAction(actionEvent ->
+        {
             showSome.getChildren().clear();
-            for (int i =0; i< productController.size();i++){
-                Button button = new Button(productController.getProduct(i).getName());
+            Label label = new Label("Выберите от куда надо удалить");
+            showSome.getChildren().add(label);
+            for (int i = 0; i < categoryController.size(); i++)
+            {
+
+                Button category = new Button(categoryController.getCategory(i).getTitle());
                 int finalI = i;
-                button.setOnAction(actionEvent1 -> {
-                    productController.deleteProduct(finalI);
-                    showSome.getChildren().clear();
+                category.setOnAction(actionEvent1 ->
+                {
+                    for (int j = 0; j < categoryController.getCategory(finalI).getSize(); j++)
+                    {
+                        Button button = new Button(categoryController.getCategory(finalI).getProduct(j).getName());
+                        int finalJ = j;
+                        button.setOnAction(actionEvent2 ->
+                        {
+                            categoryController.getCategory(finalI).deleteProduct(finalJ);
+                            showSome.getChildren().clear();
+                        });
+                        showSome.getChildren().add(button);
+                    }
                 });
-                showSome.getChildren().add(button);
+                showSome.getChildren().add(category);
             }
         });
     }
 
-    private void goToUser(){
-        enterToUser.setOnAction(e->{
+    private void goToUser() {
+        enterToUser.setOnAction(e -> {
             enterToUser.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/MainMenu.fxml"));
