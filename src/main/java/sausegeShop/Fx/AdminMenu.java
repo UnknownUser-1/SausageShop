@@ -112,6 +112,7 @@ public class AdminMenu {
 
     private void deleteOldCategory() {
         deleteCategory.setOnAction(actionEvent -> {
+            showSome.getChildren().clear();
             for (int i = 0; i < categoryController.size(); i++) {
                 Button button = new Button(categoryController.getCategory(i).getTitle());
                 int finalI = i;
@@ -131,12 +132,8 @@ public class AdminMenu {
             name.setPromptText("Введите название категории");
             Button add = new Button("Добавить");
             add.setOnAction(actionEvent1 -> {
-                for (int i = 0; i < categoryController.size(); i++) {
-                    if (categoryController.getCategory(i).getTitle().equals(name.getText())) {
-                        categoryController.addCategories(new Category(name.getText()), categoryController.size());
-                        showSome.getChildren().clear();
-                    }
-                }
+                categoryController.addCategories(new Category(name.getText()), categoryController.size());
+                showSome.getChildren().clear();
             });
             showSome.getChildren().addAll(name, add);
         });
@@ -167,36 +164,32 @@ public class AdminMenu {
             Button add = new Button("Добваить");
             showSome.getChildren().add(add);
             add.setOnAction(actionEvent1 -> {
-                for (int i = 0; i < categoryController.size(); i++) {
-                    for (int j = 0; j < categoryController.getCategory(i).getSize(); j++) {
-                        if (categoryController.getCategory(i).getProduct(j).getName().equals(name.getText())) {
-                            if (!name.getText().equals("") && !price.getText().equals("") && !description.getText().equals("") && !composition.getText().equals("")) {
-                                categoryController.getCategory(Integer.parseInt(String.valueOf(finalJ))).addProduct(Product.productFactory(name.getText(), Double.parseDouble(price.getText()), description.getText(), composition.getText(), categoryController.getCategory(Integer.parseInt(String.valueOf(finalJ)))));
-                                showSome.getChildren().clear();
-                            }
-                        }
-                    }
+                if (!name.getText().equals("") && !price.getText().equals("") && !description.getText().equals("") && !composition.getText().equals("")) {
+                    categoryController.getCategory(Integer.parseInt(String.valueOf(finalJ))).addProduct(Product.productFactory(name.getText(), Double.parseDouble(price.getText()), description.getText(), composition.getText(), categoryController.getCategory(Integer.parseInt(String.valueOf(finalJ)))));
+                    showSome.getChildren().clear();
+                } else {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Ошибка");
+                    alert.setContentText("Такой товар уже сущестсвует");
+                    alert.showAndWait();
                 }
             });
         });
     }
 
-    private void deleteOldProduct()
-    {
+    private void deleteOldProduct() {
         deleteProduct.setOnAction(actionEvent ->
         {
             showSome.getChildren().clear();
             Label label = new Label("Выберите от куда надо удалить");
             showSome.getChildren().add(label);
-            for (int i = 0; i < categoryController.size(); i++)
-            {
+            for (int i = 0; i < categoryController.size(); i++) {
 
                 Button category = new Button(categoryController.getCategory(i).getTitle());
                 int finalI = i;
                 category.setOnAction(actionEvent1 ->
                 {
-                    for (int j = 0; j < categoryController.getCategory(finalI).getSize(); j++)
-                    {
+                    for (int j = 0; j < categoryController.getCategory(finalI).getSize(); j++) {
                         Button button = new Button(categoryController.getCategory(finalI).getProduct(j).getName());
                         int finalJ = j;
                         button.setOnAction(actionEvent2 ->
