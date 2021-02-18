@@ -15,8 +15,11 @@ import sausegeShop.models.Category;
 import sausegeShop.models.Product;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+import serverShit.Message;
 
 public class MainMenu {
 
@@ -47,8 +50,11 @@ public class MainMenu {
     @FXML
     private Label whatSortShow;
 
+    private ObjectOutputStream OOS;
+    private ObjectInputStream OIS;
     private final CategoryController categoryController = CategoryController.getInstance();
     private final BasketController basketController = BasketController.getInstance();
+    ArrayList<Category> data = categoryController.getCategories();
     private static final int length = 375;
     private static final int width = 50;
 
@@ -128,11 +134,13 @@ public class MainMenu {
                     Button remove = new Button("Удалить");
                     product.getChildren().addAll(name, price, description, composition, count, rat, remove);
                     remove.setOnAction(actionEvent -> {
-                        if (basketController.getBasket().size() == 1)
+                        if (basketController.getBasket().size() == 1) {
                             showSome.getChildren().clear();
+                        }
                         for (int j = 0; j < basketController.getBasket().size(); j++) {
-                            if (name.equals(basketController.getBasket().getProducts(j).getName()))
+                            if (name.equals(basketController.getBasket().getProducts(j).getName())) {
                                 basketController.getBasket().delete(j);
+                            }
                         }
                         product.getChildren().clear();
                     });
@@ -140,12 +148,33 @@ public class MainMenu {
                 }
                 Button buyAll = new Button("Купить все");
                 buyAll.setOnAction(actionEvent -> {
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Спасибо");
-                    alert.setContentText("Спаибо за покупку");
-                    alert.showAndWait();
-                    for (int i = 0; i < basketController.getBasket().size(); i++) {
-                        basketController.getBasket().getProducts(i).setRating(basketController.getBasket().getRat(i));
+                    try {
+                        OOS.writeObject(new Message(1));
+                        OOS.flush();
+                        if (((Message) OIS.readObject()).getMessageType() == 0) {
+                            for (int i = 0; i < basketController.getBasket().size(); i++) {
+                                basketController.getBasket().getProducts(i).setRating(basketController.getBasket().getRat(i));
+                            }
+                            OOS.writeObject(new Message(0));
+                            OOS.flush();
+                            OOS.writeObject(new Message(data, 0));
+                            OOS.flush();
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Спасибо");
+                            alert.setContentText("Спаибо за покупку");
+                            alert.showAndWait();
+                        } else {
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Не спасибо");
+                            alert.setContentText("Вы не успели купить наше мясо, валите");
+                            alert.showAndWait();
+                            OOS.writeObject(new Message(1));
+                            OOS.flush();
+                            data = ((Message) (OIS.readObject())).getData();
+                            categoryController.setCategories(data);
+                        }
+                    } catch (IOException | ClassNotFoundException ex) {
+                        ex.printStackTrace();
                     }
                     basketController.getBasket().deleteAll();
                     showSome.getChildren().clear();
@@ -168,6 +197,8 @@ public class MainMenu {
             }
 
             Parent root = loader.getRoot();
+            PasswordCheck pc = loader.getController();
+            pc.setStream(OOS);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
@@ -336,5 +367,13 @@ public class MainMenu {
             product.setMinSize(length, width);
             showSome.getChildren().add(i, product);
         }
+    }
+
+    public void setOutputStream(ObjectOutputStream OOS) {
+        this.OOS = OOS;
+    }
+
+    public void setInputStream(ObjectInputStream OIS) {
+        this.OIS = OIS;
     }
 }

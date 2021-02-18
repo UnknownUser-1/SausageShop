@@ -5,6 +5,8 @@
  */
 package serverShit;
 
+import java.io.DataInputStream;
+import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,7 +20,7 @@ import sausegeShop.models.Category;
  *
  * @author pro56
  */
-public class ClientSession {
+public class ClientSession extends Thread {
 
     private final Socket socket;
     private final Context context;
@@ -32,19 +34,55 @@ public class ClientSession {
         in = new ObjectInputStream(socket.getInputStream());
     }
 
-    public void run() throws IOException, ClassNotFoundException {
-        send();
-        while (true) {
-            if (context.changed) {
-                try (FileOutputStream fos = new FileOutputStream("out.bin")) {
-                    Serialize.serializeDatabase(new ArrayList<>((ArrayList<Category>) in.readObject()), fos);
+    @Override
+    public void run() {
+        try {
+            out.writeObject(new Message(context.getData(), 0));
+            out.flush();
+            while (!socket.isClosed()) {
+                Message messageCame;
+                try {
+                    messageCame = (Message) in.readObject();
+                    switch (messageCame.getMessageType()) {
+                        case 0://Админ что-то изменил
+                            context.setConfirmData(false);
+                            
+                           context.setData(messageCame.getData());
+                            try (FileOutputStream fos = new FileOutputStream("out.bin")) {
+                                Serialize.serializeDatabase((ArrayList<Category>) context.getData(), fos);
+                            }
+                            break;
+                        case 1://Пользователь что-то хочет купить
+                            out.writeObject((context.isConfirmData())
+                                    ? (new Message(0)) : (new Message(1)));
+                            out.flush();
+                            if (((Message) in.readObject()).getMessageType() == 0) {//Данные совпадают
+                                context.setConfirmData(false);
+                                context.setData(((Message) in.readObject()).getData());
+                                try (FileOutputStream fos = new FileOutputStream("out.bin")) {
+                                    Serialize.serializeDatabase((ArrayList<Category>) context.getData(), fos);
+                                }
+                            } else {//Данные не совпадают
+                                out.writeObject(new Message(context.getData(), 0));
+                                out.flush();
+                                context.setConfirmData(true);
+                            }
+                            break;
+                        default:
+                            throw new AssertionError();
+                    }
+                } catch (EOFException e) {
+                    socket.close();
+                    System.out.println("Мужик ушел без сосисок");
                 }
-                send();
+            }
+        } catch (IOException | ClassNotFoundException ex) {
+            try {
+                socket.close();
+                System.out.println("Мужик ушел без сосисок, но через другую дверь");
+            } catch (IOException ex1) {
+                System.out.println("А иак вообще можно?");
             }
         }
-    }
-
-    public void send() throws IOException {
-        out.writeObject(context.getData());
     }
 }

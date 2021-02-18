@@ -12,12 +12,15 @@ public class Context {
 
     private ArrayList<Category> data;
     private SessionsManager sessinonsManager;
-    public boolean changed;
+    private boolean confirmData;
+    public boolean stopFlag;
+    
 
     public Context(ArrayList<Category> data) {
         this.data = data;
-        this.changed = false;
+        this.stopFlag = false;
         this.sessinonsManager = new SessionsManager();
+        confirmData = true;
     }
 
     public SessionsManager getSessionsManger() {
@@ -31,4 +34,13 @@ public class Context {
     public void setData(ArrayList<Category> data) {
         this.data = data;
     }
+
+    public boolean isConfirmData() {
+        return confirmData;
+    }
+
+    public void setConfirmData(boolean confirmData) {
+        this.confirmData = confirmData;
+    }
+    
 }

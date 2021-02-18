@@ -12,11 +12,16 @@ import sausegeShop.models.Category;
 import sausegeShop.models.Product;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
+import serverShit.Message;
 
 public class AdminMenu {
 
     private static CategoryController categoryController = CategoryController.getInstance();
+    ArrayList<Category> data = categoryController.getCategories();
+    private ObjectOutputStream OOS;
 
     @FXML
     private Button enterToUser;
@@ -43,6 +48,9 @@ public class AdminMenu {
     private Button showAllCategories;
 
     @FXML
+    private Button saveData;
+
+    @FXML
     void initialize() {
         goToUser();
         addNewProduct();
@@ -51,6 +59,7 @@ public class AdminMenu {
         deleteOldCategory();
         showProduct();
         showCategories();
+        saveDataInFile();
     }
 
     private void showCategories() {
@@ -178,8 +187,8 @@ public class AdminMenu {
     }
 
     private void deleteOldProduct() {
-        deleteProduct.setOnAction(actionEvent ->
-        {
+        deleteProduct.setOnAction(actionEvent
+                -> {
             showSome.getChildren().clear();
             Label label = new Label("Выберите от куда надо удалить");
             showSome.getChildren().add(label);
@@ -187,13 +196,13 @@ public class AdminMenu {
 
                 Button category = new Button(categoryController.getCategory(i).getTitle());
                 int finalI = i;
-                category.setOnAction(actionEvent1 ->
-                {
+                category.setOnAction(actionEvent1
+                        -> {
                     for (int j = 0; j < categoryController.getCategory(finalI).getSize(); j++) {
                         Button button = new Button(categoryController.getCategory(finalI).getProduct(j).getName());
                         int finalJ = j;
-                        button.setOnAction(actionEvent2 ->
-                        {
+                        button.setOnAction(actionEvent2
+                                -> {
                             categoryController.getCategory(finalI).deleteProduct(finalJ);
                             showSome.getChildren().clear();
                         });
@@ -218,9 +227,26 @@ public class AdminMenu {
             }
 
             Parent root = loader.getRoot();
+            MainMenu mm = loader.getController();
+            mm.setOutputStream(OOS);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
+        });
+    }
+
+    public void setStream(ObjectOutputStream OOS) {
+        this.OOS = OOS;
+    }
+
+    private void saveDataInFile() {
+        saveData.setOnAction(actionEvent -> {
+            try {
+                OOS.writeObject(new Message(data, 0));
+                OOS.flush();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         });
     }
 }

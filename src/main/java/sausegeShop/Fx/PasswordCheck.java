@@ -9,8 +9,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 public class PasswordCheck {
+
+    private ObjectOutputStream OOS;
 
     @FXML
     private Button enter;
@@ -27,8 +30,8 @@ public class PasswordCheck {
     @FXML
     void initialize() {
         enter.setOnAction(e -> {
-            if (enterPassword.getText().equals("1337")){
-             enter.getScene().getWindow().hide();
+            if (enterPassword.getText().equals("1337")) {
+                enter.getScene().getWindow().hide();
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/fxml/AdminMenu.fxml"));
 
@@ -39,15 +42,16 @@ public class PasswordCheck {
                 }
 
                 Parent root = loader.getRoot();
+                AdminMenu AM = loader.getController();
+                AM.setStream(OOS);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
-            }
-            else{
+            } else {
                 showMessage.setText("Пароль неверный");
             }
         });
-        back.setOnAction(e->{
+        back.setOnAction(e -> {
             back.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/MainMenu.fxml"));
@@ -59,10 +63,15 @@ public class PasswordCheck {
             }
 
             Parent root = loader.getRoot();
+            MainMenu mm = loader.getController();
+            mm.setOutputStream(OOS);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
         });
     }
-}
 
+    public void setStream(ObjectOutputStream OOS) {
+        this.OOS = OOS;
+    }
+}

@@ -2,7 +2,6 @@ package sausegeShop.controllers;
 
 import java.io.Serializable;
 import sausegeShop.models.Category;
-import sausegeShop.models.Product;
 
 import java.util.ArrayList;
 

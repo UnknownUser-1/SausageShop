@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sausegeShop.Fx.AdminMenu">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sausegeShop.Fx.AdminMenu">
    <children>
       <Button fx:id="addCategory" layoutX="14.0" layoutY="100.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Добавить категорию" />
       <Button fx:id="deleteCategory" layoutX="14.0" layoutY="125.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Удалить категории" />
@@ -12,8 +14,7 @@
       <Button fx:id="enterToUser" layoutX="435.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Зайти за пользователя" />
       <Button fx:id="showAllProducts" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Показать все товары" />
       <Button fx:id="showAllCategories" layoutX="14.0" layoutY="225.0" mnemonicParsing="false" text="Показать все категории" />
-      <Button layoutX="14.0" layoutY="250.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Сохрнаить данные" />
-      <Button layoutX="14.0" layoutY="275.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Загрузить данные" />
+      <Button fx:id="saveData" layoutX="14.0" layoutY="250.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Сохранить данные" />
       <ScrollPane layoutX="235.0" layoutY="100.0" prefHeight="200.0" prefWidth="342.0">
          <content>
             <VBox fx:id="showSome" prefHeight="200.0" prefWidth="327.0" />
