@@ -53,7 +53,6 @@ public class FXClient extends Application {
 
     @Override
     public void stop() throws IOException {
-        System.out.println("Забеись");
         OIS.close();
         OOS.close();
         socket.close();
