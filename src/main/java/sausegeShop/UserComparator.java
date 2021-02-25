@@ -12,6 +12,8 @@ public class UserComparator {
 
     private static final CategoryController categoryController = CategoryController.getInstance();
 
+    private UserComparator(){}
+
     public static ArrayList<Product> compareProductPrice(Category category){
         Comparator<Product> productComparator = Comparator.comparing(Product::getPrice);
         ArrayList<Product> sortProduct = category.getProducts();
