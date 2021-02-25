@@ -31,7 +31,7 @@ public class PasswordCheck {
     void initialize() {
         enter.setOnAction(e -> {
             if (enterPassword.getText().equals("1337")) {
-                enter.getScene().getWindow().hide();
+                ((Stage)enter.getScene().getWindow()).close();
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(getClass().getResource("/fxml/AdminMenu.fxml"));
 
@@ -52,7 +52,7 @@ public class PasswordCheck {
             }
         });
         back.setOnAction(e -> {
-            back.getScene().getWindow().hide();
+            ((Stage)back.getScene().getWindow()).close();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/fxml/MainMenu.fxml"));
 
