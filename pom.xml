@@ -70,7 +70,7 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>serverShit.Server</mainClass>
+                                    <mainClass>serverSide.Server</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>
@@ -112,4 +112,5 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    <description>--module-path "C:\Users\pro56\Desktop\plug\javafx-sdk-11.0.2\lib" --add-modules=javafx.controls,javafx.fxml</description>
 </project>

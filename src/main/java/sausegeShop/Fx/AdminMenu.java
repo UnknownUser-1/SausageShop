@@ -13,15 +13,14 @@ import sausegeShop.models.Product;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import serverShit.Message;
+import serverSide.Message;
 
 public class AdminMenu {
 
     private static CategoryController categoryController = CategoryController.getInstance();
-    private ObjectOutputStream OOS;
+    private ObjectOutputStream objOutStr;
 
     @FXML
     private Button enterToUser;
@@ -229,7 +228,7 @@ public class AdminMenu {
             }
             Parent root = loader.getRoot();
             MainMenu mm = loader.getController();
-            mm.setOutputStream(OOS);
+            mm.setOutputStream(objOutStr);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
@@ -237,14 +236,14 @@ public class AdminMenu {
     }
 
     public void setStream(ObjectOutputStream OOS) {
-        this.OOS = OOS;
+        this.objOutStr = OOS;
     }
 
     private void saveDataInFile() {
         saveData.setOnAction(actionEvent -> {
             try {
-                OOS.writeObject(new Message(categoryController.getCategories(), 0));
-                OOS.flush();
+                objOutStr.writeObject(new Message(categoryController.getCategories(), 0));
+                objOutStr.flush();
             } catch (IOException ex) {
                 ex.printStackTrace();
             }

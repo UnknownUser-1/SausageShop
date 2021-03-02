@@ -20,7 +20,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
-import serverShit.Message;
+import serverSide.Message;
 
 public class MainMenu {
 
@@ -51,8 +51,8 @@ public class MainMenu {
     @FXML
     private Label whatSortShow;
 
-    private ObjectOutputStream OOS;
-    private ObjectInputStream OIS;
+    private ObjectOutputStream objOutStr;
+    private ObjectInputStream objInStr;
     private final CategoryController categoryController = CategoryController.getInstance();
     private final BasketController basketController = BasketController.getInstance();
     ArrayList<Category> data = categoryController.getCategories();
@@ -78,41 +78,17 @@ public class MainMenu {
         find.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
             String product = textToFind.getText();
-            if (product.contains("?")) {
-                String actualSearch = product.substring(0, product.indexOf("?"));
-                actualSearch = actualSearch + ".+.";
-                for (int j = 0; j < categoryController.size(); j++) {
-                    for (int k = 0; k < categoryController.getCategory(j).getSize(); k++) {
-                        if (Pattern.matches(actualSearch, categoryController.getCategory(j).getProduct(k).getName())) {
-                            Button button = new Button(categoryController.getCategory(j).getProduct(k).getName() + "    " + categoryController.getCategory(j).getProduct(k).getName());
-                            button.setMinSize(length, width);
-                            int productIndex = k;
-                            int categoryIndex = j;
-                            button.setOnAction(actionEvent1 -> {
-                                showSome.getChildren().clear();
-                                showOneProduct(categoryController.getCategory(categoryIndex).getProduct(productIndex));
-                            });
-                            showSome.getChildren().add(button);
-                        }
-                    }
-                }
-            } else {
-                for (int j = 0; j < categoryController.size(); j++) {
-                    for (int k = 0; k < categoryController.getCategory(j).getSize(); k++) {
-                        if (categoryController.getCategory(j).getProduct(k).getName().toLowerCase().contains(product.toLowerCase())) {
-                            Button button = new Button(categoryController.getCategory(j).getProduct(k).getName() + "    " + categoryController.getCategory(j).getProduct(k).getPrice());
-                            int productIndex = k;
-                            button.setMinSize(length, width);
-                            int categoryIndex = j;
-                            button.setOnAction(actionEvent1 -> {
-                                showSome.getChildren().clear();
-                                showOneProduct(categoryController.getCategory(categoryIndex).getProduct(productIndex));
-                            });
-                            showSome.getChildren().add(button);
-                        }
-                    }
-
-                }
+            ArrayList<Product> sProd;
+            sProd = categoryController.search(product);
+            for (int j = 0; j < sProd.size(); j++) {
+                Button button = new Button(sProd.get(j).getName() + "    " + sProd.get(j).getPrice());
+                Product prod = sProd.get(j);
+                button.setMinSize(length, width);
+                button.setOnAction(actionEvent1 -> {
+                    showSome.getChildren().clear();
+                    showOneProduct(prod);
+                });
+                showSome.getChildren().add(button);
             }
         });
     }
@@ -150,22 +126,22 @@ public class MainMenu {
                 Button buyAll = new Button("Купить все");
                 buyAll.setOnAction(actionEvent -> {
                     try {
-                        OOS.writeObject(new Message(1));
-                        OOS.flush();
-                        if (((Message) OIS.readObject()).getMessageType() == 0) {
+                        objOutStr.writeObject(new Message(1));
+                        objOutStr.flush();
+                        if (((Message) objInStr.readObject()).getMessageType() == 0) {
                             for (int i = 0; i < basketController.getBasket().size(); i++) {
                                 basketController.getBasket().getProducts(i).setRating(basketController.getBasket().getRat(i));
                             }
-                            OOS.writeObject(new Message(0));
-                            OOS.flush();
-                            OOS.writeObject(new Message(data, 0));
-                            OOS.flush();
+                            objOutStr.writeObject(new Message(0));
+                            objOutStr.flush();
+                            objOutStr.writeObject(new Message(data, 0));
+                            objOutStr.flush();
                             alertWindow("Спасибо", "Спасибо за покупку");
                         } else {
                             alertWindow("Не спасибо", "Вы не успели купить наше мясо, валите");
-                            OOS.writeObject(new Message(1));
-                            OOS.flush();
-                            data = ((Message) (OIS.readObject())).getData();
+                            objOutStr.writeObject(new Message(1));
+                            objOutStr.flush();
+                            data = ((Message) (objInStr.readObject())).getData();
                             categoryController.setCategories(data);
                         }
                     } catch (IOException | ClassNotFoundException ex) {
@@ -193,7 +169,7 @@ public class MainMenu {
 
             Parent root = loader.getRoot();
             PasswordCheck pc = loader.getController();
-            pc.setStream(OOS);
+            pc.setStream(objOutStr);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
@@ -253,9 +229,9 @@ public class MainMenu {
         showSome.getChildren().addAll(name, price, description, composition, rating, count, rat, buy, back);
         buy.setOnAction(actionEvent -> {
             if (!count.getText().isEmpty() && !rat.getText().isEmpty() && checkInt(rat.getText()) && checkInt(count.getText())) {
-                    basketController.getBasket().add(product, Integer.parseInt(count.getText()), Integer.parseInt(rat.getText()));
-                    alertWindow("Спасибо", "Товар добавлен в корзину");
-                    showSome.getChildren().remove(0, 9);
+                basketController.getBasket().add(product, Integer.parseInt(count.getText()), Integer.parseInt(rat.getText()));
+                alertWindow("Спасибо", "Товар добавлен в корзину");
+                showSome.getChildren().remove(0, 9);
             } else {
                 alertWindow("Внимание", "Добавьте рейтинг или же количество");
             }
@@ -358,11 +334,11 @@ public class MainMenu {
     }
 
     public void setOutputStream(ObjectOutputStream OOS) {
-        this.OOS = OOS;
+        this.objOutStr = OOS;
     }
 
     public void setInputStream(ObjectInputStream OIS) {
-        this.OIS = OIS;
+        this.objInStr = OIS;
     }
 
     private void alertWindow(String title, String contextTitle) {
@@ -382,4 +358,3 @@ public class MainMenu {
     }
 
 }
-

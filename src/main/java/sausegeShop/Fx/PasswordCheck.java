@@ -13,7 +13,7 @@ import java.io.ObjectOutputStream;
 
 public class PasswordCheck {
 
-    private ObjectOutputStream OOS;
+    private ObjectOutputStream objOutStr;
 
     @FXML
     private Button enter;
@@ -43,7 +43,7 @@ public class PasswordCheck {
 
                 Parent root = loader.getRoot();
                 AdminMenu AM = loader.getController();
-                AM.setStream(OOS);
+                AM.setStream(objOutStr);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
@@ -64,7 +64,7 @@ public class PasswordCheck {
 
             Parent root = loader.getRoot();
             MainMenu mm = loader.getController();
-            mm.setOutputStream(OOS);
+            mm.setOutputStream(objOutStr);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
@@ -72,6 +72,6 @@ public class PasswordCheck {
     }
 
     public void setStream(ObjectOutputStream OOS) {
-        this.OOS = OOS;
+        this.objOutStr = OOS;
     }
 }

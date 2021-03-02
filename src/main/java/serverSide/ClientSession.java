@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package serverShit;
+package serverSide;
 
-import java.io.DataInputStream;
 import java.io.EOFException;
 import java.io.FileOutputStream;
 import java.io.IOException;
