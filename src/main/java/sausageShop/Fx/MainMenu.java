@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sausageShop.controllers.BasketController;
@@ -156,6 +157,7 @@ public class MainMenu {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
+            stage.getIcons().add(new Image("/pct/sos.png"));
             stage.setTitle("Меню авторизации");
             stage.setResizable(false);
             stage.setWidth(WIDTH);

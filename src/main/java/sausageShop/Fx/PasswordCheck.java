@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -46,6 +47,7 @@ public class PasswordCheck {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
+                stage.getIcons().add(new Image("/pct/sos.png"));
                 stage.setTitle("Меню Администратора");
                 stage.setResizable(false);
                 stage.setHeight(HEIGHT);

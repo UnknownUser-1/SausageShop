@@ -13,6 +13,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import sausageShop.controllers.CategoryController;
 import sausageShop.controllers.ProductController;
@@ -95,6 +96,7 @@ public class FXClient extends Application {
         Scene scene = new Scene(mainLayout);
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.getIcons().add(new Image("/pct/sos.png"));
         primaryStage.setResizable(false);
         primaryStage.setHeight(HEIGHT);
         primaryStage.setWidth(WIDTH);
