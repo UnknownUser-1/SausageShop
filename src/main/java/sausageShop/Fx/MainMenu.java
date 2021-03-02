@@ -43,18 +43,18 @@ public class MainMenu {
     private final CategoryController categoryController = CategoryController.getInstance();
     private final BasketController basketController = BasketController.getInstance();
     private final ProductController productController = ProductController.getInstance();
-    private static final int length = 375;
-    private static final int widthb = 50;
-    private static final int width = 400;
-    private static final int height = 200;
+    private static final int LENGTH = 375;
+    private static final int WIDTHB = 50;
+    private static final int WIDTH = 400;
+    private static final int HEIGHT = 200;
 
     @FXML
     void initialize() {
-        goToAdminMenu();
         exitWindow();
-        showAllCategories();
-        showBasket();
         findProduct();
+        showBasket();
+        goToAdminMenu();
+        showAllCategories();
     }
 
     private void exitWindow() {
@@ -72,7 +72,7 @@ public class MainMenu {
                 for (int i = 0; i < productController.size(); i++) {
                     if (Pattern.matches(actualSearch, productController.getProduct(i).getName())) {
                         Button button = new Button(productController.getProduct(i).getName() + "    " + productController.getProduct(i).getPrice());
-                        button.setMinSize(length, width);
+                        button.setMinSize(LENGTH, WIDTH);
                         int finalI = i;
                         button.setOnAction(actionEvent1 -> {
                             showSome.getChildren().clear();
@@ -86,7 +86,7 @@ public class MainMenu {
                     if (productController.getProduct(i).getName().toLowerCase().contains(product.toLowerCase())) {
                         Button button = new Button(productController.getProduct(i).getName() + "    " + productController.getProduct(i).getPrice());
                         int finalI = i;
-                        button.setMinSize(length, widthb);
+                        button.setMinSize(LENGTH, WIDTHB);
                         button.setOnAction(actionEvent1 -> {
                             showSome.getChildren().clear();
                             showOneProduct(productController.getProduct(finalI));
@@ -158,8 +158,8 @@ public class MainMenu {
             stage.show();
             stage.setTitle("Меню авторизации");
             stage.setResizable(false);
-            stage.setWidth(width);
-            stage.setHeight(height);
+            stage.setWidth(WIDTH);
+            stage.setHeight(HEIGHT);
         });
         exitWindow();
     }
@@ -176,7 +176,7 @@ public class MainMenu {
                 });
                 button.setId(String.valueOf(i));
                 button.setText(categoryController.getCategory(i).getTitle());
-                button.setMinSize(length, widthb);
+                button.setMinSize(LENGTH, WIDTHB);
                 showSome.getChildren().add(i, button);
             }
         });
@@ -193,7 +193,7 @@ public class MainMenu {
             });
             button.setId(String.valueOf(i));
             button.setText(category.getProduct(i).getName() + "       " + category.getProduct(i).getPrice());
-            button.setMinSize(length, widthb);
+            button.setMinSize(LENGTH, WIDTHB);
             showSome.getChildren().add(i, button);
         }
     }

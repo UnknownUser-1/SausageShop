@@ -25,8 +25,8 @@ public class PasswordCheck {
     @FXML
     private Label showMessage;
 
-    private static final int width = 650;
-    private static final int height = 400;
+    private static final int WIDTH = 650;
+    private static final int HEIGHT = 400;
 
     @FXML
     void initialize() {
@@ -48,8 +48,8 @@ public class PasswordCheck {
                 stage.show();
                 stage.setTitle("Меню Администратора");
                 stage.setResizable(false);
-                stage.setHeight(height);
-                stage.setWidth(width);
+                stage.setHeight(HEIGHT);
+                stage.setWidth(WIDTH);
             } else {
                 showMessage.setText("Пароль неверный");
             }
@@ -71,8 +71,8 @@ public class PasswordCheck {
             stage.show();
             stage.setTitle("Интернет магазин мясных изделий");
             stage.setResizable(false);
-            stage.setHeight(height);
-            stage.setWidth(width);
+            stage.setHeight(HEIGHT);
+            stage.setWidth(WIDTH);
         });
     }
 }

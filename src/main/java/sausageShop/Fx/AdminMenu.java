@@ -21,10 +21,10 @@ public class AdminMenu {
 
     private static CategoryController categoryController = CategoryController.getInstance();
     private static ProductController productController = ProductController.getInstance();
-    private static final int length = 375;
-    private static final int widthb = 50;
-    private static final int width = 650;
-    private static final int height = 400;
+    private static final int LENGTH = 375;
+    private static final int WIDTHB = 50;
+    private static final int WIDTH = 650;
+    private static final int HEIGHT = 400;
 
     @FXML
     private Button enterToUser;
@@ -52,13 +52,13 @@ public class AdminMenu {
 
     @FXML
     void initialize() {
-        goToUser();
+        showCategories();
+        showProduct();
+        deleteOldCategory();
+        addNewCategory();
         addNewProduct();
         deleteOldProduct();
-        addNewCategory();
-        deleteOldCategory();
-        showProduct();
-        showCategories();
+        goToUser();
     }
 
     private void showCategories() {
@@ -155,7 +155,7 @@ public class AdminMenu {
             showSome.getChildren().addAll(name, price, description, composition, cat);
             for (int i = 0; i < categoryController.size(); i++) {
                 Button button = new Button(categoryController.getCategory(i).getTitle());
-                button.setMinSize(length, widthb);
+                button.setMinSize(LENGTH, WIDTHB);
                 int finalI = i;
                 button.setOnAction(actionEvent1 -> {
                     finalJ.set(finalI);
@@ -205,8 +205,8 @@ public class AdminMenu {
             stage.show();
             stage.setTitle("Интернет магазин мясных изделий");
             stage.setResizable(false);
-            stage.setHeight(height);
-            stage.setWidth(width);
+            stage.setHeight(HEIGHT);
+            stage.setWidth(WIDTH);
         });
     }
 }

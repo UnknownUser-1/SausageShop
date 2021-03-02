@@ -43,8 +43,8 @@ public class FXClient extends Application {
     private Stage primaryStage;
     private static CategoryController categoryController = CategoryController.getInstance();
     private static ProductController productController = ProductController.getInstance();
-    private static final int width = 650;
-    private static final int height = 400;
+    private static final int WIDTH = 650;
+    private static final int HEIGHT = 400;
 
 
     public static void main(String[] args) {
@@ -96,8 +96,8 @@ public class FXClient extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         primaryStage.setResizable(false);
-        primaryStage.setHeight(height);
-        primaryStage.setWidth(width);
+        primaryStage.setHeight(HEIGHT);
+        primaryStage.setWidth(WIDTH);
     }
 
 }
