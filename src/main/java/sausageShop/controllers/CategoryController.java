@@ -1,11 +1,11 @@
-package sausegeShop.controllers;
+package sausageShop.controllers;
 
 import java.io.Serializable;
-import sausegeShop.models.Category;
+import sausageShop.models.Category;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-import sausegeShop.models.Product;
+import sausageShop.models.Product;
 
 public class CategoryController implements Serializable {
 

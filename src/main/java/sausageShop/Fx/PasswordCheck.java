@@ -1,5 +1,6 @@
-package sausegeShop.Fx;
+package sausageShop.Fx;
 
+import sausageShop.Fx.AdminMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

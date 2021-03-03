@@ -1,4 +1,4 @@
-package sausegeShop.Fx;
+package sausageShop.Fx;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,12 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sausegeShop.controllers.CategoryController;
-import sausegeShop.models.Category;
-import sausegeShop.models.Product;
+import sausageShop.controllers.CategoryController;
+import sausageShop.models.Category;
+import sausageShop.models.Product;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import serverSide.Message;

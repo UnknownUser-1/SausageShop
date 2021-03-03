@@ -1,4 +1,4 @@
-package sausegeShop.Fx;
+package sausageShop.Fx;
 
 import java.io.IOException;
 

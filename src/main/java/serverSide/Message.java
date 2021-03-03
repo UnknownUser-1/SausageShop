@@ -7,7 +7,7 @@ package serverSide;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import sausegeShop.models.Category;
+import sausageShop.models.Category;
 
 /**
  *

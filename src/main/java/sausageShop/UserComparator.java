@@ -1,8 +1,8 @@
-package sausegeShop;
+package sausageShop;
 
-import sausegeShop.controllers.CategoryController;
-import sausegeShop.models.Category;
-import sausegeShop.models.Product;
+import sausageShop.controllers.CategoryController;
+import sausageShop.models.Category;
+import sausageShop.models.Product;
 
 import java.util.ArrayList;
 import java.util.Collections;

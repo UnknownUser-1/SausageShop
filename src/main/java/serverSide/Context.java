@@ -6,7 +6,7 @@
 package serverSide;
 
 import java.util.ArrayList;
-import sausegeShop.models.Category;
+import sausageShop.models.Category;
 
 public class Context {
 

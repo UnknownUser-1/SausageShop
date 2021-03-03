@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sausegeShop.Fx;
+package sausageShop.Fx;
 
 import java.io.*;
 import java.net.Socket;
@@ -14,8 +14,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import sausegeShop.controllers.CategoryController;
-import sausegeShop.models.Category;
+import sausageShop.controllers.CategoryController;
+import sausageShop.models.Category;
 import serverSide.Message;
 
 public class FXClient extends Application {

@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package sausegeShop;
+package sausageShop;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import sausegeShop.controllers.CategoryController;
-import sausegeShop.models.Category;
-import sausegeShop.models.Product;
+import sausageShop.controllers.CategoryController;
+import sausageShop.models.Category;
+import sausageShop.models.Product;
 
 /**
  *
