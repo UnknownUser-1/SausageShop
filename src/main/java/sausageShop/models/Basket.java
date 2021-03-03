@@ -1,4 +1,4 @@
-package sausegeShop.models;
+package sausageShop.models;
 
 import java.util.ArrayList;
 
@@ -14,7 +14,7 @@ public class Basket {
 
     public Basket() {
         this.products = new ArrayList<>();
-        this.rat= new ArrayList<>();
+        this.rat = new ArrayList<>();
         this.count = new ArrayList<>();
     }
 
@@ -37,14 +37,14 @@ public class Basket {
     }
 
     public void changeCount(int pr, int c) {
-        count.set(pr,c);
+        count.set(pr, c);
     }
 
     public void changeRating(int pr, double r) {
-        rat.set(pr,r);
+        rat.set(pr, r);
     }
 
-    public int size(){
+    public int size() {
         return products.size();
     }
 

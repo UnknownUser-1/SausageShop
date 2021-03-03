@@ -1,4 +1,4 @@
-package sausegeShop.models;
+package sausageShop.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class Product implements Serializable,Comparable<Product>{
         this.cat = cat;
         this.rating = new ArrayList<>();
     }
-   
+
 
     public String getName() {
         return name;
@@ -157,7 +157,7 @@ public class Product implements Serializable,Comparable<Product>{
      * Adding another instances to {@link rating} ArrayList
      *
      * @param count Quantity of purchases
-     * @param rat New product evaluation
+     * @param rat   New product evaluation
      */
     public void purchase(int count, double rat) {
         for (int i = 0; i < count; i++) {
@@ -167,8 +167,8 @@ public class Product implements Serializable,Comparable<Product>{
 
     /**
      * Factory for making a new instance of Product
-     *<br>
-     *<br> ПОКА ЧТО КОСТЫЛЬ
+     * <br>
+     * <br> ПОКА ЧТО КОСТЫЛЬ
      */
     public static Product productFactory(String name, double price, String description, String composition, Category cat) {
         Product pr = new Product(name, price, description, composition, cat);

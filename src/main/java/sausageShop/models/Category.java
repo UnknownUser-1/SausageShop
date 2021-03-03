@@ -1,4 +1,4 @@
-package sausegeShop.models;
+package sausageShop.models;
 
 
 import java.io.Serializable;
@@ -33,7 +33,7 @@ public class Category implements Serializable,Comparable<Category>{
         this.title = title;
     }
 
-    public int getSize(){
+    public int getSize() {
         return this.products.size();
     }
 
