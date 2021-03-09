@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sausageShop.controllers.CategoryController;
@@ -22,6 +23,8 @@ public class AdminMenu {
 
     private static CategoryController categoryController = CategoryController.getInstance();
     private ObjectOutputStream objOutStr;
+    private static final int WIDTH = 650;
+    private static final int HEIGHT = 400;
 
     @FXML
     private Button enterToUser;
@@ -52,13 +55,13 @@ public class AdminMenu {
 
     @FXML
     void initialize() {
-        goToUser();
+        showCategories();
+        showProduct();
+        deleteOldCategory();
+        addNewCategory();
         addNewProduct();
         deleteOldProduct();
-        addNewCategory();
-        deleteOldCategory();
-        showProduct();
-        showCategories();
+        goToUser();
         saveDataInFile();
     }
 
@@ -182,7 +185,7 @@ public class AdminMenu {
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Ошибка");
-                    alert.setContentText("Такой товар уже сущестсвует");
+                    alert.setContentText("Такой товар уже существует");
                     alert.showAndWait();
                 }
             });
@@ -233,6 +236,11 @@ public class AdminMenu {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
+            stage.getIcons().add(new Image("/pct/sos.png"));
+            stage.setTitle("Интернет магазин мясных изделий");
+            stage.setResizable(false);
+            stage.setHeight(HEIGHT);
+            stage.setWidth(WIDTH);
         });
     }
 

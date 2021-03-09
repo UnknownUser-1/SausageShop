@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import sausageShop.UserComparator;
@@ -56,16 +57,18 @@ public class MainMenu {
     private final CategoryController categoryController = CategoryController.getInstance();
     private final BasketController basketController = BasketController.getInstance();
     ArrayList<Category> data = categoryController.getCategories();
-    private static final int length = 375;
-    private static final int width = 50;
+    private static final int LENGTH = 375;
+    private static final int WIDTHB = 50;
+    private static final int WIDTH = 400;
+    private static final int HEIGHT = 200;
 
     @FXML
     void initialize() {
-        goToAdminMenu();
         exitWindow();
-        showAllCategories();
-        showBasket();
         findProduct();
+        showBasket();
+        goToAdminMenu();
+        showAllCategories();
     }
 
     private void exitWindow() {
@@ -83,7 +86,7 @@ public class MainMenu {
             for (int j = 0; j < sProd.size(); j++) {
                 Button button = new Button(sProd.get(j).getName() + "    " + sProd.get(j).getPrice());
                 Product prod = sProd.get(j);
-                button.setMinSize(length, width);
+                button.setMinSize(LENGTH, WIDTHB);
                 button.setOnAction(actionEvent1 -> {
                     showSome.getChildren().clear();
                     showOneProduct(prod);
@@ -173,6 +176,11 @@ public class MainMenu {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
+            stage.getIcons().add(new Image("/pct/sos.png"));
+            stage.setTitle("Меню авторизации");
+            stage.setResizable(false);
+            stage.setWidth(WIDTH);
+            stage.setHeight(HEIGHT);
         });
     }
 
@@ -188,8 +196,8 @@ public class MainMenu {
                     showProducts(categoryController.getCategory(categoryIndex));
                 });
                 category.setId(String.valueOf(i));
-                category.setText(categoryController.getCategory(i).getTitle() + "     количество товаров: " + categoryController.getCategory(i).getSize());
-                category.setMinSize(length, width);
+                category.setText(categoryController.getCategory(i).getTitle() + "     количество товара: " + categoryController.getCategory(i).getSize());
+                category.setMinSize(LENGTH, WIDTHB);
                 showSome.getChildren().add(i, category);
             }
         });
@@ -207,7 +215,7 @@ public class MainMenu {
             });
             product.setId(String.valueOf(i));
             product.setText(category.getProduct(i).getName() + "       " + category.getProduct(i).getPrice());
-            product.setMinSize(length, width);
+            product.setMinSize(LENGTH, WIDTHB);
             showSome.getChildren().add(i, product);
         }
     }
@@ -312,7 +320,7 @@ public class MainMenu {
             });
             category.setId(String.valueOf(i));
             category.setText(categories.get(categoryIndex).getTitle() + "     количество товаров: " + categories.get(i).getSize());
-            category.setMinSize(length, width);
+            category.setMinSize(LENGTH, WIDTHB);
             showSome.getChildren().add(i, category);
         }
     }
@@ -328,7 +336,7 @@ public class MainMenu {
             });
             product.setId(String.valueOf(i));
             product.setText(products.get(i).getName() + "       " + products.get(i).getPrice());
-            product.setMinSize(length, width);
+            product.setMinSize(LENGTH, WIDTHB);
             showSome.getChildren().add(i, product);
         }
     }

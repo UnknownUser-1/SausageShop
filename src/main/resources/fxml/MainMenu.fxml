@@ -8,7 +8,7 @@
     <children>
         <Button fx:id="categories" layoutX="25.0" layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Категории" />
         <Button fx:id="cart" layoutX="25.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Корзина" />
-        <Button fx:id="adminMenu" layoutX="454.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Зайти за Админа" />
+        <Button fx:id="adminMenu" layoutX="476.0" layoutY="15.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="140.0" text="Зайти за Админа" />
         <Button fx:id="exit" layoutX="25.0" layoutY="320.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Выход" />
         <ScrollPane layoutX="188.0" layoutY="85.0" prefHeight="235.0" prefWidth="390.0">
             <content>

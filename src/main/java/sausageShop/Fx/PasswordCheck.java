@@ -1,5 +1,6 @@
 package sausageShop.Fx;
 
+import javafx.scene.image.Image;
 import sausageShop.Fx.AdminMenu;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,8 @@ import java.io.ObjectOutputStream;
 public class PasswordCheck {
 
     private ObjectOutputStream objOutStr;
+    private static final int WIDTH = 650;
+    private static final int HEIGHT = 400;
 
     @FXML
     private Button enter;
@@ -48,6 +51,11 @@ public class PasswordCheck {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
+                stage.getIcons().add(new Image("/pct/sos.png"));
+                stage.setTitle("Меню Администратора");
+                stage.setResizable(false);
+                stage.setHeight(HEIGHT);
+                stage.setWidth(WIDTH);
             } else {
                 showMessage.setText("Пароль неверный");
             }
@@ -69,6 +77,11 @@ public class PasswordCheck {
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
+            stage.getIcons().add(new Image("/pct/sos.png"));
+            stage.setTitle("Интернет магазин мясных изделий");
+            stage.setResizable(false);
+            stage.setHeight(HEIGHT);
+            stage.setWidth(WIDTH);
         });
     }
 

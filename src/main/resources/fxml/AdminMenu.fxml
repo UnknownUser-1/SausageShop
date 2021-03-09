@@ -13,8 +13,8 @@
         <Button fx:id="enterToUser" layoutX="435.0" layoutY="14.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="151.0" text="Зайти за пользователя" />
         <Button fx:id="showAllProducts" layoutX="14.0" layoutY="200.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Показать все товары" />
         <Button fx:id="showAllCategories" layoutX="14.0" layoutY="225.0" mnemonicParsing="false" text="Показать все категории" />
-        <Button layoutX="14.0" layoutY="300.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Сохранить данные" />
-        <Button layoutX="14.0" layoutY="325.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Загрузить данные" />
+        <Button layoutX="14.0" layoutY="291.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Сохранить данные" />
+        <Button layoutX="14.0" layoutY="316.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Загрузить данные" />
         <ScrollPane layoutX="235.0" layoutY="100.0" prefHeight="200.0" prefWidth="342.0">
             <content>
                 <VBox fx:id="showSome" prefHeight="200.0" prefWidth="327.0" />

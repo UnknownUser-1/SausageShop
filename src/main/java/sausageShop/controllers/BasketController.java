@@ -26,7 +26,7 @@ public class BasketController {
 
     public void setBasket(Basket basket) {
         if (basket == null)
-            throw new IllegalArgumentException("Корзину которую вы пытаетесь добваить не сущствует");
+            throw new IllegalArgumentException("Корзину которую вы пытаетесь добваить не существует");
         this.basket = basket;
     }
 }
