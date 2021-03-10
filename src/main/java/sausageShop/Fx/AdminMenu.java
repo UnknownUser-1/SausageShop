@@ -14,10 +14,9 @@ import sausageShop.models.Product;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import serverSide.Message;
+import serverSide.server.Message;
 
 public class AdminMenu {
 
