@@ -109,7 +109,7 @@ public class Server implements Runnable {
             System.out.println(e.getMessage());
         }
         try {
-            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres", "postgres", "postgres");
+            connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/postgres?useUnicode=yes&characterEncoding=UTF-8", "postgres", "postgres");
             return connection;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
