@@ -16,7 +16,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sausageShop.controllers.CategoryController;
 import sausageShop.models.Category;
-import serverSide.Message;
+import serverSide.server.Message;
 
 public class FXClient extends Application {
 
@@ -60,7 +60,7 @@ public class FXClient extends Application {
 
     @Override
     public void init() throws IOException, ClassNotFoundException {
-        socket = new Socket("localhost", 5000);
+        socket = new Socket("localhost", 4000);
         objInStr = new ObjectInputStream(socket.getInputStream());
         objOutStr = new ObjectOutputStream(socket.getOutputStream());
         data = ((Message) (objInStr.readObject())).getData();

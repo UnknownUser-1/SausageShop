@@ -3,15 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package serverSide;
+package serverSide.server;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.*;
-import java.util.logging.*;
+
+import org.apache.ibatis.jdbc.RuntimeSqlException;
+import org.apache.ibatis.jdbc.ScriptRunner;
+
 
 import sausageShop.Serialize;
 
@@ -24,14 +25,23 @@ public class Server implements Runnable {
     private Context context;
 
     public static void main(String[] args) throws Exception {
-        createDbUserTable();
+        try{
+            createDbTables();
+        }catch (NullPointerException e){
+            System.out.println("Скорее всего мы не можем найти бд, проверьте хост и порт");
+        }
+        try {
+            generateContentInDbTable();
+        } catch (NullPointerException e) {
+            System.out.println("Некуда добавлять конетент, скорее всего не подключена бд");;
+        }
         Server ser = new Server();
         ser.run();
     }
 
 
     public Server() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
-        this.port = 5000;
+        this.port = 4000;
         try (FileInputStream fis = new FileInputStream("out.bin")) {
             this.context = new Context(Serialize.deserializeDatabase(fis));
         }
@@ -61,36 +71,34 @@ public class Server implements Runnable {
         }
     }
 
-    private static void createDbUserTable() throws SQLException {
-        Connection connection = null;
-        Statement statement = null;
-
-        String createTableSQL =
-                "CREATE TABLE PRODUCT(" +
-                        "NAME        VARCHAR," +
-                        "PRICE       DOUBLE PRECISION," +
-                        "DESCRIPTION VARCHAR," +
-                        "COMPOSITION VARCHAR, " +
-                        "CATEGORY    VARCHAR," +
-                        "RATING      DOUBLE PRECISION " +
-                        " )";
+    private static void createDbTables() throws SQLException, FileNotFoundException {
+        Connection connection = getDBConnection();
+        ScriptRunner sr = new ScriptRunner(connection);
+        System.out.println("Инициализируем базу данных PostgreSQL...");
+        Reader reader = new BufferedReader(new FileReader
+                ("C:\\Users\\Sakura\\IdeaProjects\\SausageShop\\src\\main\\resources\\sqlScripts\\create_tables.sql"));
         try {
-            connection = getDBConnection();
-            statement = connection.createStatement();
-
-            // выполнить SQL запрос
-            statement.execute(createTableSQL);
-            System.out.println("Table \"product\" is created!");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            if (statement != null) {
-                statement.close();
-            }
-            if (connection != null) {
-                connection.close();
-            }
+            sr.runScript(reader);
+        } catch (RuntimeSqlException e){
+            System.out.println("нету бд");
+            return;
         }
+        System.out.println("База данных успешно проинициализированна!");
+    }
+
+    private static void generateContentInDbTable() throws FileNotFoundException {
+        Connection connection = getDBConnection();
+        ScriptRunner sr = new ScriptRunner(connection);
+        System.out.println("Заполняем таблицы...");
+        Reader reader = new BufferedReader(new FileReader
+                ("C:\\Users\\Sakura\\IdeaProjects\\SausageShop\\src\\main\\resources\\sqlScripts\\generate_content.sql"));
+        try{
+            sr.runScript(reader);
+        } catch (RuntimeSqlException e){
+            System.out.println("нету бд");
+            return;
+        }
+        System.out.println("Таблицы заполнины исходными данными!");
     }
 
     private static Connection getDBConnection() {

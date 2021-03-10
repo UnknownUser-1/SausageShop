@@ -1,9 +1,11 @@
 package sausageShop.models;
 
+import serverSide.dao.Identified;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Product implements Serializable,Comparable<Product>{
+public class Product implements Serializable,Comparable<Product>, Identified<Integer> {
 
     /**
      * Product name
@@ -21,6 +23,8 @@ public class Product implements Serializable,Comparable<Product>{
      * Product composition
      */
     private String composition;
+
+    private Integer id = null;
     /**
      * Product category.
      * <br>
@@ -50,6 +54,13 @@ public class Product implements Serializable,Comparable<Product>{
         this.rating = new ArrayList<>();
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

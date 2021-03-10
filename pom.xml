@@ -32,7 +32,17 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.19</version>
         </dependency>
-
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.4.5</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -76,7 +86,7 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>serverSide.Server</mainClass>
+                                    <mainClass>serverSide.server.Server</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>

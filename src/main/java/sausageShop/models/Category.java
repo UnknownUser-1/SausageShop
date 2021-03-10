@@ -1,14 +1,17 @@
 package sausageShop.models;
 
 
+import serverSide.dao.Identified;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
-public class Category implements Serializable,Comparable<Category>{
+public class Category implements Serializable, Comparable<Category>, Identified<Integer> {
 
     private ArrayList<Product> products;
     private String title;
+    private Integer id = null;
 
     public Category(String title) {
         this.products = new ArrayList<>();
@@ -16,6 +19,14 @@ public class Category implements Serializable,Comparable<Category>{
     }
 
     public Category(){}
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Integer getId() {
+        return id;
+    }
 
     public String getTitle() {
         return title;
