@@ -8,18 +8,22 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sausageShop.Serialize;
 import sausageShop.controllers.CategoryController;
 import sausageShop.models.Category;
 import sausageShop.models.Product;
+import serverSide.dao.PersistException;
+import serverSide.dao.SqlDao;
+import serverSide.server.Server;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import serverSide.server.Message;
 
 public class AdminMenu {
 
+    private static SqlDao sqlDao = new SqlDao(Server.getDBConnection());
     private static CategoryController categoryController = CategoryController.getInstance();
     private ObjectOutputStream objOutStr;
     private static final int WIDTH = 650;
@@ -61,7 +65,7 @@ public class AdminMenu {
         addNewProduct();
         deleteOldProduct();
         goToUser();
-        saveDataInFile();
+//        saveToXmlFile();
     }
 
     private void showCategories() {
@@ -128,6 +132,11 @@ public class AdminMenu {
                 Button button = new Button(categoryController.getCategory(i).getTitle());
                 int categoryIndex = i;
                 button.setOnAction(actionEvent1 -> {
+                    try {
+                        sqlDao.deleteCategory(categoryController.getCategory(categoryIndex));
+                    } catch (PersistException e) {
+                        e.printStackTrace();
+                    }
                     categoryController.deleteCategories(categoryIndex);
                     showSome.getChildren().clear();
                 });
@@ -143,7 +152,12 @@ public class AdminMenu {
             name.setPromptText("Введите название категории");
             Button add = new Button("Добавить");
             add.setOnAction(actionEvent1 -> {
-                categoryController.addCategories(new Category(name.getText()), categoryController.size());
+                Category category = new Category(name.getText());
+                try {
+                    categoryController.addCategories(sqlDao.persistCategory(category), categoryController.size());
+                } catch (PersistException e) {
+                    e.printStackTrace();
+                }
                 showSome.getChildren().clear();
             });
             showSome.getChildren().addAll(name, add);
@@ -178,7 +192,12 @@ public class AdminMenu {
             add.setOnAction(actionEvent1 -> {
                 if (!name.getText().isEmpty() && !price.getText().isEmpty() && !description.getText().isEmpty() && !composition.getText().isEmpty()) {
                     if (checkPrice(price.getText())) {
-                        categoryController.getCategory(categoryIndex.get()).addProduct(Product.productFactory(name.getText(), Double.parseDouble(price.getText()), description.getText(), composition.getText(), categoryController.getCategory(categoryIndex.get())));
+                        Product product = Product.productFactory(name.getText(), Double.parseDouble(price.getText()), description.getText(), composition.getText(),categoryController.getCategory(categoryIndex.get()).getId());
+                        try {
+                            categoryController.getCategory(categoryIndex.get()).addProduct(sqlDao.persistProduct(product));
+                        } catch (PersistException e) {
+                            e.printStackTrace();
+                        }
                         showSome.getChildren().clear();
                     }
                 } else {
@@ -191,7 +210,7 @@ public class AdminMenu {
         });
     }
 
-    private void deleteOldProduct() {
+    private void deleteOldProduct()  {
         deleteProduct.setOnAction(actionEvent
                 -> {
             showSome.getChildren().clear();
@@ -208,6 +227,11 @@ public class AdminMenu {
                         int productIndex = j;
                         button.setOnAction(actionEvent2
                                 -> {
+                            try {
+                                sqlDao.deleteProduct(categoryController.getCategory(categoryIndex).getProduct(productIndex));
+                            } catch (PersistException e) {
+                                e.printStackTrace();
+                            }
                             categoryController.getCategory(categoryIndex).deleteProduct(productIndex);
                             showSome.getChildren().clear();
                         });
@@ -247,17 +271,6 @@ public class AdminMenu {
         this.objOutStr = OOS;
     }
 
-    private void saveDataInFile() {
-        saveData.setOnAction(actionEvent -> {
-            try {
-                objOutStr.writeObject(new Message(categoryController.getCategories(), 0));
-                objOutStr.flush();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        });
-    }
-
     private boolean checkPrice(String priceString) {
         try {
             double price = Double.parseDouble(priceString);
@@ -266,4 +279,11 @@ public class AdminMenu {
             return false;
         }
     }
+
+    /*private void saveToXmlFile(){
+        saveData.setOnAction(actionEvent -> {
+            String filePath = "src\\main\\resources\\xml\\AllCategories";
+            Serialize.convertObjectToXml(categoryController,filePath);
+        });
+    }*/
 }

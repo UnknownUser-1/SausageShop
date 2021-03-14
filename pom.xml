@@ -7,7 +7,8 @@
     <artifactId>SausageShop</artifactId>
     <version>13</version>
     <packaging>jar</packaging>
-    
+
+
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -32,19 +33,7 @@
             <artifactId>postgresql</artifactId>
             <version>42.2.19</version>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.4.5</version>
-        </dependency>
     </dependencies>
-
     <build>
         <defaultGoal>install</defaultGoal>
         <plugins>
@@ -55,7 +44,7 @@
                 <configuration>
                     <source>1.9</source>
                     <target>1.9</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <encoding>UTF-8</encoding>
                 </configuration>
                 <version>3.6.1</version>
             </plugin>
@@ -65,7 +54,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>2.4.3</version>
                 <configuration>
-                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
             <!--            Отвечает за jar-->
@@ -105,7 +94,7 @@
                             <archive>
                                 <manifest>
                                     <addClasspath>true</addClasspath>
-                                    <mainClass>sausegeShop.Fx.NewMain</mainClass>
+                                    <mainClass>sausageShop.Fx.NewMain</mainClass>
                                 </manifest>
                             </archive>
                         </configuration>
@@ -132,10 +121,4 @@
             </plugin>
         </plugins>
     </build>
-    
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-    <description>--module-path "C:\Users\pro56\Desktop\plug\javafx-sdk-11.0.2\lib" --add-modules=javafx.controls,javafx.fxml</description>
 </project>

@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sausageShop.Fx.MainMenu">
+<AnchorPane prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sausageShop.Fx.MainMenu">
     <children>
         <Button fx:id="categories" layoutX="25.0" layoutY="150.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Категории" />
         <Button fx:id="cart" layoutX="25.0" layoutY="175.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="117.0" text="Корзина" />
@@ -22,5 +22,12 @@
                 <Image url="@../pct/logo.png" />
             </image>
         </ImageView>
+      <MenuButton fx:id="filterMenu" layoutX="188.0" layoutY="60.0" mnemonicParsing="false" text="MenuButton">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+      <Label fx:id="whatSortShow" layoutX="303.0" layoutY="64.0" prefHeight="17.0" prefWidth="117.0" text="Label" />
     </children>
 </AnchorPane>

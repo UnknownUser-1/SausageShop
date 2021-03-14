@@ -9,12 +9,13 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.*;
+import java.util.Scanner;
 
-import org.apache.ibatis.jdbc.RuntimeSqlException;
-import org.apache.ibatis.jdbc.ScriptRunner;
+
 
 
 import sausageShop.Serialize;
+import serverSide.dao.PersistException;
 
 /**
  * @author pro56
@@ -25,25 +26,15 @@ public class Server implements Runnable {
     private Context context;
 
     public static void main(String[] args) throws Exception {
-        try{
-            createDbTables();
-        }catch (NullPointerException e){
-            System.out.println("Скорее всего мы не можем найти бд, проверьте хост и порт");
-        }
-        try {
-            generateContentInDbTable();
-        } catch (NullPointerException e) {
-            System.out.println("Некуда добавлять конетент, скорее всего не подключена бд");;
-        }
         Server ser = new Server();
         ser.run();
     }
 
 
-    public Server() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException {
+    public Server() throws FileNotFoundException, IOException, ClassNotFoundException, SQLException, PersistException {
         this.port = 4000;
         try (FileInputStream fis = new FileInputStream("out.bin")) {
-            this.context = new Context(Serialize.deserializeDatabase(fis));
+            this.context = new Context(Serialize.deserializeDatabase());
         }
     }
 
@@ -63,45 +54,14 @@ public class Server implements Runnable {
                 //Запуск логики работы с клиентом
                 clientSession.start();
             }
-
             ss.close();
-
-        } catch (IOException e) {
+            getDBConnection().close();
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
     }
 
-    private static void createDbTables() throws SQLException, FileNotFoundException {
-        Connection connection = getDBConnection();
-        ScriptRunner sr = new ScriptRunner(connection);
-        System.out.println("Инициализируем базу данных PostgreSQL...");
-        Reader reader = new BufferedReader(new FileReader
-                ("C:\\Users\\Sakura\\IdeaProjects\\SausageShop\\src\\main\\resources\\sqlScripts\\create_tables.sql"));
-        try {
-            sr.runScript(reader);
-        } catch (RuntimeSqlException e){
-            System.out.println("нету бд");
-            return;
-        }
-        System.out.println("База данных успешно проинициализированна!");
-    }
-
-    private static void generateContentInDbTable() throws FileNotFoundException {
-        Connection connection = getDBConnection();
-        ScriptRunner sr = new ScriptRunner(connection);
-        System.out.println("Заполняем таблицы...");
-        Reader reader = new BufferedReader(new FileReader
-                ("C:\\Users\\Sakura\\IdeaProjects\\SausageShop\\src\\main\\resources\\sqlScripts\\generate_content.sql"));
-        try{
-            sr.runScript(reader);
-        } catch (RuntimeSqlException e){
-            System.out.println("нету бд");
-            return;
-        }
-        System.out.println("Таблицы заполнины исходными данными!");
-    }
-
-    private static Connection getDBConnection() {
+    public static Connection getDBConnection() {
         Connection connection = null;
         try {
             Class.forName("org.postgresql.Driver");

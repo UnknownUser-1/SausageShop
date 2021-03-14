@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import sausageShop.Serialize;
 import sausageShop.models.Category;
@@ -38,49 +39,13 @@ public class ClientSession extends Thread {
         try {
             out.writeObject(new Message(context.getData(), 0));
             out.flush();
-            while (!socket.isClosed()) {
-                Message messageCame;
-                try {
-                    messageCame = (Message) in.readObject();
-                    switch (messageCame.getMessageType()) {
-                        case 0://Админ что-то изменил
-                            context.setConfirmData(false);
-                            
-                           context.setData(messageCame.getData());
-                            try (FileOutputStream fos = new FileOutputStream("out.bin")) {
-                                Serialize.serializeDatabase((ArrayList<Category>) context.getData(), fos);
-                            }
-                            break;
-                        case 1://Пользователь что-то хочет купить
-                            out.writeObject((context.isConfirmData())
-                                    ? (new Message(0)) : (new Message(1)));
-                            out.flush();
-                            if (((Message) in.readObject()).getMessageType() == 0) {//Данные совпадают
-                                context.setConfirmData(false);
-                                context.setData(((Message) in.readObject()).getData());
-                                try (FileOutputStream fos = new FileOutputStream("out.bin")) {
-                                    Serialize.serializeDatabase((ArrayList<Category>) context.getData(), fos);
-                                }
-                            } else {//Данные не совпадают
-                                out.writeObject(new Message(context.getData(), 0));
-                                out.flush();
-                                context.setConfirmData(true);
-                            }
-                            break;
-                        default:
-                            throw new AssertionError();
-                    }
-                } catch (EOFException e) {
-                    socket.close();
-                    System.out.println("Мужик ушел без сосисок");
-                }
-            }
-        } catch (IOException | ClassNotFoundException ex) {
+        } catch (IOException ex) {
             try {
                 socket.close();
+                Server.getDBConnection().close();
                 System.out.println("Мужик ушел без сосисок, но через другую дверь");
-            } catch (IOException ex1) {
-                System.out.println("А иак вообще можно?");
+            } catch (IOException | SQLException exr) {
+                System.out.println("А так вообще можно?");
             }
         }
     }

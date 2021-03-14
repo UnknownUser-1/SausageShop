@@ -1,39 +1,39 @@
 package sausageShop.models;
 
-import serverSide.dao.Identified;
-
+//import javax.xml.bind.annotation.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Product implements Serializable,Comparable<Product>, Identified<Integer> {
+
+//@XmlRootElement(name = "product")
+//@XmlAccessorType(XmlAccessType.FIELD)
+public class Product implements Serializable,Comparable<Product>{
 
     /**
      * Product name
      */
+    //@XmlElement(name = "name")
     private String name;
     /**
      * Product price
      */
+    //@XmlElement(name = "price")
     private double price;
     /**
      * Product description
      */
+    //@XmlElement(name = "description")
     private String description;
     /**
      * Product composition
      */
+    //@XmlElement(name = "composition")
     private String composition;
 
+    private Integer categoryId = null;
+
     private Integer id = null;
-    /**
-     * Product category.
-     * <br>
-     * <br>WARNING! Maybe it needs to be changed!!!!!
-     * <br>
-     * <br>You can't just create an instance without adding it to Category
-     * after. If you do, then your category won't have this product instance
-     */
-    private Category cat;
+
     /**
      * Product rating will show only after calculations and some purchases
      */
@@ -45,13 +45,26 @@ public class Product implements Serializable,Comparable<Product>, Identified<Int
      * <br>
      * <br>It's needed so you are able to make a Product with bound to a categary.
      */
-    private Product(String name, double price, String description, String composition, Category cat) {
+    public Product(){
+        this.rating = new ArrayList<>();
+    }
+
+    private Product(String name, double price, String description, String composition, int categoryId) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.composition = composition;
-        this.cat = cat;
         this.rating = new ArrayList<>();
+        this.id = null;
+        this.categoryId = categoryId;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Integer getId() {
@@ -94,50 +107,12 @@ public class Product implements Serializable,Comparable<Product>, Identified<Int
         this.composition = composition;
     }
 
-    /**
-     * You can get {@link Category} here.
-     *
-     * <br>
-     * <br>WARNINNG
-     *
-     * @see Product#cat here.
-     */
-    public Category getCategory() {
-        if (this.cat != null) {
-            if (this.cat.getProducts().contains(this)) {
-                return cat;
-            }
-            cat.getProducts().add(this);
-        }
-        return cat;
-    }
 
-    /**
-     * You can set {@link Category} here.
-     *
-     * <br>
-     * <br>WARNINNG
-     *
-     * @see Product#cat here.
-     */
-    public void setCategory(Category cat) {
-        if (this.cat != null) {
-            if (this.cat.getProducts().contains(this)) {
-                this.cat.getProducts().remove(this);
-            }
-        }
-        cat.getProducts().add(this);
-        this.cat = cat;
-
-    }
-
-    public String getCategoryTitle() {
-        return this.cat.getTitle();
-    }
 
     /**
      * Calculates rating by dividing summ of ratings by number of ratings
      */
+   // @XmlElement(name = "rating")
     public double getRating() {
         if (rating.isEmpty()) {
             return 0;
@@ -181,9 +156,8 @@ public class Product implements Serializable,Comparable<Product>, Identified<Int
      * <br>
      * <br> ПОКА ЧТО КОСТЫЛЬ
      */
-    public static Product productFactory(String name, double price, String description, String composition, Category cat) {
-        Product pr = new Product(name, price, description, composition, cat);
-        pr.setCategory(cat);
+    public static Product productFactory(String name, double price, String description, String composition, int categoryId) {
+        Product pr = new Product(name, price, description, composition,categoryId );
         return pr;
     }
 

@@ -1,15 +1,18 @@
 package sausageShop.models;
 
 
-import serverSide.dao.Identified;
-
+//import javax.xml.bind.annotation.XmlAttribute;
+//import javax.xml.bind.annotation.XmlElement;
+//import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
-public class Category implements Serializable, Comparable<Category>, Identified<Integer> {
+//@XmlRootElement(name = "category")
+public class Category implements Serializable, Comparable<Category> {
 
+   // @XmlElement(name = "product")
     private ArrayList<Product> products;
+    //@XmlAttribute
     private String title;
     private Integer id = null;
 
@@ -18,7 +21,9 @@ public class Category implements Serializable, Comparable<Category>, Identified<
         this.title = title;
     }
 
-    public Category(){}
+    public Category(){
+        this.products = new ArrayList<>();
+    }
 
     public void setId(int id) {
         this.id = id;

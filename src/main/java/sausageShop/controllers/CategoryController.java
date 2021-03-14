@@ -7,8 +7,13 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import sausageShop.models.Product;
 
+//import javax.xml.bind.annotation.XmlElement;
+//import javax.xml.bind.annotation.XmlRootElement;
+
+//@XmlRootElement(name = "categories")
 public class CategoryController implements Serializable {
 
+    //@XmlElement(name = "category")
     private ArrayList<Category> categories = new ArrayList<>();
 
     private static CategoryController instance;

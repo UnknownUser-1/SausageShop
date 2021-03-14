@@ -195,7 +195,7 @@ public class MainMenu {
                     showProducts(categoryController.getCategory(categoryIndex));
                 });
                 category.setId(String.valueOf(i));
-                category.setText(categoryController.getCategory(i).getTitle() + "     количество товара: " + categoryController.getCategory(i).getSize());
+                category.setText(categoryController.getCategory(i).getTitle() );
                 category.setMinSize(LENGTH, WIDTHB);
                 showSome.getChildren().add(i, category);
             }
@@ -245,7 +245,7 @@ public class MainMenu {
         });
         back.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
-            showProducts(product.getCategory());
+            showAllCategories();
         });
     }
 
