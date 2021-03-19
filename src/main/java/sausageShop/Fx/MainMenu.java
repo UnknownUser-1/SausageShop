@@ -61,6 +61,7 @@ public class MainMenu {
     private static final int WIDTH = 400;
     private static final int HEIGHT = 200;
 
+
     @FXML
     void initialize() {
         exitWindow();
@@ -128,25 +129,16 @@ public class MainMenu {
                 Button buyAll = new Button("Купить все");
                 buyAll.setOnAction(actionEvent -> {
                     try {
-                        objOutStr.writeObject(new Message(1));
-                        objOutStr.flush();
-                        if (((Message) objInStr.readObject()).getMessageType() == 0) {
-                            for (int i = 0; i < basketController.getBasket().size(); i++) {
-                                basketController.getBasket().getProducts(i).setRating(basketController.getBasket().getRat(i));
-                            }
-                            objOutStr.writeObject(new Message(0));
+                        for (int i = 0; i < basketController.getBasket().size(); i++) {
+                            basketController.getBasket().getProducts(i).setRating(basketController.getBasket().getRat(i));
+                            Message message = new Message();
+                            message.setProduct(basketController.getBasket().getProducts(i));
+                            message.setMessageType(4);
+                            objOutStr.writeObject(message);
                             objOutStr.flush();
-                            objOutStr.writeObject(new Message(data, 0));
-                            objOutStr.flush();
-                            alertWindow("Спасибо", "Спасибо за покупку");
-                        } else {
-                            alertWindow("Не спасибо", "Вы не успели купить наше мясо, валите");
-                            objOutStr.writeObject(new Message(1));
-                            objOutStr.flush();
-                            data = ((Message) (objInStr.readObject())).getData();
-                            categoryController.setCategories(data);
                         }
-                    } catch (IOException | ClassNotFoundException ex) {
+                        alertWindow("Спасибо", "Спасибо за покупку");
+                    } catch (IOException ex) {
                         ex.printStackTrace();
                     }
                     basketController.getBasket().deleteAll();
@@ -172,6 +164,7 @@ public class MainMenu {
             Parent root = loader.getRoot();
             PasswordCheck pc = loader.getController();
             pc.setStream(objOutStr);
+            pc.setIn(objInStr);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
@@ -195,7 +188,7 @@ public class MainMenu {
                     showProducts(categoryController.getCategory(categoryIndex));
                 });
                 category.setId(String.valueOf(i));
-                category.setText(categoryController.getCategory(i).getTitle() );
+                category.setText(categoryController.getCategory(i).getTitle());
                 category.setMinSize(LENGTH, WIDTHB);
                 showSome.getChildren().add(i, category);
             }

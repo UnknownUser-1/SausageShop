@@ -14,6 +14,16 @@ import java.util.ArrayList;
 public class SqlDao implements  Serializable {
 
     /**
+     * Возвращает sql запрос для обновления записи.
+     * <p/>
+     * UPDATE [Table] SET [column = ?, column = ?, ...] WHERE id = ?;
+     */
+    private String getUpdateQueryInCategory(){
+        return "UPDATE sausageShop.product SET nameProduct = ?, price = ?, composition = ?, description = ?,\n" +
+                " rating = ?, categoryId = ?  WHERE id = ?;";
+    }
+
+    /**
      * Возвращает sql запрос для получения всех записей в таблице category и product.
      */
     private String getSelectQueryInCategory(){return "SELECT * FROM sausageShop.category";}
@@ -39,7 +49,7 @@ public class SqlDao implements  Serializable {
     /**
      * Разбирает ResultSet и возвращает список объектов соответствующих содержимому ResultSetCategory.
      */
-    public   ArrayList<Category> parseResultSetCategory(ResultSet rs) throws PersistException{
+    private   ArrayList<Category> parseResultSetCategory(ResultSet rs) throws PersistException{
         ArrayList<Category> categories = new ArrayList<>();
         try {
             while (rs.next()){
@@ -54,7 +64,7 @@ public class SqlDao implements  Serializable {
         return categories;
     }
 
-    public   ArrayList<Product> parseResultSetProduct(ResultSet rs) throws PersistException{
+    private  ArrayList<Product> parseResultSetProduct(ResultSet rs) throws PersistException{
         ArrayList<Product> products = new ArrayList<>();
         try {
             while (rs.next()){
@@ -77,7 +87,7 @@ public class SqlDao implements  Serializable {
     /**
      * Устанавливает аргументы insert запроса в соответствии со значением полей объекта object.
      */
-    protected void prepareStatementForInsertCategory(PreparedStatement statement, Category category) throws PersistException{
+    private void prepareStatementForInsertCategory(PreparedStatement statement, Category category) throws PersistException{
         try {
             statement.setString(1, category.getTitle());
         } catch (Exception e) {
@@ -85,7 +95,7 @@ public class SqlDao implements  Serializable {
         }
     }
 
-    protected void prepareStatementForInsertProduct(PreparedStatement statement, Product product) throws PersistException{
+    private void prepareStatementForInsertProduct(PreparedStatement statement, Product product) throws PersistException{
         try {
             statement.setString(1,product.getName());
             statement.setDouble(2,product.getPrice());
@@ -93,6 +103,20 @@ public class SqlDao implements  Serializable {
             statement.setString(4,product.getDescription());
             statement.setDouble(5,product.getRating());
             statement.setInt(6,product.getCategoryId());
+        } catch (Exception e) {
+            throw new PersistException(e);
+        }
+    }
+
+    private void prepareStatementForUpdateProduct(PreparedStatement statement, Product product) throws PersistException{
+        try {
+            statement.setString(1,product.getName());
+            statement.setDouble(2,product.getPrice());
+            statement.setString(3,product.getComposition());
+            statement.setString(4,product.getDescription());
+            statement.setDouble(5,product.getRating());
+            statement.setInt(6,product.getCategoryId());
+            statement.setInt(7,product.getId());
         } catch (Exception e) {
             throw new PersistException(e);
         }
@@ -217,6 +241,20 @@ public class SqlDao implements  Serializable {
             int count = statement.executeUpdate();
             if (count != 1) {
                 throw new PersistException("On delete modify more then 1 record: " + count);
+            }
+        } catch (Exception e) {
+            throw new PersistException(e);
+        }
+    }
+
+    public void update(Product product) throws PersistException {
+
+        String sql = getUpdateQueryInCategory();
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            prepareStatementForUpdateProduct(statement, product);
+            int count = statement.executeUpdate();
+            if (count != 1) {
+                throw new PersistException("On update modify more then 1 record: " + count);
             }
         } catch (Exception e) {
             throw new PersistException(e);

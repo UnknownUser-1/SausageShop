@@ -11,13 +11,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class PasswordCheck {
 
     private ObjectOutputStream objOutStr;
+    private ObjectInputStream in;
     private static final int WIDTH = 650;
     private static final int HEIGHT = 400;
+
 
     @FXML
     private Button enter;
@@ -48,6 +51,7 @@ public class PasswordCheck {
                 Parent root = loader.getRoot();
                 AdminMenu AM = loader.getController();
                 AM.setStream(objOutStr);
+                AM.setIn(in);
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.show();
@@ -74,6 +78,7 @@ public class PasswordCheck {
             Parent root = loader.getRoot();
             MainMenu mm = loader.getController();
             mm.setOutputStream(objOutStr);
+            mm.setInputStream(in);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
@@ -87,5 +92,9 @@ public class PasswordCheck {
 
     public void setStream(ObjectOutputStream OOS) {
         this.objOutStr = OOS;
+    }
+
+    public void setIn(ObjectInputStream in) {
+        this.in = in;
     }
 }

@@ -7,6 +7,7 @@ package sausageShop.Fx;
 
 import java.io.*;
 import java.net.Socket;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import javafx.application.Application;
@@ -26,7 +27,7 @@ public class FXClient extends Application {
     static ArrayList<Category> data;
     private ObjectInputStream objInStr;
     private ObjectOutputStream objOutStr;
-    private Socket socket;
+    private static Socket socket;
     private static final int WIDTH = 650;
     private static final int HEIGHT = 400;
 
@@ -58,6 +59,7 @@ public class FXClient extends Application {
         primaryStage.setWidth(WIDTH);
     }
 
+
     @Override
     public void stop() throws IOException {
         objInStr.close();
@@ -74,4 +76,7 @@ public class FXClient extends Application {
         categoryController.setCategories(data);
     }
 
+    public static Socket getSocket(){
+        return socket;
+    }
 }
