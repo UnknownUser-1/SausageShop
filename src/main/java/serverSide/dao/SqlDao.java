@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class SqlDao implements  Serializable {
@@ -49,8 +50,8 @@ public class SqlDao implements  Serializable {
     /**
      * Разбирает ResultSet и возвращает список объектов соответствующих содержимому ResultSetCategory.
      */
-    private   ArrayList<Category> parseResultSetCategory(ResultSet rs) throws PersistException{
-        ArrayList<Category> categories = new ArrayList<>();
+    private   List<Category> parseResultSetCategory(ResultSet rs) throws PersistException{
+        List<Category> categories = new ArrayList<>();
         try {
             while (rs.next()){
                 Category category = new Category();
@@ -64,8 +65,8 @@ public class SqlDao implements  Serializable {
         return categories;
     }
 
-    private  ArrayList<Product> parseResultSetProduct(ResultSet rs) throws PersistException{
-        ArrayList<Product> products = new ArrayList<>();
+    private  List<Product> parseResultSetProduct(ResultSet rs) throws PersistException{
+        List<Product> products = new ArrayList<>();
         try {
             while (rs.next()){
                 Product product = new Product();
@@ -144,7 +145,7 @@ public class SqlDao implements  Serializable {
         sql = getSelectQueryInProduct() + " WHERE id = CURRVAL(pg_get_serial_sequence('sausageShop.product','id'))";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
-            ArrayList<Product> list = parseResultSetProduct(rs);
+            List<Product> list = parseResultSetProduct(rs);
             if ((list == null) || (list.size() != 1)) {
                 throw new PersistException("Exception on findByPK new persist data.");
             }
@@ -156,9 +157,9 @@ public class SqlDao implements  Serializable {
     }
 
 
-    public ArrayList<Category> getAllCategoriesFromDataBase() throws PersistException, SQLException {
-        ArrayList<Category> categories = new ArrayList<>();
-        ArrayList<Product> products = new ArrayList<>();
+    public List<Category> getAllCategoriesFromDataBase() throws PersistException, SQLException {
+        List<Category> categories = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         String sqlCategory = getSelectQueryInCategory();
         String sqlProduct = getSelectQueryInProduct();
         try {
@@ -202,7 +203,7 @@ public class SqlDao implements  Serializable {
         sql = getSelectQueryInCategory() + " WHERE id = CURRVAL(pg_get_serial_sequence('sausageShop.category','id'))";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet rs = statement.executeQuery();
-            ArrayList<Category> list = parseResultSetCategory(rs);
+            List<Category> list = parseResultSetCategory(rs);
             if ((list == null) || (list.size() != 1)) {
                 throw new PersistException("Exception on findByPK new persist data.");
             }
@@ -248,7 +249,6 @@ public class SqlDao implements  Serializable {
     }
 
     public void update(Product product) throws PersistException {
-
         String sql = getUpdateQueryInCategory();
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             prepareStatementForUpdateProduct(statement, product);

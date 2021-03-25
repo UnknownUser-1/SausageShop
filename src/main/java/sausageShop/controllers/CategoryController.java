@@ -4,6 +4,7 @@ import java.io.Serializable;
 import sausageShop.models.Category;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import sausageShop.models.Product;
 
@@ -68,8 +69,8 @@ public class CategoryController implements Serializable {
         return categories.size();
     }
 
-    public ArrayList<Product> search(String str) {
-        ArrayList<Product> result = new ArrayList<>();
+    public List<Product> search(String str) {
+        List<Product> result = new ArrayList<>();
         String product = str;
         if (product.contains("?")) {
             String predQue = product.substring(0, product.indexOf("?"));
@@ -83,7 +84,6 @@ public class CategoryController implements Serializable {
                 predQue = predQue + ".+";
                 product = predQue;
             }
-            product = "С.с";
             for (int j = 0; j < this.size(); j++) {
                 for (int k = 0; k < this.getCategory(j).getSize(); k++) {
                     if (Pattern.matches(product, this.getCategory(j).getProduct(k).getName())) {

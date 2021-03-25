@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import serverSide.server.Message;
 
@@ -55,7 +56,6 @@ public class MainMenu {
     private ObjectInputStream objInStr;
     private final CategoryController categoryController = CategoryController.getInstance();
     private final BasketController basketController = BasketController.getInstance();
-    ArrayList<Category> data = categoryController.getCategories();
     private static final int LENGTH = 375;
     private static final int WIDTHB = 50;
     private static final int WIDTH = 400;
@@ -81,7 +81,7 @@ public class MainMenu {
         find.setOnAction(actionEvent -> {
             showSome.getChildren().clear();
             String product = textToFind.getText();
-            ArrayList<Product> sProd;
+            List<Product> sProd;
             sProd = categoryController.search(product);
             for (int j = 0; j < sProd.size(); j++) {
                 Button button = new Button(sProd.get(j).getName() + "    " + sProd.get(j).getPrice());
@@ -302,7 +302,7 @@ public class MainMenu {
         });
     }
 
-    private void showAllCategories(ArrayList<Category> categories) {
+    private void showAllCategories(List<Category> categories) {
         for (int i = 0; i < categories.size(); i++) {
             Button category = new Button();
             int categoryIndex = i;
@@ -317,7 +317,7 @@ public class MainMenu {
         }
     }
 
-    private void showProducts(ArrayList<Product> products) {
+    private void showProducts(List<Product> products) {
         showSome.getChildren().clear();
         for (int i = 0; i < products.size(); i++) {
             Button product = new Button();

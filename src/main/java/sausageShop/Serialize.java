@@ -7,6 +7,7 @@ package sausageShop;
 import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import sausageShop.controllers.CategoryController;
 import sausageShop.models.Category;
@@ -23,7 +24,7 @@ import serverSide.server.Server;
  */
 public class Serialize {
 
-    public static ArrayList<Category> deserializeDatabase() throws PersistException, SQLException {
+    public static List<Category> deserializeDatabase() throws PersistException, SQLException {
         SqlDao sqlCategoryDao = new SqlDao(Server.getDBConnection());
         return sqlCategoryDao.getAllCategoriesFromDataBase();
     }

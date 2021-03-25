@@ -6,6 +6,7 @@ package sausageShop.models;
 //import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 //@XmlRootElement(name = "category")
 public class Category implements Serializable, Comparable<Category> {
@@ -37,7 +38,7 @@ public class Category implements Serializable, Comparable<Category> {
         return title;
     }
 
-    public ArrayList<Product> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 

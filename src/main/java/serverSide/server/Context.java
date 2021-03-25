@@ -6,17 +6,19 @@
 package serverSide.server;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import sausageShop.models.Category;
 
 public class Context {
 
-    private ArrayList<Category> data;
+    private List<Category> data;
     private SessionsManager sessinonsManager;
     private boolean confirmData;
     public boolean stopFlag;
     
 
-    public Context(ArrayList<Category> data) {
+    public Context(List<Category> data) {
         this.data = data;
         this.stopFlag = false;
         this.sessinonsManager = new SessionsManager();
@@ -27,11 +29,11 @@ public class Context {
         return this.sessinonsManager;
     }
 
-    public ArrayList<Category> getData() {
+    public List<Category> getData() {
         return data;
     }
 
-    public void setData(ArrayList<Category> data) {
+    public void setData(List<Category> data) {
         this.data = data;
     }
 

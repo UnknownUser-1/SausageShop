@@ -132,7 +132,7 @@ public class AdminMenu {
                 button.setOnAction(actionEvent1 -> {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Delete Category");
-                    alert.setHeaderText("Вы точно удалить данную категорию?");
+                    alert.setHeaderText("Вы точно хотите удалить данную категорию?");
                     Optional<ButtonType> option = alert.showAndWait();
 
                     if (option.get() == ButtonType.OK) {
@@ -142,6 +142,7 @@ public class AdminMenu {
                             exception.printStackTrace();
                         }
                         categoryController.deleteCategories(categoryIndex);
+                        showSome.getChildren().clear();
                     }
                 });
                 showSome.getChildren().add(button);
@@ -158,7 +159,6 @@ public class AdminMenu {
             add.setOnAction(actionEvent1 -> {
                 Category category = new Category(name.getText());
                 try {
-
                     categoryController.addCategories(sqlCategorySaveAndGet(category, 0),categoryController.size());
                 } catch (IOException exception) {
                     exception.printStackTrace();
@@ -288,10 +288,12 @@ public class AdminMenu {
         message.setMessageType(messageType);
         try {
             objOutStr.writeObject(message);
-            try {
-                cat = (Category) in.readObject();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+            if(messageType ==0) {
+                try {
+                    cat = (Category) in.readObject();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -306,10 +308,12 @@ public class AdminMenu {
         message.setMessageType(messageType);
         try {
             objOutStr.writeObject(message);
-            try {
-                pro = (Product) in.readObject();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+            if(messageType==2) {
+                try {
+                    pro = (Product) in.readObject();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         } catch (IOException ex) {
             ex.printStackTrace();

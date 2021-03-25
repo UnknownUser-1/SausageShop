@@ -31,7 +31,7 @@ public class FXClient extends Application {
     private static final int WIDTH = 650;
     private static final int HEIGHT = 400;
 
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) {
         launch(args);
     }
 
@@ -72,7 +72,7 @@ public class FXClient extends Application {
         socket = new Socket("localhost", 4000);
         objInStr = new ObjectInputStream(socket.getInputStream());
         objOutStr = new ObjectOutputStream(socket.getOutputStream());
-        data = ((Message) (objInStr.readObject())).getData();
+        data = (ArrayList<Category>) ((Message) (objInStr.readObject())).getData();
         categoryController.setCategories(data);
     }
 

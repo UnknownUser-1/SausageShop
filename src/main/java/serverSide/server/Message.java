@@ -7,6 +7,8 @@ package serverSide.server;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+
 import sausageShop.models.Category;
 import sausageShop.models.Product;
 
@@ -16,11 +18,11 @@ import sausageShop.models.Product;
  */
 public class Message implements Serializable {
 
-    private ArrayList<Category> data;
+    private List<Category> data;
     private Category category;
     private Product product;
 
-    public Message(ArrayList<Category> data, int messageType) {
+    public Message(List<Category> data, int messageType) {
         this.data = data;
         this.messageType = messageType;
     }
@@ -58,11 +60,11 @@ public class Message implements Serializable {
         this.category = category;
     }
 
-    public ArrayList<Category> getData() {
+    public List<Category> getData() {
         return data;
     }
 
-    public void setData(ArrayList<Category> data) {
+    public void setData(List<Category> data) {
         this.data = data;
     }
 

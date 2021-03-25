@@ -7,6 +7,7 @@ import sausageShop.models.Product;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class UserComparator {
 
@@ -14,57 +15,57 @@ public class UserComparator {
 
     private UserComparator(){}
 
-    public static ArrayList<Product> compareProductPrice(Category category){
+    public static List<Product> compareProductPrice(Category category){
         Comparator<Product> productComparator = Comparator.comparing(Product::getPrice);
-        ArrayList<Product> sortProduct = category.getProducts();
+        List<Product> sortProduct = category.getProducts();
         sortProduct.sort(productComparator);
         return sortProduct;
     }
 
-    public static ArrayList<Category> compareCategoryCount(){
+    public static List<Category> compareCategoryCount(){
         Comparator<Category> categoryComparator = Comparator.comparing(Category::getSize);
-        ArrayList<Category> sortCategory = categoryController.getCategories();
+        List<Category> sortCategory = categoryController.getCategories();
         sortCategory.sort(categoryComparator);
         return sortCategory;
     }
-    public static ArrayList<Category> compareCategoryName(){
+    public static List<Category> compareCategoryName(){
         Comparator<Category> categoryComparator = Comparator.comparing(Category::getTitle);
-        ArrayList<Category> sortCategory = categoryController.getCategories();
+        List<Category> sortCategory = categoryController.getCategories();
         sortCategory.sort(categoryComparator);
         return sortCategory;
     }
 
-    public static ArrayList<Product> compareProductName(Category category){
+    public static List<Product> compareProductName(Category category){
         Comparator<Product> productComparator = Comparator.comparing(Product::getName);
-        ArrayList<Product> sortProduct = category.getProducts();
+        List<Product> sortProduct = category.getProducts();
         sortProduct.sort(productComparator);
         return sortProduct;
     }
 
-    public static ArrayList<Product> reversedCompareProductPrice(Category category){
+    public static List<Product> reversedCompareProductPrice(Category category){
         Comparator<Product> productComparator = Comparator.comparing(Product::getPrice);
-        ArrayList<Product> sortProduct = category.getProducts();
+        List<Product> sortProduct = category.getProducts();
         sortProduct.sort(productComparator.reversed());
         return sortProduct;
     }
 
-    public static ArrayList<Category> reversedCompareCategoryCount(){
+    public static List<Category> reversedCompareCategoryCount(){
         Comparator<Category> categoryComparator = Comparator.comparing(Category::getSize);
-        ArrayList<Category> sortCategory = categoryController.getCategories();
+        List<Category> sortCategory = categoryController.getCategories();
         sortCategory.sort(categoryComparator.reversed());
         return sortCategory;
     }
 
-    public static ArrayList<Category> reversedCompareCategoryName(){
+    public static List<Category> reversedCompareCategoryName(){
         Comparator<Category> categoryComparator = Comparator.comparing(Category::getTitle);
-        ArrayList<Category> sortCategory = categoryController.getCategories();
+        List<Category> sortCategory = categoryController.getCategories();
         sortCategory.sort(categoryComparator.reversed());
         return sortCategory;
     }
 
-    public static ArrayList<Product> reversedCompareProductName(Category category){
+    public static List<Product> reversedCompareProductName(Category category){
         Comparator<Product> productComparator = Comparator.comparing(Product::getName);
-        ArrayList<Product> sortProduct = category.getProducts();
+        List<Product> sortProduct = category.getProducts();
         sortProduct.sort(productComparator.reversed());
         return sortProduct;
     }
