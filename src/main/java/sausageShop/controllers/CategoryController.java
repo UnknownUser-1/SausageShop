@@ -1,20 +1,15 @@
 package sausageShop.controllers;
 
-import java.io.Serializable;
 import sausageShop.models.Category;
+import sausageShop.models.Product;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import sausageShop.models.Product;
-
-//import javax.xml.bind.annotation.XmlElement;
-//import javax.xml.bind.annotation.XmlRootElement;
-
-//@XmlRootElement(name = "categories")
 public class CategoryController implements Serializable {
 
-    //@XmlElement(name = "category")
+
     private ArrayList<Category> categories = new ArrayList<>();
 
     private static CategoryController instance;
@@ -70,36 +65,26 @@ public class CategoryController implements Serializable {
     }
 
     public List<Product> search(String str) {
-        List<Product> result = new ArrayList<>();
-        String product = str;
-        if (product.contains("?")) {
-            String predQue = product.substring(0, product.indexOf("?"));
-            String postQue = product.substring(product.indexOf("?"), product.length());
+        String pro = str;
+        ArrayList<Product> productArrayList = new ArrayList<>();
+        if (pro.contains("?")) {
+            String predQue = pro.substring(0, pro.indexOf("?"));
+            String postQue = pro.substring(pro.indexOf("?"), pro.length());
             postQue = postQue.replace("?", "");
             if (!postQue.isEmpty()) {
                 predQue = predQue + ".";
-                product = predQue;
-                product = product + postQue;
+                pro = predQue;
+                pro = pro + postQue;
             } else {
                 predQue = predQue + ".+";
-                product = predQue;
-            }
-            for (int j = 0; j < this.size(); j++) {
-                for (int k = 0; k < this.getCategory(j).getSize(); k++) {
-                    if (Pattern.matches(product, this.getCategory(j).getProduct(k).getName())) {
-                        result.add(this.getCategory(j).getProduct(k));
-                    }
-                }
-            }
-        } else {
-            for (int j = 0; j < this.size(); j++) {
-                for (int k = 0; k < this.getCategory(j).getSize(); k++) {
-                    if (this.getCategory(j).getProduct(k).getName().toLowerCase().contains(product.toLowerCase())) {
-                        result.add(this.getCategory(j).getProduct(k));
-                    }
-                }
+                pro = predQue;
             }
         }
-        return result;
+        String finalPro = pro;
+        categories.forEach(category -> category.getProducts()
+                .stream().filter(product ->
+                        Pattern.matches(finalPro, product.getName())).forEach(productArrayList::add));
+
+        return productArrayList;
     }
 }
