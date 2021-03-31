@@ -1,138 +1,62 @@
 package sausageShop.models;
 
 import java.util.ArrayList;
-import java.util.function.Consumer;
 
 public class Basket {
 
     /**
      * ArrayList with params
-     * <br>{@link  BasketCrutch#p} Product
-     * <br>{@link BasketCrutch#count} buying amount
-     * <br>{@link BasketCrutch#rating} rating
      * <br>We store all the Basket Information here
      */
-    private ArrayList<BasketCrutch> products;
+    private ArrayList<Product> products;
+    private ArrayList<Integer> count;
+    private ArrayList<Double> rat;
 
     public Basket() {
         this.products = new ArrayList<>();
+        this.rat = new ArrayList<>();
+        this.count = new ArrayList<>();
     }
 
-    /**
-     *
-     * We need to create a some sort o a method that can return massive or smth
-     * like that.
-     */
-    public ArrayList<BasketCrutch> getBasket() {
-        return products;
-    }
-
-    public void delete(int indx) {
-        products.remove(indx);
+    public void delete(int i) {
+        products.remove(i);
+        count.remove(i);
+        rat.remove(i);
     }
 
     public void deleteAll() {
         products.removeAll(products);
+        count.removeAll(count);
+        rat.removeAll(rat);
     }
 
-    public void add(Product pr, int count, double rat) {
-        products.add(new BasketCrutch(pr, count, rat));
+    public void add(Product pr, int c, double r) {
+        products.add(pr);
+        count.add(c);
+        rat.add(r);
     }
 
-    public void changeCount(int pr, int count) {
-        products.get(pr).setCount(count);
+    public void changeCount(int pr, int c) {
+        count.set(pr, c);
     }
 
-    public void changeRating(int pr, double rating) {
-        products.get(pr).setRating(rating);
+    public void changeRating(int pr, double r) {
+        rat.set(pr, r);
     }
 
-    public void purchase() {
-        for (BasketCrutch product : products) {
-            product.getProduct().purchase(product.getCount(), product.getRating());
-        }
+    public int size() {
+        return products.size();
     }
 
-    public double getPrice() {
-        double price = 0;
-        for (BasketCrutch product : products) {
-            for (int i = 0; i < product.getCount(); i++) {
-                price += product.getProduct().getPrice();
-            }
-        }
-        return price;
+    public Product getProducts(int i) {
+        return products.get(i);
     }
 
-    /**
-     * Printing basket information
-     */
-    public void print() {
-        if (products.isEmpty()) {
-            System.out.println("Корзина пуста");
-            return;
-        }
-        System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
-        System.out.println("Информация о корзине");
-        System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
-        products.forEach(new Consumer<BasketCrutch>() {
-            @Override
-            public void accept(BasketCrutch b) {
-                System.out.println(b.getProduct().getName() + "  " + b.getProduct().getPrice() + "  Кол-во в заказе: " + b.getCount() + "  Ваша оценка: " + b.getRating());
-            }
-        });
-        System.out.println("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/");
+    public Double getRat(int i) {
+        return rat.get(i);
     }
 
-    public void printUser() {
-        int g = 3;
-        for (int i = 0; i < getBasket().size(); i++) {
-            System.out.println(g + ". " + getBasket().get(i).getProduct().getName());
-            g++;
-        }
-    }
-
-}
-
-/**
- * WARNING
- * <br> Чудовищный костыль
- * <br>
- * <br>
- * <br> It needed for this {@link products} ArrayList creation
- */
-class BasketCrutch {
-
-    private Product p;
-    private int count;
-    private double rating;
-
-    public BasketCrutch(Product p, int count, double rating) {
-        this.p = p;
-        this.count = count;
-        this.rating = rating;
-    }
-
-    public Product getProduct() {
-        return p;
-    }
-
-    public void setProduct(Product p) {
-        this.p = p;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
+    public Integer getCount(int i) {
+        return count.get(i);
     }
 }

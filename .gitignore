@@ -24,13 +24,12 @@ out
 target
 
 ### NetBeans ###
-/out.bin
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-nbactions.xml
+/nbactions.xml
 
 ### VS Code ###
 .vscode/
