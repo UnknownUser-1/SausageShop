@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "org.postgresql.Driver",
+      "type": "java.lang.String",
+      "description": "Description for dataSource.username."
+    }
+  ] }
