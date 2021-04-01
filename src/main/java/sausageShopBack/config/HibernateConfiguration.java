@@ -1,5 +1,6 @@
 package sausageShopBack.config;
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,10 @@ public class HibernateConfiguration {
     @Value("${spring.datasource.username}")
     private String USERNAME;
 
+    @Bean
+    public LayoutDialect layoutDialect() {
+        return new LayoutDialect();
+    }
 
     @Bean
     public DataSource dataSource() {

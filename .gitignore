@@ -22,6 +22,7 @@ build/
 out/
 out
 target
+lib
 
 ### NetBeans ###
 /nbproject/private/
