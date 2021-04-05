@@ -11,4 +11,13 @@ public class HtmlController {
         return "main";
     }
 
+    @RequestMapping("/RegisterHtml.html")
+    public String register(){
+        return "registerHtml";
+    }
+
+    @RequestMapping("/main.html")
+    public String login() {
+        return "main";
+    }
 }
