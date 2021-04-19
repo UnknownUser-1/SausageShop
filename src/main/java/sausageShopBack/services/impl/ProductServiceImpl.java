@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getAll() {
-        return null;
+        return productDao.getAll();
     }
 
     @Override

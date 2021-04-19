@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public class ProductDaoImpl implements ProductDao {
 
+
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -51,7 +52,12 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        return null;
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        List<Product> products = session.createQuery("from Product ").list();
+        transaction.commit();
+        session.close();
+        return products;
     }
 
     @Override

@@ -1,17 +1,20 @@
 package sausageShopBack.models;
 
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "sausageshop.product")
-public class Product implements Comparable<Product>{
+@Table(name = "product", schema = "sausageshop")
+public class Product implements Comparable<Product> {
+
 
     @NotNull
     @Column(name = "nameproduct")
@@ -30,25 +33,29 @@ public class Product implements Comparable<Product>{
     private String composition;
 
     @NotNull
-    @Column(name = "categoryId")
-    private Integer categoryId = null;
+    @Column(name = "categoryid")
+    private Integer categoryId;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    /*@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "category")
-    private Category category;
+    private Category category;*/
 
 
     @Id
     @NotNull
     @GeneratedValue
     @Column(name = "id")
-    private Integer id = null;
+    private Integer id;
 
     @Transient
-    private ArrayList<Double> rating;
+    private ArrayList<Double> allValuesInTheRating;
 
-    public Product(){
-        this.rating = new ArrayList<Double>();
+    @NotNull
+    @Column(name = "rating")
+    private Double rating;
+
+    public Product() {
+        this.allValuesInTheRating = new ArrayList<Double>();
     }
 
 
@@ -57,36 +64,36 @@ public class Product implements Comparable<Product>{
         this.price = price;
         this.description = description;
         this.composition = composition;
-        this.rating = new ArrayList<>();
+        this.allValuesInTheRating = new ArrayList<>();
         this.id = null;
         this.categoryId = categoryId;
     }
 
-    @NotNull
-    @Column(name = "rating")
     public double getRating() {
-        if (rating.isEmpty()) {
-            return 0;
-        }
-        double rt = 0;
-        for (Double rating1 : this.rating) {
-            rt += rating1;
-        }
-        return rt / this.rating.size();
+        return rating;
     }
 
-    public void setRating(double rat){
-        rating.add(rat);
+    public void setRating(double rat) {
+        allValuesInTheRating.add(rat);
+        if (allValuesInTheRating.isEmpty()) {
+            this.rating = rat;
+        }
+        double rt = 0;
+        for (Double rating1 : this.allValuesInTheRating) {
+            rt += rating1;
+        }
+        rt = rt + rat;
+        rating = rt / this.allValuesInTheRating.size()+1;
     }
 
     public static Product productFactory(String name, double price, String description, String composition, int categoryId) {
-        Product pr = new Product(name, price, description, composition,categoryId );
+        Product pr = new Product(name, price, description, composition, categoryId);
         return pr;
     }
 
     @Override
     public int compareTo(Product o) {
-        return (int)(this.getPrice() - o.getPrice());
+        return (int) (this.getPrice() - o.getPrice());
     }
 
 

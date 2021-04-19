@@ -1,7 +1,8 @@
 package sausageShopBack.models;
 
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -9,13 +10,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Table(name = "category")
+@Table(name = "category", schema="sausageshop")
 public class Category implements Serializable, Comparable<Category> {
 
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    /*@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)*/
+    @Transient
     private List<Product> products;
 
     @NotNull
