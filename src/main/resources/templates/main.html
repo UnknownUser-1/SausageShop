@@ -5,14 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="/css/fontawesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/css/fontawesome.min.css" type="text/css"/>
     <link rel="stylesheet" href="/css/ionicons.min.css" type="text/css"/>
     <link rel="stylesheet" href="/css/simple-line-icons.css" type="text/css"/>
     <link rel="stylesheet" href="/css/plugins/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="/css/plugins/plugins.css" type="text/css"/>
     <link rel="stylesheet" href="/css/style.min.css" type="text/css"/>
-
+    <link rel="shortcut icon" type="image/x-icon" href="/pct/icon.ico" />
 </head>
 <body>
 <header>
@@ -110,25 +110,26 @@
             </div>
         </div>
         <!-- product-tab-nav end -->
+
         <div class="row">
-            <div class="col-12">
-                <div class="tab-content" id="pills-tabContent">
-                    <!-- first tab-pane -->
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                         aria-labelledby="pills-home-tab">
-                        <div class="product-slider-init theme1 slick-nav">
-                            <div class="slider-item">
-                                <div class="product-list mb-30">
-                                    <div class="card product-card">
-                                        <div class="card-body p-0">
+            <div th:each="product : ${productList}" class="card-body p-0">
+                <div class="col-8 align-items-center">
+                    <div class="tab-content" id="pills-tabContent">
+                        <!-- first tab-pane -->
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                             aria-labelledby="pills-home-tab">
+                            <div class="product-slider-init theme1 slick-nav">
+                                <div class="slider-item">
+                                    <div class="product-list mb-30">
+                                        <div class="card product-card">
                                             <div class="media flex-column">
                                                 <div class="media-body">
                                                     <div class="product-desc">
-                                                        <h3 class="title">New Luxury
-                                                            Men's Slim Fit Shirt Short Sleeve..</h3>
+                                                        <h3 class="title" th:text="${product.description}"></h3>
                                                         <div class="d-flex align-items-center justify-content-between">
-                                                            <h6 class="product-price">$11.90</h6>
-                                                            <button class="pro-btn" data-toggle="modal"
+                                                            <h6 class="product-price"
+                                                                th:text="${product.price}"></h6>
+                                                            <button class="pro-btn align-items-end" data-toggle="modal"
                                                                     data-target="#add-to-cart"><i
                                                                     class="icon-basket"></i></button>
                                                         </div>
@@ -138,15 +139,6 @@
                                         </div>
                                     </div>
                                     <!-- product-list End -->
-                                    <div class="card product-card" >
-                                        <div class="card-body p-0">
-                                            <div class="media flex-column">
-                                                <tr th:each="prod : ${prods}" th:class="${prodStat.odd}? 'odd'">
-                                                    <td th:text="#{product.name}"></td>
-                                                </tr>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -158,8 +150,7 @@
 </section>
 
 
-
-<script src="/js/vendor/jquery-3.5.1.min.js" ></script>
+<script src="/js/vendor/jquery-3.5.1.min.js"></script>
 <script src="/js/vendor/modernizr-3.7.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/plugins/jquery-ui.min.js"></script>

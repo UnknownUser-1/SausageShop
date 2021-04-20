@@ -6,6 +6,7 @@ import sausageShopBack.dao.ProductDao;
 import sausageShopBack.models.Product;
 import sausageShopBack.services.ProductService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -34,6 +35,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    @Transactional
     public List<Product> getAll() {
         return productDao.getAll();
     }

@@ -3,6 +3,7 @@ package sausageShopBack.config;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -15,6 +16,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
+@ComponentScan(basePackages = "sausageShopBack")
 @EnableTransactionManagement
 public class HibernateConfiguration {
     @Value("${spring.datasource.driverClassName}")
@@ -28,6 +30,7 @@ public class HibernateConfiguration {
 
     @Value("${spring.datasource.username}")
     private String USERNAME;
+
 
     @Bean
     public LayoutDialect layoutDialect() {
@@ -49,11 +52,9 @@ public class HibernateConfiguration {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
+        sessionFactory.setPackagesToScan("sausageShopBack.models");
         Properties hibernateProperties = new Properties();
         sessionFactory.setHibernateProperties(hibernateProperties);
-        sessionFactory.setAnnotatedClasses(Product.class);
-        sessionFactory.setAnnotatedClasses(Category.class);
-        sessionFactory.setAnnotatedClasses(Basket.class);
 
         return sessionFactory;
     }

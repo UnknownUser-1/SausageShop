@@ -52,12 +52,12 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        Session session = this.sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        List<Product> products = session.createQuery("from Product ").list();
-        transaction.commit();
-        session.close();
-        return products;
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Product> products = session.createQuery("from Product").list();
+        //Transaction transaction = session.beginTransaction();
+       // transaction.commit();
+        //session.close();
+        return  products;
     }
 
     @Override
