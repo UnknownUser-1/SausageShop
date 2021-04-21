@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css"/>
     <link rel="stylesheet" href="/css/plugins/plugins.css" type="text/css"/>
     <link rel="stylesheet" href="/css/style.min.css" type="text/css"/>
-    <link rel="shortcut icon" type="image/x-icon" href="/pct/icon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="/pct/icon.ico"/>
 </head>
 <body>
 <header>
@@ -40,13 +40,13 @@
         </div>
     </div>
     <!-- header top end -->
-    <!-- header-middle satrt -->
+    <!-- header-middle start -->
     <div class="header-middle pt-20">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-sm-6 col-lg-2 order-first">
                     <div class="logo text-center text-sm-left mb-30 mb-sm-0">
-                        <a href="main.html"><img src="/pct/logo.png" alt="logo"></a>
+                        <a href="/"><img src="/pct/logo.png" alt="logo"></a>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-5 col-xl-4">
@@ -74,7 +74,7 @@
                 <div class="col-lg-10 offset-lg-2 d-flex flex-wrap align-items-center position-relative">
                     <ul class="main-menu d-flex">
                         <li class="active ml-0">
-                            <a href="main.html" class="pl-0">Главная</a>
+                            <a href="/" class="pl-0">Главная</a>
                         </li>
                         <li class="position-static">
                             <ul>
@@ -110,38 +110,34 @@
             </div>
         </div>
         <!-- product-tab-nav end -->
+        <div class="tab-content" id="pills-tabContent">
+            <!-- first tab-pane -->
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="row grid-view theme1">
+                    <div th:each="product: ${productList}" class="col-sm-6 col-lg-4 col-xl-3 mb-30">
+                        <a href="single-product.html">
+                            <div class="card product-card">
+                                <div class="card-body">
 
-        <div class="row">
-            <div th:each="product : ${productList}" class="card-body p-0">
-                <div class="col-8 align-items-center">
-                    <div class="tab-content" id="pills-tabContent">
-                        <!-- first tab-pane -->
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                             aria-labelledby="pills-home-tab">
-                            <div class="product-slider-init theme1 slick-nav">
-                                <div class="slider-item">
-                                    <div class="product-list mb-30">
-                                        <div class="card product-card">
-                                            <div class="media flex-column">
-                                                <div class="media-body">
-                                                    <div class="product-desc">
-                                                        <h3 class="title" th:text="${product.name}"></h3>
-                                                        <div class="d-flex align-items-center justify-content-between">
-                                                            <h6 class="product-price"
-                                                                th:text="${product.price}"></h6>
-                                                            <button class="pro-btn align-items-end" data-toggle="modal"
-                                                                    data-target="#add-to-cart"><i
-                                                                    class="icon-basket"></i></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+
+                                    <!-- product links -->
+
+                                    <div class="product-desc py-0">
+                                        <p class="h2" th:text="${product.name}"></p>
+                                        <p class="h6" th:text="${product.description}"></p>
+                                        <div class="star-rating">
+                                            <span class="ion-ios-star"></span>
+                                            <p class="h6" th:text="${product.rating}"></p>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <h6 class="product-price" th:text="${product.price}"></h6>
+                                            <button class="pro-btn" data-toggle="modal" data-target="#add-to-cart"><i
+                                                    class="icon-basket"></i></button>
                                         </div>
                                     </div>
-                                    <!-- product-list End -->
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>

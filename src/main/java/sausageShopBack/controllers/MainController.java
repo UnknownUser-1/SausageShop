@@ -17,10 +17,17 @@ public class MainController {
         this.productService = productService;
     }
 
-    @GetMapping({"/", "templates/main.html"})
+    @GetMapping({"/"})
     public String home(Model model) {
         model.addAttribute("productList", productService.getAll());
         return "main";
     }
+
+
+//    @GetMapping
+//    public String product(Model model){
+//        model.addAttribute("product", );
+//        return "product";
+//    }
 
 }
