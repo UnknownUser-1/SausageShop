@@ -115,7 +115,7 @@
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <div class="row grid-view theme1">
                     <div th:each="product: ${productList}" class="col-sm-6 col-lg-4 col-xl-3 mb-30">
-                        <a href="single-product.html">
+                        <a th:href="@{/product/{id}(id=${product.id})}">
                             <div class="card product-card">
                                 <div class="card-body">
 

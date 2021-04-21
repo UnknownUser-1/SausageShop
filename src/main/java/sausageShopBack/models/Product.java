@@ -34,7 +34,7 @@ public class Product implements Comparable<Product> {
 
     @NotNull
     @Column(name = "categoryid")
-    private Integer categoryId;
+    private Long categoryId;
 
     /*@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "category")
@@ -45,7 +45,7 @@ public class Product implements Comparable<Product> {
     @NotNull
     @GeneratedValue
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Transient
     private ArrayList<Double> allValuesInTheRating;
@@ -59,7 +59,7 @@ public class Product implements Comparable<Product> {
     }
 
 
-    public Product(String name, double price, String description, String composition, int categoryId) {
+    public Product(String name, double price, String description, String composition, long categoryId) {
         this.name = name;
         this.price = price;
         this.description = description;
