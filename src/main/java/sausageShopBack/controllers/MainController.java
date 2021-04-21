@@ -17,7 +17,7 @@ public class MainController {
         this.productService = productService;
     }
 
-    @GetMapping("/")
+    @GetMapping({"/", "templates/main.html"})
     public String home(Model model) {
         model.addAttribute("productList", productService.getAll());
         return "main";

@@ -122,18 +122,6 @@
                 <div class="col-12 col-md-6 mb-3 mb-md-0">
                     <nav class="shop-grid-nav">
                         <ul class="nav nav-pills align-items-center" id="pills-tab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-                                   aria-controls="pills-home" aria-selected="true">
-                                    <i class="fa fa-th"></i>
-
-                                </a>
-                            </li>
-                            <li class="nav-item mr-0">
-                                <a class="nav-link active" id="pills-profile-tab" data-toggle="pill"
-                                   href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                   aria-selected="false"><i class="fa fa-list"></i></a>
-                            </li>
                         </ul>
                     </nav>
                 </div>
@@ -153,99 +141,33 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>.
         </div>
         <!-- product-tab-nav end -->
         <div class="tab-content" id="pills-tabContent">
-            <!-- first tab-pane -->
-            <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div class="row grid-view theme1">
-                    <div class="col-sm-6 col-lg-4 col-xl-3 mb-30">
-                        <div class="card product-card">
-                            <div class="card-body">
-                                <div class="product-thumbnail position-relative">
-                                    <span class="badge badge-danger top-right">New</span>
-                                    <a href="single-product.html">
-                                        <img class="first-img" src="assets/img/product/11.jpg" alt="thumbnail">
-                                        <img class="second-img" src="assets/img/product/5.jpg" alt="thumbnail">
-                                    </a>
-                                    <!-- product links -->
-                                    <ul class="product-links d-flex justify-content-center">
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target="#compare">
-                                                <span data-toggle="tooltip" data-placement="bottom"
-                                                      title="Add to compare" class="icon-shuffle"></span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" data-toggle="modal" data-target="#quick-view">
-                                                <span data-toggle="tooltip" data-placement="bottom" title="Quick view"
-                                                      class="icon-magnifier"></span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                    <!-- product links end-->
-                                </div>
-                                <div class="product-desc py-0">
-                                    <h3 class="title"><a >orginal
-                                        Kaval
-                                        Windbreaker Winter Jacket</a></h3>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <h6 class="product-price">$11.90</h6>
-                                        <button class="pro-btn" data-toggle="modal" data-target="#add-to-cart"><i
-                                                class="icon-basket"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- product-list End -->
-                    </div>
-                </div>
-            </div>
             <!-- second tab-pane -->
             <div class="tab-pane fade show active" id="pills-profile" role="tabpanel"
                  aria-labelledby="pills-profile-tab">
                 <div class="row grid-view-list theme1">
                     <div class="col-12 mb-30">
                         <div class="card product-card">
-                            <div class="card-body">
+                            <div class="card-body" th:each="category :${categoryList}">
                                 <div class="media flex-column flex-md-row">
-                                    <div class="product-thumbnail position-relative">
-                                        <span class="badge badge-danger top-right">New</span>
-                                        <a href="single-product.html">
-                                            <img class="first-img" src="assets/img/product/11.jpg" alt="thumbnail">
-                                            <img class="second-img" src="assets/img/product/5.jpg" alt="thumbnail">
-                                        </a>
-                                    </div>
                                     <div class="media-body pl-30">
                                         <div class="product-desc py-0">
-                                            <h3 class="title"><a>orginal
-                                                Kaval
-                                                Windbreaker Winter Jacket</a></h3>
-                                            <h6 class="product-price">$11.90</h6>
-
+                                            <h3 class="title"><a th:text="${category.title}">Название категории</a></h3>
                                         </div>
                                         <ul class="product-list-des">
                                             <li>
-                                                Block out the haters with the fresh adidas® Originals Kaval Windbreaker
-                                                Jacket.
+                                               Количество продуктов в данной категории
                                             </li>
-                                            <li>
-                                                Part of the Kaval Collection.
-                                            </li>
-                                            <li>
-                                                Regular fit is eased, but not sloppy, and perfect for any activity.
-                                            </li>
-                                            <li>
-                                                Plain-woven jacket specifically constructed for freedom of movement.
+                                            <li th:text="${category.getSize()}">
+
                                             </li>
                                         </ul>
-                                        <div class="availability-list mb-30">
-                                            <p>Availability: <span>1200 In Stock</span></p>
-                                        </div>
                                         <button class="btn theme-btn--dark1 btn--xl rounded-5" data-toggle="modal"
                                                 data-target="#add-to-cart">
-                                            Add to cart
+                                            Посмотреть товары
                                         </button>
                                     </div>
                                 </div>
@@ -256,24 +178,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <nav class="pagination-section mt-30">
-                    <div class="row align-items-center">
-                        <div class="col-12">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#"><i class="ion-chevron-right"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </div>
 </div>
 </body>
 </html>

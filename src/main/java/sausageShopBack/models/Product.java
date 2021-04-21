@@ -59,7 +59,7 @@ public class Product implements Comparable<Product> {
     }
 
 
-    private Product(String name, double price, String description, String composition, int categoryId) {
+    public Product(String name, double price, String description, String composition, int categoryId) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -86,10 +86,6 @@ public class Product implements Comparable<Product> {
         rating = rt / this.allValuesInTheRating.size()+1;
     }
 
-    public static Product productFactory(String name, double price, String description, String composition, int categoryId) {
-        Product pr = new Product(name, price, description, composition, categoryId);
-        return pr;
-    }
 
     @Override
     public int compareTo(Product o) {
