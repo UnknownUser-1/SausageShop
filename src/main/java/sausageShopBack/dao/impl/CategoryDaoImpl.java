@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import sausageShopBack.dao.CategoryDao;
 import sausageShopBack.models.Category;
+import sausageShopBack.models.Product;
 
 import java.util.List;
 
@@ -51,7 +52,12 @@ public class CategoryDaoImpl implements CategoryDao {
 
     @Override
     public List<Category> getAll() {
-        return null;
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Category> categories = session.createQuery("from Category ").list();
+        //Transaction transaction = session.beginTransaction();
+        //transaction.commit();
+        //session.close();
+        return  categories;
     }
 
     @Override
