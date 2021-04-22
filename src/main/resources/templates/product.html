@@ -195,7 +195,7 @@
                                     <li><h4>Состав</h4></li>
                                     <li><span th:object="${product}" th:text="*{composition}"></span></li>
                                     <li><h4>Категория</h4></li>
-                                    <li><span th:text="${category}"></span></li>
+                                    <li><span th:object="${product}" th:text="*{categoryId.title}"></span></li>
                                 </ul>
                             </div>
                         </div>

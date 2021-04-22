@@ -33,8 +33,9 @@ public class Product implements Comparable<Product> {
     private String composition;
 
     @NotNull
-    @Column(name = "categoryid")
-    private Long categoryId;
+    @ManyToOne
+    @JoinColumn(name = "categoryid", foreignKey = @ForeignKey(name = "categoryid"))
+    private Category categoryId;
 
     /*@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "category")
@@ -59,7 +60,7 @@ public class Product implements Comparable<Product> {
     }
 
 
-    public Product(String name, double price, String description, String composition, long categoryId) {
+    public Product(String name, double price, String description, String composition, Category categoryId) {
         this.name = name;
         this.price = price;
         this.description = description;

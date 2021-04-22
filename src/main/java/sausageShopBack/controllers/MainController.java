@@ -15,12 +15,10 @@ import sausageShopBack.services.impl.ProductServiceImpl;
 public class MainController {
 
     ProductServiceImpl productService;
-    CategoryServiceImpl categoryService;
 
     @Autowired
-    public MainController(ProductServiceImpl productService, CategoryServiceImpl categoryService) {
+    public MainController(ProductServiceImpl productService) {
         this.productService = productService;
-        this.categoryService = categoryService;
     }
 
     @GetMapping({"/"})
@@ -33,9 +31,7 @@ public class MainController {
     @GetMapping({"/product/{id}"})
     public String goToProduct(@PathVariable(value = "id") Long id, Model model) {
         Product product = productService.getById(id);
-        String category = categoryService.getById(product.getCategoryId()).getTitle();
         model.addAttribute("product", product);
-        model.addAttribute("category", category);
         return "product";
     }
 
