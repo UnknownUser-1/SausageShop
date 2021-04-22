@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import sausageShopBack.services.impl.ProductServiceImpl;
 
 @Controller
-public class CartContoller {
+public class CartController {
 
     @Autowired
     ProductServiceImpl productService;
