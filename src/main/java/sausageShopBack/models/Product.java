@@ -37,11 +37,6 @@ public class Product implements Comparable<Product> {
     @JoinColumn(name = "categoryid", foreignKey = @ForeignKey(name = "categoryid"))
     private Category categoryId;
 
-    /*@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "category")
-    private Category category;*/
-
-
     @Id
     @NotNull
     @GeneratedValue

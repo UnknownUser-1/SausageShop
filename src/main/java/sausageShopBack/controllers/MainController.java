@@ -3,6 +3,7 @@ package sausageShopBack.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +34,20 @@ public class MainController {
         Product product = productService.getById(id);
         model.addAttribute("product", product);
         return "product";
+    }
+
+    //Временно здесь
+    @GetMapping({"/productdelete/{id}"})
+    public String deleteToProduct(@PathVariable(value = "id") Long id, Model model) {
+        this.productService.delete(productService.getById(id));
+        return "redirect:/shopAdmin";
+    }
+
+    //Временно здесь
+    @GetMapping({"/shopAdmin"})
+    public String admin(Model model) {
+        model.addAttribute("productList", productService.getAll());
+        return "admin-shop-grid-list";
     }
 
 }
