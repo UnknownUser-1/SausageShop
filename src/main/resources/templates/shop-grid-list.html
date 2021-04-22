@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta name="description" content="" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <meta name="description" content=""/>
     <title>Магазин мясных изделий SausageShop</title>
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico"/>
 
     <!--********************************** 
         all css files 
@@ -18,7 +18,7 @@
        fontawesome,bootstrap,plugins and main style css
      ***************************************************-->
 
-    <link rel="stylesheet" href="/css/fontawesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/css/fontawesome.min.css" type="text/css"/>
     <link rel="stylesheet" href="/css/ionicons.min.css" type="text/css"/>
     <link rel="stylesheet" href="/css/simple-line-icons.css" type="text/css"/>
     <link rel="stylesheet" href="/css/plugins/jquery-ui.min.css" type="text/css">
@@ -56,8 +56,8 @@
                                 <a href="#" id="dropdown1" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">Настройки </a>
                                 <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown1">
-                                    <li><a href="../templates/myaccount.html">My account</a></li>
-                                    <li><a href="../templates/login.html">Sign out</a></li>
+                                    <li><a href="../templates/myaccount.html">Мой профиль</a></li>
+                                    <li><a href="../templates/login.html">Выйти</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -83,7 +83,7 @@
                     <div class="search-form pt-30 pt-lg-0">
                         <form class="form-inline position-relative">
                             <input class="form-control theme1-border" type="search"
-                                   placeholder="Enter your search key ...">
+                                   placeholder="Введите ключевые слова">
                             <button class="btn search-btn theme-bg btn-rounded" type="submit"><i
                                     class="icon-magnifier"></i></button>
                         </form>
@@ -134,7 +134,7 @@
             </div>
             <div class="col-12">
                 <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                    <li class="breadcrumb-item"><a href="/templates/main.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/templates/main.html">Домой</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Sausage</li>
                 </ol>
             </div>
@@ -152,32 +152,33 @@
                         <ul class="nav nav-pills align-items-center" id="pills-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
-                                    aria-controls="pills-home" aria-selected="true">
+                                   aria-controls="pills-home" aria-selected="true">
                                     <i class="fa fa-th"></i>
 
                                 </a>
                             </li>
                             <li class="nav-item mr-0">
                                 <a class="nav-link active" id="pills-profile-tab" data-toggle="pill"
-                                    href="#pills-profile" role="tab" aria-controls="pills-profile"
-                                    aria-selected="false"><i class="fa fa-list"></i></a>
+                                   href="#pills-profile" role="tab" aria-controls="pills-profile"
+                                   aria-selected="false"><i class="fa fa-list"></i></a>
                             </li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-12 col-md-6 position-relative">
                     <div class="shop-grid-button d-flex align-items-center">
-                        <span class="sort-by">Sort by:</span>
+                        <span class="sort-by">Сортировать по:</span>
                         <button class="btn-dropdown rounded d-flex justify-content-between" type="button"
-                            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Relevance <span class="ion-android-arrow-dropdown"></span>
+                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                            Актуальность <span class="ion-android-arrow-dropdown"></span>
                         </button>
                         <div class="dropdown-menu shop-grid-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Relevance</a>
-                            <a class="dropdown-item" href="#"> Name, A to Z</a>
-                            <a class="dropdown-item" href="#"> Name, Z to A</a>
-                            <a class="dropdown-item" href="#"> Price, low to high</a>
-                            <a class="dropdown-item" href="#"> Price, high to low</a>
+                            <a class="dropdown-item" href="#">Актуальность</a>
+                            <a class="dropdown-item" href="#"> По имени А-Я</a>
+                            <a class="dropdown-item" href="#"> По имени Я-А</a>
+                            <a class="dropdown-item" href="#"> По возрастанию цены</a>
+                            <a class="dropdown-item" href="#"> По убыванию цены</a>
                         </div>
                     </div>
                 </div>
@@ -207,7 +208,7 @@
             </div>
             <!-- second tab-pane -->
             <div class="tab-pane fade show active" id="pills-profile" role="tabpanel"
-                aria-labelledby="pills-profile-tab">
+                 aria-labelledby="pills-profile-tab">
                 <div class="row grid-view-list theme1">
                     <div class="col-12 mb-30">
                         <div class="card product-card">
@@ -216,21 +217,21 @@
                                     <div class="media-body pl-30">
                                         <div class="product-desc py-0">
                                             <h3 class="title" th:text="${product.name}"><a></a></h3>
-                                            <h6 class="product-price" th:text="${product.price}">Price</h6>
+                                            <h6 class="product-price" th:text="${product.price}">Цена</h6>
 
                                         </div>
                                         <ul class="product-list-des">
                                             <li th:text="${product.composition}">
-                                                composition
+                                                Состав
                                             </li>
                                             <li th:text="${product.description}">
-                                                description
+                                                Описание
                                             </li>
 
                                         </ul>
                                         <button class="btn theme-btn--dark1 btn--xl rounded-5" data-toggle="modal"
-                                            data-target="#add-to-cart">
-                                            Add to cart
+                                                data-target="#add-to-cart">
+                                            Добавить в корзину
                                         </button>
 
                                     </div>
@@ -246,15 +247,15 @@
 </div>
 <!-- product tab end -->
 <!-- modals start -->
-    <!--*********************** 
-        all js files
-     ***********************-->
+<!--***********************
+    all js files
+ ***********************-->
 
-    <!--****************************************************** 
-        jquery,modernizr ,poppe,bootstrap,plugins and main js
-     ******************************************************-->
+<!--******************************************************
+    jquery,modernizr ,poppe,bootstrap,plugins and main js
+ ******************************************************-->
 
-<script src="/js/vendor/jquery-3.5.1.min.js" ></script>
+<script src="/js/vendor/jquery-3.5.1.min.js"></script>
 <script src="/js/vendor/modernizr-3.7.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/plugins/jquery-ui.min.js"></script>
@@ -262,19 +263,19 @@
 <script src="/js/plugins/plugins.js"></script>
 <script src="/js/main.js"></script>
 
-    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+<!-- Use the minified version files listed below for better performance and remove the files listed above -->
 
-    <!--*************************** 
-          Minified  js 
-     ***************************-->
+<!--***************************
+      Minified  js
+ ***************************-->
 
-    <!--*********************************** 
-         vendor,plugins and main js
-      ***********************************-->
+<!--***********************************
+     vendor,plugins and main js
+  ***********************************-->
 
-    <!-- <script src="assets/js/vendor/vendor.min.js"></script>
-    <script src="assets/js/plugins/plugins.min.js"></script>
-    <script src="assets/js/main.js"></script> -->
+<!-- <script src="assets/js/vendor/vendor.min.js"></script>
+<script src="assets/js/plugins/plugins.min.js"></script>
+<script src="assets/js/main.js"></script> -->
 
 
 </body>
