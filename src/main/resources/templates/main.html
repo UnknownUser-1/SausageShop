@@ -78,7 +78,7 @@
                         </li>
                         <li class="position-static">
                             <ul>
-                                <li class="mega-menu-title"><a href="/templates/shop-grid-list.html">Магазин</a></li>
+                                <li class="mega-menu-title"><a href="/shop">Магазин</a></li>
                             </ul>
                         </li>
                         <li class="position-static">
@@ -118,10 +118,7 @@
                         <a th:href="@{/product/{id}(id=${product.id})}">
                             <div class="card product-card">
                                 <div class="card-body">
-
-
                                     <!-- product links -->
-
                                     <div class="product-desc py-0">
                                         <p class="h2" th:text="${product.name}"></p>
                                         <p class="h6" th:text="${product.description}"></p>

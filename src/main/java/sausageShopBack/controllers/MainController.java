@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import sausageShopBack.models.Basket;
 import sausageShopBack.models.Product;
 import sausageShopBack.services.impl.CategoryServiceImpl;
 import sausageShopBack.services.impl.ProductServiceImpl;
@@ -30,7 +31,7 @@ public class MainController {
 
 
     @GetMapping({"/product/{id}"})
-    public String goToProduct(@PathVariable(value = "id") Long id, Model model){
+    public String goToProduct(@PathVariable(value = "id") Long id, Model model) {
         Product product = productService.getById(id);
         String category = categoryService.getById(product.getCategoryId()).getTitle();
         model.addAttribute("product", product);

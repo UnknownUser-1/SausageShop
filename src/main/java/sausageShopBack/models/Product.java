@@ -75,7 +75,7 @@ public class Product implements Comparable<Product> {
 
     public void setRating(double rat) {
         allValuesInTheRating.add(rat);
-        if (allValuesInTheRating.isEmpty()) {
+        if (allValuesInTheRating.isEmpty()) {//Зачем нужна эта проверка, если мы в этом методе итак добавляем значения
             this.rating = rat;
         }
         double rt = 0;
