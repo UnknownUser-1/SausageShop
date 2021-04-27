@@ -13,7 +13,7 @@ import java.util.ArrayList;
 @Setter
 @Entity
 @Table(name = "product", schema = "sausageshop")
-public class Product implements Comparable<Product> {
+public class Product {
 
 
     @NotNull
@@ -33,19 +33,16 @@ public class Product implements Comparable<Product> {
     private String composition;
 
     @NotNull
-    @Column(name = "categoryid")
-    private Integer categoryId;
-
-    /*@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "category")
-    private Category category;*/
+    @ManyToOne
+    @JoinColumn(name = "categoryid", foreignKey = @ForeignKey(name = "categoryid"))
+    private Category categoryId;
 
 
     @Id
     @NotNull
     @GeneratedValue
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Transient
     private ArrayList<Double> allValuesInTheRating;
@@ -59,7 +56,7 @@ public class Product implements Comparable<Product> {
     }
 
 
-    public Product(String name, double price, String description, String composition, int categoryId) {
+    public Product(String name, double price, String description, String composition, Category categoryId) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -84,12 +81,6 @@ public class Product implements Comparable<Product> {
         }
         rt = rt + rat;
         rating = rt / this.allValuesInTheRating.size()+1;
-    }
-
-
-    @Override
-    public int compareTo(Product o) {
-        return (int) (this.getPrice() - o.getPrice());
     }
 
 
