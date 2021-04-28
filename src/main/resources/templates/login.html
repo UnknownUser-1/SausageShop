@@ -102,20 +102,20 @@
                 <div class="col-lg-10 offset-lg-2 d-flex flex-wrap align-items-center position-relative">
                     <ul class="main-menu d-flex">
                         <li class="active ml-0">
-                            <a href="main.html" class="pl-0">Главная</a>
+                            <a th:href="@{/}" class="pl-0">Главная</a>
                         </li>
                         <li class="position-static">
                             <ul>
-                                <li class="mega-menu-title"><a href="/templates/shop-grid-list.html">Магазин</a></li>
+                                <li class="mega-menu-title"><a th:href="@{/shop}">Магазин</a></li>
                             </ul>
                         </li>
                         <li class="position-static">
                             <ul>
-                                <li class="mega-menu-title"><a href="/templates/cart.html">Корзина</a></li>
+                                <li class="mega-menu-title"><a th:href="@{/cart}">Корзина</a></li>
                             </ul>
                         </li>
-                        <li><a href="/templates/contact.html">Где мы</a></li>
-                        <li><a href="/templates/categoryList.html">Категории</a></li>
+                        <li><a th:href="@{/contact}">Где мы</a></li>
+                        <li><a th:href="@{/categoryList}">Категории</a></li>
                     </ul>
 
                 </div>

@@ -57,8 +57,8 @@
                                 <a href="#" id="dropdown1" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">Настройки </a>
                                 <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown1">
-                                    <li><a href="../templates/myaccount.html">Мой аккаунт</a></li>
-                                    <li><a href="../templates/login.html">Выйти</a></li>
+                                    <li><a th:href="@{/myaccount}">Мой аккаунт</a></li>
+                                    <li><a th:href="@{/logout}">Выйти</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -106,16 +106,16 @@
                         </li>
                         <li class="position-static">
                             <ul>
-                                <li class="mega-menu-title"><a href="/templates/shop-grid-list.html">Магазин</a></li>
+                                <li class="mega-menu-title"><a th:href="@{/shop}">Магазин</a></li>
                             </ul>
                         </li>
                         <li class="position-static">
                             <ul>
-                                <li class="mega-menu-title"><a href="/templates/cart.html">Корзина</a></li>
+                                <li class="mega-menu-title"><a th:href="@{/cart}">Корзина</a></li>
                             </ul>
                         </li>
-                        <li><a href="/templates/contact.html">Где мы</a></li>
-                        <li><a href="/templates/categoryList.html">Категории</a></li>
+                        <li><a th:href="@{/contact}">Где мы</a></li>
+                        <li><a th:href="@{/categoryList}">Категории</a></li>
                     </ul>
 
                 </div>
@@ -158,7 +158,7 @@
                     <a href="#account-info" data-toggle="tab" class="active"><i class="fa fa-user"></i>Подробнее об
                         аккаунте </a>
 
-                    <a href="/templates/login.html"><i class="fa fa-sign-out"></i> Выйти из аккаунта</a>
+                    <a th:href="@{/logout}"><i class="fa fa-sign-out"></i> Выйти из аккаунта</a>
                 </div>
             </div>
             <!-- My Account Tab Menu End -->
