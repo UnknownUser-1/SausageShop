@@ -17,7 +17,7 @@ public class CategoryListController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping({"templates/categoryList.html"})
+    @GetMapping({"categoryList"})
     public String home(Model model) {
         model.addAttribute("categoryList", categoryService.getAll());
         return "categoryList";

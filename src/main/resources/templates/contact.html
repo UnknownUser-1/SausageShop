@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8" />
@@ -57,8 +57,8 @@
                                 <a href="#" id="dropdown1" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">Настройки </a>
                                 <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown1">
-                                    <li><a href="../templates/myaccount.html">Мой профиль</a></li>
-                                    <li><a href="../templates/login.html">Выйти</a></li>
+                                    <li><a th:href="@{myaccount}">Мой профиль</a></li>
+                                    <li><a th:href="@{/logout}">Выйти</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -102,20 +102,20 @@
                 <div class="col-lg-10 offset-lg-2 d-flex flex-wrap align-items-center position-relative">
                     <ul class="main-menu d-flex">
                         <li class="active ml-0">
-                            <a href="main.html" class="pl-0">Главная</a>
+                            <a th:href="@{/}" class="pl-0">Главная</a>
                         </li>
                         <li class="position-static">
                             <ul>
-                                <li class="mega-menu-title"><a href="/templates/shop-grid-list.html">Магазин</a></li>
+                                <li class="mega-menu-title"><a th:href="@{/shop}">Магазин</a></li>
                             </ul>
                         </li>
                         <li class="position-static">
                             <ul>
-                                <li class="mega-menu-title"><a href="/templates/cart.html">Корзина</a></li>
+                                <li class="mega-menu-title"><a th:href="@{/cart}">Корзина</a></li>
                             </ul>
                         </li>
-                        <li><a href="/templates/contact.html">Где мы</a></li>
-                        <li><a href="/templates/categoryList.html">Категории</a></li>
+                        <li><a th:href="@{/contact}">Где мы</a></li>
+                        <li><a th:href="@{/categoryList}">Категории</a></li>
                     </ul>
 
                 </div>
@@ -136,7 +136,7 @@
             </div>
             <div class="col-12">
                 <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                    <li class="breadcrumb-item"><a href="/templates/main.html">Домой</a></li>
+                    <li class="breadcrumb-item"><a th:href="@{/}">Домой</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Контакты</li>
                 </ol>
             </div>
