@@ -223,8 +223,15 @@
                                             </ul>
                                             <button class="btn theme-btn--dark1 btn--xl rounded-5" data-toggle="modal"
                                                     data-target="#add-to-cart">
-                                                Добавить в корзину
+                                                Изменить
                                             </button>
+                                            <a th:href="@{/productdelete/{id}(id=${product.id})}">
+                                                <button class="btn theme-btn--dark1 btn--xl rounded-5"
+                                                        data-toggle="modal"
+                                                        data-target="#add-to-cart">
+                                                    Удалить
+                                                </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

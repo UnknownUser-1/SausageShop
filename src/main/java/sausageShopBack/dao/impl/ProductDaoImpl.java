@@ -14,10 +14,10 @@ import java.util.List;
 public class ProductDaoImpl implements ProductDao {
 
 
-   private final SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
     @Autowired
-   public ProductDaoImpl(SessionFactory sessionFactory){
+    public ProductDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
@@ -43,9 +43,9 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product getById(Long id) {
         Session session = this.sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
+        // Transaction transaction = session.beginTransaction();
         Product product = session.get(Product.class, id);
-        transaction.commit();
+//        transaction.commit();
         session.close();
         return product;
     }
@@ -55,9 +55,9 @@ public class ProductDaoImpl implements ProductDao {
         Session session = this.sessionFactory.openSession();
         List<Product> products = session.createQuery("from Product").list();
         //Transaction transaction = session.beginTransaction();
-       // transaction.commit();
+        // transaction.commit();
         session.close();
-        return  products;
+        return products;
     }
 
     @Override

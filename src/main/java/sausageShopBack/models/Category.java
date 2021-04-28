@@ -29,7 +29,7 @@ public class Category implements Serializable, Comparable<Category> {
     @NotNull
     @GeneratedValue
     @Column(name = "id")
-    private Integer id = null;
+    private Long id = null;
 
     public Category(@NotNull String title) {
         this.products = new ArrayList<>();

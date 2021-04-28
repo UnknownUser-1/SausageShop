@@ -10,7 +10,7 @@ import sausageShopBack.services.securityServices.UserServiceImpl;
 import sausageShopBack.validator.UserValidator;
 
 @Controller
-public class MyAccaountController {
+public class MyAccountController {
 
     UserServiceImpl userService;
 

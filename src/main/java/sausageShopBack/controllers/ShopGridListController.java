@@ -17,7 +17,7 @@ public class ShopGridListController {
         this.productService = productService;
     }
 
-    @GetMapping({"templates/shop-grid-list.html"})
+    @GetMapping({"/shop"})
     public String home(Model model) {
         model.addAttribute("productList", productService.getAll());
         return "shop-grid-list";

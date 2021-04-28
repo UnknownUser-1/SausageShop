@@ -48,7 +48,7 @@ public class CategoryController implements Serializable {
 
     //Обновление продукта
     @PutMapping("/category/updateProduct")
-    public void uptadeProduct(Product product){ productService.update(product);}
+    public void updateProduct(Product product){ productService.update(product);}
 
     @PostMapping("/category/newProduct")
     public void createProduct(Product product){ productService.save(product);}

@@ -29,8 +29,8 @@
                                 <a href="#" id="dropdown1" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">Настройки </a>
                                 <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown1">
-                                    <li><a href="/templates/myaccount.html">My account</a></li>
-                                    <li><a href="/templates/login.html">Sign out</a></li>
+                                    <li><a href="/templates/myaccount.html">Мой аккаунт</a></li>
+                                    <li><a href="/templates/login.html">Выйти</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -56,7 +56,7 @@
                     <div class="search-form pt-30 pt-lg-0">
                         <form class="form-inline position-relative">
                             <input class="form-control theme1-border" type="search"
-                                   placeholder="Enter your search key ...">
+                                   placeholder="Введите ключевые слова">
                             <button class="btn search-btn theme-bg btn-rounded" type="submit"><i
                                     class="icon-magnifier"></i></button>
                         </form>
@@ -78,7 +78,7 @@
                         </li>
                         <li class="position-static">
                             <ul>
-                                <li class="mega-menu-title"><a href="/templates/shop-grid-list.html">Магазин</a></li>
+                                <li class="mega-menu-title"><a href="/shop">Магазин</a></li>
                             </ul>
                         </li>
                         <li class="position-static">
@@ -104,7 +104,7 @@
             <div class="row align-items-center">
                 <div class="col-12">
                     <div class="section-title text-center mb-30">
-                        <h2 class="title text-dark text-capitalize">Our products</h2>
+                        <h2 class="title text-dark text-capitalize">Наши продукты</h2>
                     </div>
                 </div>
             </div>
@@ -115,13 +115,10 @@
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 <div class="row grid-view theme1">
                     <div th:each="product: ${productList}" class="col-sm-6 col-lg-4 col-xl-3 mb-30">
-                        <a href="single-product.html">
+                        <a th:href="@{/product/{id}(id=${product.id})}">
                             <div class="card product-card">
                                 <div class="card-body">
-
-
                                     <!-- product links -->
-
                                     <div class="product-desc py-0">
                                         <p class="h2" th:text="${product.name}"></p>
                                         <p class="h6" th:text="${product.description}"></p>
