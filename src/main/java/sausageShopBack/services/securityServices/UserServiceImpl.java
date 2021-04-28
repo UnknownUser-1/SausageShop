@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+
     @Override
     public void save(User user, Long roleId) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
