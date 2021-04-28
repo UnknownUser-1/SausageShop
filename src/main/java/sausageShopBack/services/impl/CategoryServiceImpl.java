@@ -1,6 +1,7 @@
 package sausageShopBack.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import sausageShopBack.dao.CategoryDao;
 import sausageShopBack.models.Category;
@@ -9,7 +10,7 @@ import sausageShopBack.services.CategoryService;
 import java.util.List;
 
 @Service
-public class CategoryServiceImpl implements CategoryService {
+public class CategoryServiceImpl implements CategoryService{
 
     private final CategoryDao categoryDao;
 

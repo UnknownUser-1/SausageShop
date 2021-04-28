@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8"/>
@@ -130,13 +130,13 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-title text-center mb-15">
-                    <h2 class="title text-dark text-capitalize">Мой аккаунт</h2>
+                    <h2 class="title text-dark text-capitalize">my account</h2>
                 </div>
             </div>
             <div class="col-12">
                 <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                    <li class="breadcrumb-item"><a href="/templates/main.html">Домой</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Мой аккаунт</li>
+                    <li class="breadcrumb-item"><a href="/templates/main.html">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">my account</li>
                 </ol>
             </div>
         </div>
@@ -172,30 +172,19 @@
                         <div class="myaccount-content">
                             <h3>Подробнее об аккаунте</h3>
                             <div class="account-details-form">
-                                <form action="#">
+                                <form action="#" >
                                     <div class="row">
                                         <div class="col-lg-6 col-12 mb-30">
-                                            <input id="first-name" placeholder="Имя" type="text">
+                                            <label id="first-name" th:text="${user}" type="text">UserName</label>
                                         </div>
-
                                         <div class="col-lg-6 col-12 mb-30">
-                                            <input id="last-name" placeholder="Фамилия" type="text">
+                                            <input id="last-name" placeholder="New UserName" type="text">
                                         </div>
-
-                                        <div class="col-12 mb-30">
-                                            <input id="display-name" placeholder="Отображаемое имя" type="text">
-                                        </div>
-
-                                        <div class="col-12 mb-30">
-                                            <input id="email" placeholder="Почта" type="email">
-                                        </div>
-
                                         <div class="col-12 mb-30">
                                             <h4>Password change</h4>
                                         </div>
-
                                         <div class="col-12 mb-30">
-                                            <input id="current-pwd" placeholder="Текущий пароль" type="password">
+                                            <label id="current-pwd" type="password">Password</label>
                                         </div>
 
                                         <div class="col-lg-6 col-12 mb-30">
@@ -226,15 +215,15 @@
 <!-- product tab end -->
 <!-- footer strat -->
 
-<!--***********************
-    all js files
- ***********************-->
+    <!--*********************** 
+        all js files
+     ***********************-->
 
-<!--******************************************************
-    jquery,modernizr ,poppe,bootstrap,plugins and main js
- ******************************************************-->
+    <!--****************************************************** 
+        jquery,modernizr ,poppe,bootstrap,plugins and main js
+     ******************************************************-->
 
-<script src="/js/vendor/jquery-3.5.1.min.js"></script>
+<script src="/js/vendor/jquery-3.5.1.min.js" ></script>
 <script src="/js/vendor/modernizr-3.7.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/plugins/jquery-ui.min.js"></script>
@@ -245,17 +234,17 @@
 
 <!-- Use the minified version files listed below for better performance and remove the files listed above -->
 
-<!--***************************
-      Minified  js
- ***************************-->
+    <!--*************************** 
+          Minified  js 
+     ***************************-->
 
-<!--***********************************
-     vendor,plugins and main js
-  ***********************************-->
+    <!--*********************************** 
+         vendor,plugins and main js
+      ***********************************-->
 
-<!-- <script src="assets/js/vendor/vendor.min.js"></script>
-<script src="assets/js/plugins/plugins.min.js"></script>
-<script src="assets/js/main.js"></script> -->
+    <!-- <script src="assets/js/vendor/vendor.min.js"></script>
+    <script src="assets/js/plugins/plugins.min.js"></script>
+    <script src="assets/js/main.js"></script> -->
 
 
 </body>

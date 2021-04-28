@@ -48,7 +48,7 @@ public class HibernateConfiguration {
     }
 
     //After creating new entity class add that into sessionFactory.setAnnotatedClasses
-    @Bean
+    @Bean(name = "entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
