@@ -4,6 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import sausageShopBack.dao.UserDao;
 import sausageShopBack.models.Role;
@@ -17,9 +19,13 @@ public class UserDaoImpl implements UserDao {
 
     private final SessionFactory sessionFactory;
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
-    public UserDaoImpl(SessionFactory sessionFactory){
+    public UserDaoImpl(SessionFactory sessionFactory,
+                       BCryptPasswordEncoder bCryptPasswordEncoder){
         this.sessionFactory = sessionFactory;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     @Override
@@ -60,6 +66,7 @@ public class UserDaoImpl implements UserDao {
         Session session = this.sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         User user= session.get(User.class, id);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         transaction.commit();
         session.close();
         return user;

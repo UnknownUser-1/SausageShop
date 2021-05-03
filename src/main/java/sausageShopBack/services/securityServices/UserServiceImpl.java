@@ -21,8 +21,11 @@ public class UserServiceImpl implements UserService {
 
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
     @Autowired
-    public UserServiceImpl(UserDaoImpl userDao, RoleDaoImpl roleDao, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserDaoImpl userDao,
+                           RoleDaoImpl roleDao,
+                           BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.roleDao = roleDao;
         this.userDao = userDao;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -36,6 +39,11 @@ public class UserServiceImpl implements UserService {
         roles.add(roleDao.getById(roleId));
         user.setRoles(roles);
         userDao.save(user);
+    }
+
+    public void update(User user){
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userDao.update(user);
     }
 
     @Override

@@ -20,7 +20,9 @@ public class RegisterController {
     UserValidator userValidator;
 
     @Autowired
-    public RegisterController(UserServiceImpl userService, SecurityServiceImpl securityService, UserValidator userValidator){
+    public RegisterController(UserServiceImpl userService,
+                              SecurityServiceImpl securityService,
+                              UserValidator userValidator){
         this.userService = userService;
         this.securityService = securityService;
         this.userValidator = userValidator;
@@ -33,17 +35,20 @@ public class RegisterController {
     }
 
     /**
-     * Если пароль ввденный пользователем равен 7777777, значит это админ
+     * Если пароль ввденный пользователем равен 777777777, значит это админ
      * Мы передаем id роли чтобы она присвоилась пользователю
      */
     @RequestMapping(value = "/register/add", method = RequestMethod.POST)
-    public String registerForm(@ModelAttribute(value = "user") User user, BindingResult bindingResult, Model model){
+    public String registerForm(@ModelAttribute(value = "user") User user,
+                               BindingResult bindingResult,
+                               Model model){
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
             return "redirect:/register";
         }
-        if(user.getPassword().equals("7777777")) {
+        if(user.getPassword().equals("777777777")) {
             userService.save(user,2L);
+            return "redirect:/shopAdmin";
         } else{
             userService.save(user,1L);
         }
