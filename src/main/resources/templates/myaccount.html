@@ -172,28 +172,24 @@
                         <div class="myaccount-content">
                             <h3>Подробнее об аккаунте</h3>
                             <div class="account-details-form">
-                                <form action="#" >
+                                <form action="#"  th:action="@{/myaccount/update}" th:object="${updateUser}" method="post">
                                     <div class="row">
                                         <div class="col-lg-6 col-12 mb-30">
-                                            <label id="first-name" th:text="${user}" type="text">UserName</label>
+                                            <label id="first-name" th:text="${userName}" type="text">Имя пользователя</label>
                                         </div>
                                         <div class="col-lg-6 col-12 mb-30">
-                                            <input id="last-name" placeholder="New UserName" type="text">
+                                            <input id="last-name" placeholder="Новое имя пользователя" type="text" th:field="*{username}">
                                         </div>
                                         <div class="col-12 mb-30">
-                                            <h4>Password change</h4>
+                                            <h4>Изменение пароля</h4>
                                         </div>
-                                        <div class="col-12 mb-30">
-                                            <label id="current-pwd" type="password">Password</label>
-                                        </div>
-
                                         <div class="col-lg-6 col-12 mb-30">
-                                            <input id="new-pwd" placeholder="Новый пароль" type="password">
+                                            <input id="new-pwd" placeholder="Новый пароль" type="password" th:field="*{password}">
                                         </div>
 
                                         <div class="col-lg-6 col-12 mb-30">
                                             <input id="confirm-pwd" placeholder="Подтвердите новый пароль"
-                                                   type="password">
+                                                   type="password" th:field="*{confirmPassword}">
                                         </div>
 
                                         <div class="col-12">

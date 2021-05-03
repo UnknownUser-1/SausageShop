@@ -1,5 +1,6 @@
 package sausageShopBack.config;
 
+import org.aspectj.weaver.bcel.BcelAccessForInlineMunger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,14 +21,14 @@ import sausageShopBack.services.securityServices.UserDetailsServiceImpl;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final PasswordEncoder passwordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private final UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-    public WebSecurityConfig(PasswordEncoder passwordEncoder,
+    public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder,
                              UserDetailsServiceImpl userDetailsService){
-        this.passwordEncoder = passwordEncoder;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userDetailsService = userDetailsService;
     }
 
@@ -35,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder);
+        provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(userDetailsService);
         return provider;
     }
@@ -52,7 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.authorizeRequests()
                 .antMatchers("/shopAdmin/**").hasRole( "ADMIN")
-                .antMatchers("/myAccount").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/myaccount").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/cart").hasRole("USER")
                 .antMatchers("/**").permitAll()
                 .and()
