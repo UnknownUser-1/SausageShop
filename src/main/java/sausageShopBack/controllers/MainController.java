@@ -29,25 +29,15 @@ public class MainController {
     }
 
 
-    @GetMapping({"/product/{id}"})
-    public String goToProduct(@PathVariable(value = "id") Long id, Model model) {
-        Product product = productService.getById(id);
-        model.addAttribute("product", product);
-        return "product";
-    }
-
-    //Временно здесь
     @GetMapping({"/productdelete/{id}"})
     public String deleteToProduct(@PathVariable(value = "id") Long id, Model model) {
         this.productService.delete(productService.getById(id));
         return "redirect:/shopAdmin";
     }
 
-    //Временно здесь
     @GetMapping({"/shopAdmin"})
     public String admin(Model model) {
         model.addAttribute("productList", productService.getAll());
         return "admin-shop-grid-list";
     }
-
 }

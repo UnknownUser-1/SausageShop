@@ -47,6 +47,9 @@ public class Product {
     @Transient
     private ArrayList<Double> allValuesInTheRating;
 
+    @Transient
+    private Integer count;
+
     @NotNull
     @Column(name = "rating")
     private Double rating;

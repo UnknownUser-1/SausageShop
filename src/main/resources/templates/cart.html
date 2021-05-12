@@ -153,7 +153,6 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
-                                <th class="text-center" scope="col">Картинка товара</th>
                                 <th class="text-center" scope="col">Название товара</th>
                                 <th class="text-center" scope="col">Состояние на складе</th>
                                 <th class="text-center" scope="col">Кол-во</th>
@@ -162,21 +161,18 @@
                                 <th class="text-center" scope="col">Проверка</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody th:each="product:${product}" >
                             <tr>
-                                <th class="text-center" scope="row">
-                                    <img src="assets/img/product/2.jpg" alt="img">
-                                </th>
                                 <td class="text-center">
-                                    <span class="whish-title">Вода</span>
+                                    <span class="whish-title" th:text="${product.name}">Вода</span>
                                 </td>
                                 <td class="text-center">
                                     <span class="badge badge-danger position-static">В наличии</span>
                                 </td>
                                 <td class="text-center">
                                     <div class="product-count style">
-                                        <div class="count d-flex justify-content-center">
-                                            <input type="number" min="1" max="10" step="1" value="1">
+                                        <div class="count d-flex justify-content-center" >
+                                            <input type="number" min="1" max="10" step="1" th:value="${product.count}">
                                             <div class="button-group">
                                                 <button class="count-btn increment"><i
                                                         class="fas fa-chevron-up"></i></button>
@@ -187,15 +183,15 @@
                                     </div>
                                 </td>
                                 <td class="text-center">
-                                    <span class="whish-list-price">
+                                    <span class="whish-list-price" th:text="${product.price}">
                                         $38.24
                                     </span></td>
 
                                 <td class="text-center">
-                                    <a href="#"> <span class="trash"><i class="fas fa-trash-alt"></i> </span></a>
+                                    <a th:href="@{/productdeleteInCart/{id}(id=${product.id})}"> <span class="trash"><i class="fas fa-trash-alt"></i> </span></a>
                                 </td>
                                 <td class="text-center">
-                                    <a href="#" class="btn theme-btn--dark1 btn--lg">Купить</a>
+                                    <a th:href="@{/buyAllProduct}" class="btn theme-btn--dark1 btn--lg">Купить</a>
                                 </td>
                             </tr>
                         </tbody>
