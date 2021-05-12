@@ -2,6 +2,7 @@ package sausageShopBack.models;
 
 import java.util.ArrayList;
 
+
 public class Basket {
 
     /**
@@ -18,7 +19,8 @@ public class Basket {
         this.count = new ArrayList<>();
     }
 
-    public void delete(int i) {
+    public void delete(Long i) {
+        i=i-1;
         products.remove(i);
         count.remove(i);
         rat.remove(i);
@@ -30,11 +32,17 @@ public class Basket {
         rat.removeAll(rat);
     }
 
-    public void add(Product pr, int c, double r) {
+    public void add(Product pr) {
         products.add(pr);
-        count.add(c);
-        rat.add(r);
+        count.add(pr.getCount());
+
     }
+
+    public ArrayList<Product> getAllProducts(){
+        return this.products;
+    }
+
+    public ArrayList<Integer> getCount(){return this.count;}
 
     public void changeCount(int pr, int c) {
         count.set(pr, c);

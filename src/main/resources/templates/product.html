@@ -120,41 +120,39 @@
             </div>
             <div class="col-lg-6 mt-5 mt-md-0">
                 <div class="single-product-info">
-                    <div class="single-product-head">
-                        <h2 th:object="${product}" th:text="*{name}" class="title mb-20"></h2>
-                        <div class="star-content mb-20">
-                            <span class="star-on"><i class="ion-ios-star"></i> </span>
-                            <p class="h6" th:object="${product}" th:text="*{rating}"></p>
-                            <!--Рейтинг-->
+                    <form th:action="@{/product/addToCart}" th:object="${productToCart}" method="post">
+                        <div class="single-product-head">
+                            <h2 th:text="${product.name}" class="title mb-20"> </h2>
+                            <div class="star-content mb-20">
+                                <span class="star-on"><i class="ion-ios-star"></i> </span>
+                                <p class="h6" th:object="${product}" th:text="*{rating}"></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="product-body mb-40">
-                        <div class="d-flex align-items-center mb-30">
-                            <h6 class="product-price mr-20">
-                                <span th:object="${product}" th:text="*{price}" class="onsale"></span></h6>
+                        <div class="product-body mb-40">
+                            <div class="d-flex align-items-center mb-30">
+                                <h6 class="product-price mr-20">
+                                    <span th:object="${product}" th:text="*{price}" class="onsale"></span></h6>
+                            </div>
+                            <p th:object="${product}" th:text="*{description}"></p>
                         </div>
-                        <p th:object="${product}" th:text="*{description}"></p>
-                    </div>
-                    <div class="product-footer">
-                        <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-30">
-                            <div class="count d-flex">
-                                <label>
-<!--                  ///////////////////////////Тут добавлять потом в корзину/////////////////////////////////-->
-                                    <input type="number"  min="1" max="10" step="1" value="1">
-                                </label>
-                                <div class="button-group">
-                                    <button class="count-btn increment"><i class="fas fa-chevron-up"></i></button>
-                                    <button class="count-btn decrement"><i class="fas fa-chevron-down"></i></button>
+
+                        <div class="product-footer">
+                            <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-30">
+                                <div class="count d-flex">
+                                    <label>
+                                        <!--                  ///////////////////////////Тут добавлять потом в корзину/////////////////////////////////-->
+                                        <input type="number" min="1" max="10" step="1" value="1" th:field="${productToCart.count}">
+                                    </label>
+                                </div>
+                                <div>
+                                    <button class="btn theme-btn--dark1 btn--xl mt-5 mt-sm-0 rounded-5">
+                                        <span class="mr-2"><i class="ion-android-add"></i></span>
+                                        В корзину
+                                    </button>
                                 </div>
                             </div>
-                            <div>
-                                <button class="btn theme-btn--dark1 btn--xl mt-5 mt-sm-0 rounded-5">
-                                    <span class="mr-2"><i class="ion-android-add"></i></span>
-                                    В корзину
-                                </button>
-                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
