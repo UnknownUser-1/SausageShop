@@ -43,9 +43,9 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Product getById(Long id) {
         Session session = this.sessionFactory.openSession();
-        // Transaction transaction = session.beginTransaction();
+        Transaction transaction = session.beginTransaction();
         Product product = session.get(Product.class, id);
-//        transaction.commit();
+        transaction.commit();
         session.close();
         return product;
     }
@@ -54,8 +54,8 @@ public class ProductDaoImpl implements ProductDao {
     public List<Product> getAll() {
         Session session = this.sessionFactory.openSession();
         List<Product> products = session.createQuery("from Product").list();
-        //Transaction transaction = session.beginTransaction();
-        // transaction.commit();
+        Transaction transaction = session.beginTransaction();
+        transaction.commit();
         session.close();
         return products;
     }

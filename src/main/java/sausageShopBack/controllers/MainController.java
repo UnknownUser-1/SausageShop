@@ -40,7 +40,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/searchProduct", method = RequestMethod.POST)
-    public String searchProduct(@ModelAttribute(value = "newProduct") Product product,
+    public String searchProduct(@ModelAttribute(value = "productToSearch") Product product,
                                 Model model) {
         model.addAttribute("productList", productService.search(product.getName()));
         return "shop-grid-list";
