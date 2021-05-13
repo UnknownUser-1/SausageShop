@@ -28,12 +28,14 @@ public class CartController {
         this.id = id;
         model.addAttribute("product", product);
         model.addAttribute("productToCart", new Product());
+        model.addAttribute("productToSearch", new Product());
         return "product";
     }
 
     @RequestMapping(value = {"/cart"}, method = RequestMethod.GET)
     public String home(Model model) {
         model.addAttribute("product", basketService.getAllProduct());
+        model.addAttribute("productToSearch", new Product());
         return "cart";
     }
 
@@ -45,6 +47,7 @@ public class CartController {
 
     /**
      * Данный метод нужно повесить на кнопку(которую надо создать)
+     *
      * @return
      */
     @RequestMapping(value = "/buyAllProduct", method = RequestMethod.GET)
@@ -54,7 +57,7 @@ public class CartController {
     }
 
     /**
-     *Это просто ужасно, но я не успел придумать что-то лучше
+     * Это просто ужасно, но я не успел придумать что-то лучше
      */
     @RequestMapping(value = "/product/addToCart", method = RequestMethod.POST)
     public String addProductToCart(@ModelAttribute(value = "newProduct") Product product,

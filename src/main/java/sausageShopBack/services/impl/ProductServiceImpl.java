@@ -7,7 +7,9 @@ import sausageShopBack.models.Product;
 import sausageShopBack.services.ProductService;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -44,4 +46,27 @@ public class ProductServiceImpl implements ProductService {
     public void delete(Product product) {
         productDao.delete(product);
     }
+
+    public List<Product> search(String str) {
+        String pro = str;
+        ArrayList<Product> productArrayList = new ArrayList<>();
+        if (pro.contains("?")) {
+            String predQue = pro.substring(0, pro.indexOf("?"));
+            String postQue = pro.substring(pro.indexOf("?"), pro.length());
+            postQue = postQue.replace("?", "");
+            if (!postQue.isEmpty()) {
+                predQue = predQue + ".";
+                pro = predQue;
+                pro = pro + postQue;
+            } else {
+                predQue = predQue + ".+";
+                pro = predQue;
+            }
+        }
+        String finalPro = pro;
+                productDao.getAll().stream().filter(product ->
+                        Pattern.matches(finalPro, product.getName())).forEach(productArrayList::add);
+        return productArrayList;
+    }
+
 }
