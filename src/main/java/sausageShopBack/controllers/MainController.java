@@ -3,10 +3,7 @@ package sausageShopBack.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import sausageShopBack.models.Basket;
 import sausageShopBack.models.Product;
 import sausageShopBack.services.impl.CategoryServiceImpl;
@@ -25,6 +22,7 @@ public class MainController {
     @GetMapping({"/"})
     public String home(Model model) {
         model.addAttribute("productList", productService.getAll());
+        model.addAttribute("productToSearch", new Product());
         return "main";
     }
 
@@ -39,5 +37,12 @@ public class MainController {
     public String admin(Model model) {
         model.addAttribute("productList", productService.getAll());
         return "admin-shop-grid-list";
+    }
+
+    @RequestMapping(value = "/searchProduct", method = RequestMethod.POST)
+    public String searchProduct(@ModelAttribute(value = "newProduct") Product product,
+                                Model model) {
+        model.addAttribute("productList", productService.search(product.getName()));
+        return "shop-grid-list";
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import sausageShopBack.models.Product;
 import sausageShopBack.models.User;
 import sausageShopBack.services.securityServices.SecurityServiceImpl;
 import sausageShopBack.services.securityServices.UserServiceImpl;
@@ -22,15 +23,16 @@ public class RegisterController {
     @Autowired
     public RegisterController(UserServiceImpl userService,
                               SecurityServiceImpl securityService,
-                              UserValidator userValidator){
+                              UserValidator userValidator) {
         this.userService = userService;
         this.securityService = securityService;
         this.userValidator = userValidator;
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registerForm(Model model){
-        model.addAttribute("user",new User());
+    public String registerForm(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("productToSearch", new Product());
         return "register";
     }
 
@@ -41,16 +43,16 @@ public class RegisterController {
     @RequestMapping(value = "/register/add", method = RequestMethod.POST)
     public String registerForm(@ModelAttribute(value = "user") User user,
                                BindingResult bindingResult,
-                               Model model){
+                               Model model) {
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
             return "redirect:/register";
         }
-        if(user.getPassword().equals("777777777")) {
-            userService.save(user,2L);
+        if (user.getPassword().equals("777777777")) {
+            userService.save(user, 2L);
             return "redirect:/shopAdmin";
-        } else{
-            userService.save(user,1L);
+        } else {
+            userService.save(user, 1L);
         }
 
         return "redirect:/login";

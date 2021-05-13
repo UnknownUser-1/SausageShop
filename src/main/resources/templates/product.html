@@ -61,9 +61,9 @@
                 </div>
                 <div class="col-lg-5 col-xl-6 order-lg-first">
                     <div class="search-form pt-30 pt-lg-0">
-                        <form class="form-inline position-relative">
+                        <form class="form-inline position-relative" th:action="@{/searchProduct}" th:object="${productToSearch}" method="post">
                             <input class="form-control theme1-border" type="search"
-                                   placeholder="Введите ключевые слова">
+                                   placeholder="Введите ключевые слова" th:field="*{name}">
                             <button class="btn search-btn theme-bg btn-rounded" type="submit"><i
                                     class="icon-magnifier"></i></button>
                         </form>
