@@ -34,24 +34,28 @@ public class ShopGridListController {
     @RequestMapping(value = "/compareProductName", method = RequestMethod.GET)
     public String compareProductName(Model model) {
         model.addAttribute("productList", comporator.compareProductName(productService.getAll()));
+        model.addAttribute("productToSearch", new Product());
         return "shop-grid-list";
     }
 
     @RequestMapping(value = "/reversedCompareProductName", method = RequestMethod.GET)
     public String reversedCompareProductName(Model model) {
         model.addAttribute("productList", comporator.reversedCompareProductName(productService.getAll()));
+        model.addAttribute("productToSearch", new Product());
         return "shop-grid-list";
     }
 
     @RequestMapping(value = "/compareProductPrice", method = RequestMethod.GET)
     public String compareProductPrice(Model model) {
         model.addAttribute("productList", comporator.compareProductPrice(productService.getAll()));
+        model.addAttribute("productToSearch", new Product());
         return "shop-grid-list";
     }
 
     @RequestMapping(value = "/reversedCompareProductPrice", method = RequestMethod.GET)
     public String reversedCompareProductPrice(Model model) {
         model.addAttribute("productList", comporator.reversedCompareProductPrice(productService.getAll()));
+        model.addAttribute("productToSearch", new Product());
         return "shop-grid-list";
     }
 }
