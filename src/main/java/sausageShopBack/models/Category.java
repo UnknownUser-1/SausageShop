@@ -13,12 +13,12 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "category", schema="sausageshop")
+@Table(name = "category", schema = "sausageshop")
 public class Category implements Serializable, Comparable<Category> {
 
 
-    /*@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)*/
-    @Transient
+    @OneToMany
+    @JoinColumn(name = "categoryid")
     private List<Product> products;
 
     @NotNull
@@ -36,7 +36,7 @@ public class Category implements Serializable, Comparable<Category> {
         this.title = title;
     }
 
-    public Category(){
+    public Category() {
         this.products = new ArrayList<>();
     }
 
@@ -44,20 +44,20 @@ public class Category implements Serializable, Comparable<Category> {
         return this.products.size();
     }
 
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
         this.products.add(product);
     }
 
-    public void deleteProduct(int i){
+    public void deleteProduct(int i) {
         this.products.remove(i);
     }
 
-    public Product getProduct(int number){
+    public Product getProduct(int number) {
         return this.products.get(number);
     }
 
     @Override
     public int compareTo(Category o) {
-        return (this.getSize()-o.getSize());
+        return (this.getSize() - o.getSize());
     }
 }

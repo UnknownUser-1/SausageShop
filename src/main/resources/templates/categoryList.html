@@ -125,23 +125,6 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="col-12 col-md-6 position-relative">
-                    <div class="shop-grid-button d-flex align-items-center">
-                        <span class="sort-by">Сортировать по:</span>
-                        <button class="btn-dropdown rounded d-flex justify-content-between" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                            Актуальность <span class="ion-android-arrow-dropdown"></span>
-                        </button>
-                        <div class="dropdown-menu shop-grid-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Актуальность</a>
-                            <a class="dropdown-item" href="#"> По имени А-Я</a>
-                            <a class="dropdown-item" href="#"> По имени Я-А</a>
-                            <a class="dropdown-item" href="#"> По возрастанию цены</a>
-                            <a class="dropdown-item" href="#"> По убыванию цены</a>
-                        </div>
-                    </div>
-                </div>
             </div>
             .
         </div>
@@ -167,10 +150,9 @@
 
                                             </li>
                                         </ul>
-                                        <button class="btn theme-btn--dark1 btn--xl rounded-5" data-toggle="modal"
-                                                data-target="#add-to-cart">
+                                        <a th:href="@{/productInCategory/{id}(id=${category.id})}" class="btn theme-btn--dark1 btn--xl rounded-5" data-toggle="modal">
                                             Посмотреть товары
-                                        </button>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
