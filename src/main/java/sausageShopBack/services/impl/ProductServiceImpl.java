@@ -69,4 +69,14 @@ public class ProductServiceImpl implements ProductService {
         return productArrayList;
     }
 
+    public List<Product> productCertainCategoryId(Long id){
+        List<Product> products = productDao.getAll();
+        List<Product> productList = new ArrayList<>();
+        for (Product product : products) {
+            if (product.getCategoryId().getId().equals(id)) {
+                productList.add(product);
+            }
+        }
+        return productList;
+    }
 }

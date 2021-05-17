@@ -82,7 +82,8 @@
                 </div>
                 <div class="col-lg-5 col-xl-6 order-lg-first">
                     <div class="search-form pt-30 pt-lg-0">
-                        <form class="form-inline position-relative" th:action="@{/searchProduct}" th:object="${productToSearch}" method="post">
+                        <form class="form-inline position-relative" th:action="@{/searchProduct}"
+                              th:object="${productToSearch}" method="post">
                             <input class="form-control theme1-border" type="search"
                                    placeholder="Введите ключевые слова" th:field="*{name}">
                             <button class="btn search-btn theme-bg btn-rounded" type="submit"><i
@@ -150,11 +151,12 @@
         <div class="row">
             <div class="col-12">
                 <h3 class="title text-capitalize mb-30 pb-25"> Log in to your account</h3>
-                <form class="log-in-form" th:action="@{/login}" method="post">
+                <form class="log-in-form" th:action="@{/login}"  method="post">
                     <div class="form-group row">
                         <label for="username" class="col-md-3 col-form-label">UserName</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="username" placeholder="Username"
+                            <input  type="text" class="form-control" id="username"
+                                   placeholder="Username"
                                    name="username">
                         </div>
                     </div>
@@ -162,10 +164,11 @@
                         <label for="inputPassword" class="col-md-3 col-form-label">Password</label>
                         <div class="col-md-6">
                             <div class="input-group mb-2 mr-sm-2">
-                                <input type="password" class="form-control" id="inputPassword" name="password">
+                                <input  type="password" class="form-control" id="inputPassword" name="password">
                                 <div class="input-group-prepend">
                                     <button type="button"
-                                        class="input-group-text  theme-btn--dark1 btn--md show-password">show</button>
+                                            class="input-group-text  theme-btn--dark1 btn--md show-password">show
+                                    </button>
                                 </div>
                             </div>
 
@@ -184,7 +187,7 @@
                     <div class="form-group row text-center mb-0">
                         <div class="col-12">
                             <div class="border-top">
-                                <a th:href="@{/register}" class="no-account">No account? Create one here</a>
+                                <a th:href="@{/register}" class="no-account">Нет аккаунта? Создайте его сейчас</a>
                             </div>
                         </div>
                     </div>
