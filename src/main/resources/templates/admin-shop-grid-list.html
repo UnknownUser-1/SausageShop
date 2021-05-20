@@ -64,9 +64,10 @@
                 </div>
                 <div class="col-lg-5 col-xl-6 order-lg-first">
                     <div class="search-form pt-30 pt-lg-0">
-                        <form class="form-inline position-relative">
+                        <form class="form-inline position-relative" th:action="@{/searchProduct}"
+                              th:object="${productToSearch}" method="post">
                             <input class="form-control theme1-border" type="search"
-                                   placeholder="Введите ключевые слова">
+                                   placeholder="Введите ключевые слова" th:field="*{name}">
                             <button class="btn search-btn theme-bg btn-rounded" type="submit"><i
                                     class="icon-magnifier"></i></button>
                         </form>
@@ -143,6 +144,7 @@
                                 <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
                                    aria-controls="pills-home" aria-selected="true">
                                     <i class="fa fa-th"></i>
+
                                 </a>
                             </li>
                             <li class="nav-item mr-0">
@@ -163,10 +165,10 @@
                         </button>
                         <div class="dropdown-menu shop-grid-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#">Актуальность</a>
-                            <a class="dropdown-item" href="#"> По имени А-Я</a>
-                            <a class="dropdown-item" href="#"> По имени Я-А</a>
-                            <a class="dropdown-item" href="#"> По возрастанию цены</a>
-                            <a class="dropdown-item" href="#"> По убыванию цены</a>
+                            <a class="dropdown-item" th:href="@{/compareProductName}"> По имени А-Я</a>
+                            <a class="dropdown-item" th:href="@{/reversedCompareProductName}"> По имени Я-А</a>
+                            <a class="dropdown-item" th:href="@{/compareProductPrice}"> По возрастанию цены</a>
+                            <a class="dropdown-item" th:href="@{/reversedCompareProductPrice}"> По убыванию цены</a>
                         </div>
                     </div>
                 </div>

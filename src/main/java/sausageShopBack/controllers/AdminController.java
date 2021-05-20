@@ -28,6 +28,7 @@ public class AdminController {
     @GetMapping({"/shop"})
     public String admin(Model model) {
         model.addAttribute("productList", productService.getAll());
+        model.addAttribute("productToSearch", new Product());
         return "admin-shop-grid-list";
     }
 
