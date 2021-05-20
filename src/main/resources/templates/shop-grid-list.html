@@ -158,7 +158,8 @@
                              <span class="ion-android-arrow-dropdown"></span>
                         </button>
                         <div class="dropdown-menu shop-grid-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Актуальность</a>
+                            <a class="dropdown-item" th:href="@{/compareProductRating}">По возрастанию рейтинга</a>
+                            <a class="dropdown-item" th:href="@{/reversedCompareProductRating}">По убыванию рейтинга</a>
                             <a class="dropdown-item" th:href="@{/compareProductName}"> По имени А-Я</a>
                             <a class="dropdown-item" th:href="@{/reversedCompareProductName}"> По имени Я-А</a>
                             <a class="dropdown-item" th:href="@{/compareProductPrice}"> По возрастанию цены</a>
