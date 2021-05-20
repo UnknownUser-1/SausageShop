@@ -36,8 +36,8 @@
                                 <a href="#" id="dropdown1" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">Настройки </a>
                                 <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown1">
-                                    <li><a href="/templates/myaccount.html">Мой аккаунт</a></li>
-                                    <li><a href="/templates/login.html">Выход</a></li>
+                                    <li><a th:href="@{/myaccount}">Мой аккаунт</a></li>
+                                    <li><a th:href="@{/logout}">Выход</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -63,7 +63,7 @@
                     <div class="search-form pt-30 pt-lg-0">
                         <form class="form-inline position-relative">
                             <input class="form-control theme1-border" type="search"
-                                   placeholder="Enter your search key ...">
+                                   placeholder="введите ключевые слова">
                             <button class="btn search-btn theme-bg btn-rounded" type="submit"><i
                                     class="icon-magnifier"></i></button>
                         </form>

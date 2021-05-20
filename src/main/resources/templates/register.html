@@ -152,19 +152,19 @@
                 <div class="log-in-form">
                     <form class="personal-information" th:action="@{/register/add}"  th:object="${user}" method="post">
                         <div class="order-asguest theme1 mb-3">
-                            <span>Already have an account?</span>
-                            <a class="text-muted hover-color" th:action="@{/login}" th:method="post">Log in instead!</a>
+                            <span>Уже есть аккаунт?</span>
+                            <a class="text-muted hover-color" th:action="@{/login}" th:method="post">Войдите!</a>
                         </div>
 
                         <div class="form-group row">
-                            <label  class="col-md-3 col-form-label" >UserName</label>
+                            <label  class="col-md-3 col-form-label" >Имя пользователя</label>
                             <div class="col-md-6">
                                 <input type="text" id="username" class="form-control"  th:field="*{username}" >
-                                <label class="col-md-3 col-form-label" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name error</label>
+                                <label class="col-md-3 col-form-label" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Ошибка имени</label>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="Password" class="col-md-3 col-form-label" >Password</label>
+                            <label for="Password" class="col-md-3 col-form-label" >Пароль</label>
                             <div class="col-md-6">
                                 <div class="input-group mb-2 mr-sm-2">
                                     <input type="password" class="form-control" id="Password"  th:field="*{password}" >
@@ -177,13 +177,13 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label  class="col-md-3 col-form-label" >Confirm Password</label>
+                            <label  class="col-md-3 col-form-label" >Подтвердить пароль</label>
                             <div class="col-md-6">
                                 <div class="input-group mb-2 mr-sm-2">
                                     <input type="password" class="form-control" id="confirmPassword"  th:field="*{confirmPassword}" >
                                     <div class="input-group-prepend">
                                         <button type="button"
-                                                class="input-group-text theme-btn--dark1 btn--md show-password">show</button>
+                                                class="input-group-text theme-btn--dark1 btn--md show-password">показать</button>
                                     </div>
                                 </div>
                             </div>
@@ -191,7 +191,7 @@
                         <div class="form-group row">
                             <div class="col-12">
                                 <div class="sign-btn text-right">
-                                    <input type="submit" value="Submit" class="btn theme-btn--dark1 btn--md"/>
+                                    <input type="submit" value="Отправить" class="btn theme-btn--dark1 btn--md"/>
                                 </div>
                             </div>
                         </div>
