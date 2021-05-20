@@ -1,6 +1,7 @@
 package sausageShopBack.validator;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -11,6 +12,7 @@ import sausageShopBack.services.securityServices.UserServiceImpl;
 
 
 @Component
+@Slf4j
 public class UserValidator implements Validator {
 
     private UserServiceImpl userService;
@@ -30,7 +32,7 @@ public class UserValidator implements Validator {
         User user = (User) o;
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "Required");
-        if (user.getUsername().length() < 8 || user.getUsername().length() > 32) {
+        if (user.getUsername().length() < 5 || user.getUsername().length() > 32) {
             errors.rejectValue("username", "Size.userForm.username");
         }
 

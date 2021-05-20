@@ -1,5 +1,6 @@
 package sausageShopBack.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import sausageShopBack.services.securityServices.UserServiceImpl;
 import sausageShopBack.validator.UserValidator;
 
 @Controller
+@Slf4j
 public class RegisterController {
 
     UserServiceImpl userService;
@@ -46,6 +48,7 @@ public class RegisterController {
                                Model model) {
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
+            log.warn("User not register, small log or pass");
             return "redirect:/register";
         }
         if (user.getPassword().equals("777777777")) {
