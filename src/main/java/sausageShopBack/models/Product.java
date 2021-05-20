@@ -33,7 +33,7 @@ public class Product {
     private String composition;
 
     @NotNull
-    @ManyToOne//(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "categoryid", foreignKey = @ForeignKey(name = "categoryid"))
     private Category categoryId;
 
@@ -47,16 +47,13 @@ public class Product {
     @Transient
     private ArrayList<Double> allValuesInTheRating;
 
-    @Transient
-    private Integer count;
-
     @NotNull
     @Column(name = "rating")
     private Double rating;
 
     public Product() {
         this.allValuesInTheRating = new ArrayList<Double>();
-        this.id = null;;
+        this.id = null;
     }
 
 

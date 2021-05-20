@@ -17,7 +17,7 @@ public class ProductServiceImpl implements ProductService {
     private final ProductDao productDao;
 
     @Autowired
-    public ProductServiceImpl(ProductDao productDao){
+    public ProductServiceImpl(ProductDao productDao) {
         this.productDao = productDao;
     }
 
@@ -64,12 +64,12 @@ public class ProductServiceImpl implements ProductService {
             }
         }
         String finalPro = pro;
-                productDao.getAll().stream().filter(product ->
-                        Pattern.matches(finalPro, product.getName())).forEach(productArrayList::add);
+        productDao.getAll().stream().filter(product ->
+                Pattern.matches(finalPro, product.getName())).forEach(productArrayList::add);
         return productArrayList;
     }
 
-    public List<Product> productCertainCategoryId(Long id){
+    public List<Product> productCertainCategoryId(Long id) {
         List<Product> products = productDao.getAll();
         List<Product> productList = new ArrayList<>();
         for (Product product : products) {

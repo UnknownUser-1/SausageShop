@@ -61,7 +61,8 @@
                 </div>
                 <div class="col-lg-5 col-xl-6 order-lg-first">
                     <div class="search-form pt-30 pt-lg-0">
-                        <form class="form-inline position-relative" th:action="@{/searchProduct}" th:object="${productToSearch}" method="post">
+                        <form class="form-inline position-relative" th:action="@{/searchProduct}"
+                              th:object="${productToSearch}" method="post">
                             <input class="form-control theme1-border" type="search"
                                    placeholder="Введите ключевые слова" th:field="*{name}">
                             <button class="btn search-btn theme-bg btn-rounded" type="submit"><i
@@ -118,11 +119,12 @@
                 </div>
 
             </div>
-            <div class="col-lg-6 mt-5 mt-md-0">
-                <div class="single-product-info">
-                    <form th:action="@{/product/addToCart}" th:object="${productToCart}" method="post">
+            <form th:action="@{/product/addToCart}" method="post">
+                <div class="col-lg-6 mt-5 mt-md-0">
+                    <div class="single-product-info">
                         <div class="single-product-head">
-                            <h2 th:text="${product.name}" class="title mb-20"> </h2>
+                            <input type="hidden" th:field="*{product.id}" />
+                            <h2 th:text="${product.name}" class="title mb-20"></h2>
                             <div class="star-content mb-20">
                                 <span class="star-on"><i class="ion-ios-star"></i> </span>
                                 <p class="h6" th:object="${product}" th:text="*{rating}"></p>
@@ -139,9 +141,11 @@
                         <div class="product-footer">
                             <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-30">
                                 <div class="count d-flex">
+
                                     <label>
                                         <!--                  ///////////////////////////Тут добавлять потом в корзину/////////////////////////////////-->
-                                        <input type="number" min="1" max="10" step="1" value="1" th:field="${productToCart.count}">
+                                        <input type="number" min="1" max="10" step="1" value="1"
+                                               th:field="${cart.quantity}">
                                     </label>
                                 </div>
                                 <div>
@@ -152,9 +156,9 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </section>

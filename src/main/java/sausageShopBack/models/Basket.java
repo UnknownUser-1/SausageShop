@@ -32,11 +32,11 @@ public class Basket {
         rat.removeAll(rat);
     }
 
-    public void add(Product pr) {
-        products.add(pr);
-        count.add(pr.getCount());
-
-    }
+//    public void add(Product pr) {
+//        products.add(pr);
+//        count.add(pr.getCount());
+//
+//    }
 
     public ArrayList<Product> getAllProducts(){
         return this.products;

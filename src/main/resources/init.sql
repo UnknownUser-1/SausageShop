@@ -37,6 +37,26 @@ CREATE TABLE IF NOT EXISTS sausageShop.product (
          rating DOUBLE PRECISION,
           categoryId INTEGER,
            FOREIGN KEY (categoryId) REFERENCES sausageShop.category (id) ON DELETE CASCADE );
+		   
+		   CREATE TABLE IF NOT EXISTS sausageShop.purchasesList
+(
+    id        serial PRIMARY KEY,
+    userID    integer NOT NULL,
+    productID integer NOT NULL,
+    quantity  integer NOT NULL,
+    FOREIGN KEY (productID) REFERENCES sausageShop.product (id) ON DELETE CASCADE,
+    FOREIGN KEY (userID) REFERENCES sausageShop.users (id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS sausageShop.cart
+(
+    id        serial PRIMARY KEY,
+    userID    integer NOT NULL,
+    productID integer NOT NULL,
+    quantity  integer NOT NULL,
+    FOREIGN KEY (productID) REFERENCES sausageShop.product (id) ON DELETE CASCADE,
+    FOREIGN KEY (userID) REFERENCES sausageShop.users (id) ON DELETE CASCADE
+);
 
 INSERT INTO sausageShop.category (title) VALUES ('колбаски');
 INSERT INTO sausageShop.category (title) VALUES ('мяско');
