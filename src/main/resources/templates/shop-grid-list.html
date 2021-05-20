@@ -150,14 +150,11 @@
                     </nav>
                 </div>
                 <div class="col-12 col-md-6 position-relative">
-                    <div class="shop-grid-button d-flex align-items-center">
-                        <span class="sort-by">Сортировать по:</span>
-                        <button class="btn-dropdown rounded d-flex justify-content-between" type="button"
-                                id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                             <span class="ion-android-arrow-dropdown"></span>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Сортировать по:
                         </button>
-                        <div class="dropdown-menu shop-grid-menu" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" th:href="@{/compareProductRating}">По возрастанию рейтинга</a>
                             <a class="dropdown-item" th:href="@{/reversedCompareProductRating}">По убыванию рейтинга</a>
                             <a class="dropdown-item" th:href="@{/compareProductName}"> По имени А-Я</a>
