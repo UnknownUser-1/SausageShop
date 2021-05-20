@@ -49,4 +49,14 @@ public class Comporator {
         products.sort(productComparator.reversed());
         return products;
     }
+    public List<Product> compareProductRating(List<Product> products) {
+        Comparator<Product> productComparator = Comparator.comparing(Product::getRating);
+        products.sort(productComparator);
+        return products;
+    }
+    public List<Product> reversedCompareProductRating(List<Product> products) {
+        Comparator<Product> productComparator = Comparator.comparing(Product::getRating);
+        products.sort(productComparator.reversed());
+        return products;
+    }
 }

@@ -63,6 +63,18 @@ public class AdminShopGridListController {
         productService.update(product);
         return "redirect:/admin/shop";
     }
+    @RequestMapping(value = "/compareProductRating", method = RequestMethod.GET)
+    public String compareProductRating(Model model) {
+        model.addAttribute("productList", comporator.compareProductRating(productService.getAll()));
+        model.addAttribute("productToSearch", new Product());
+        return "admin-shop-grid-list";
+    }
+    @RequestMapping(value = "/reversedCompareProductRating", method = RequestMethod.GET)
+    public String reversedCompareProductRating(Model model) {
+        model.addAttribute("productList", comporator.reversedCompareProductRating(productService.getAll()));
+        model.addAttribute("productToSearch", new Product());
+        return "admin-shop-grid-list";
+    }
 
     @RequestMapping(value = "/compareProductName", method = RequestMethod.GET)
     public String compareProductName(Model model) {
