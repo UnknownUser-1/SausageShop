@@ -31,7 +31,11 @@ public class Purchase {
     @Column(name = "quantity")
     private Integer quantity;
 
+    @Column(name = "evaluation")
+    private  Double evaluation;
+
     public Purchase(){
         userId = null;
+        evaluation = null;
     }
 }

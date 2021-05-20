@@ -1,13 +1,14 @@
 package sausageShopBack.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import sausageShopBack.dao.CartDao;
+import org.springframework.stereotype.Service;
 import sausageShopBack.dao.PurchaseDao;
 import sausageShopBack.models.Purchase;
 import sausageShopBack.services.PurchaseService;
 
 import java.util.List;
 
+@Service
 public class PurchaseServiceImpl implements PurchaseService {
 
     private final PurchaseDao purchaseDao;
@@ -40,5 +41,9 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public void delete(Purchase purchase) {
         this.purchaseDao.delete(purchase);
+    }
+
+    public List<Purchase> getAllByUserId(Long id) {
+        return this.purchaseDao.findAllByUserId(id);
     }
 }

@@ -6,7 +6,6 @@ import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import sausageShopBack.dao.PurchaseDao;
-import sausageShopBack.dao.PurchaseDao;
 import sausageShopBack.models.Purchase;
 
 import java.util.List;
@@ -67,5 +66,19 @@ public class PurchaseDaoImpl implements PurchaseDao {
         session.delete(purch);
         transaction.commit();
         session.close();
+    }
+
+    @Override
+    public List<Purchase> findAllByUserId(Long userId) {
+        Session session = this.sessionFactory.openSession();
+        List<Purchase> purch = session.createQuery("from Purchase ").list();
+        Transaction transaction = session.beginTransaction();
+        transaction.commit();
+        session.close();
+        for (int i = 0; i < purch.size(); i++) {
+            if (!userId.equals(purch.get(i).getUserId().getId()))
+                purch.remove(i);
+        }
+        return purch;
     }
 }

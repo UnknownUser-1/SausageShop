@@ -38,15 +38,17 @@ CREATE TABLE IF NOT EXISTS sausageShop.product (
           categoryId INTEGER,
            FOREIGN KEY (categoryId) REFERENCES sausageShop.category (id) ON DELETE CASCADE );
 		   
-		   CREATE TABLE IF NOT EXISTS sausageShop.purchasesList
+CREATE TABLE IF NOT EXISTS sausageShop.purchaseslist
 (
-    id        serial PRIMARY KEY,
-    userID    integer NOT NULL,
-    productID integer NOT NULL,
-    quantity  integer NOT NULL,
+    id         serial PRIMARY KEY,
+    userID     integer          NOT NULL,
+    productID  integer          NOT NULL,
+    quantity   integer          NOT NULL,
+    evaluation double precision,
     FOREIGN KEY (productID) REFERENCES sausageShop.product (id) ON DELETE CASCADE,
     FOREIGN KEY (userID) REFERENCES sausageShop.users (id) ON DELETE CASCADE
-);
+	);
+	
 
 CREATE TABLE IF NOT EXISTS sausageShop.cart
 (

@@ -188,7 +188,7 @@
                                 <span class="whish-title" th:text="${cart.productId.price}"></span>
                             </td>
                             <td class="text-center">
-                                <a th:href="@{/buyCart/{id}(id=${cart.id})}" class="btn theme-btn--dark1 btn--lg">Купить</a>
+                                <a th:href="@{/buy/{id}(id=${cart.id})}" class="btn theme-btn--dark1 btn--lg">Купить</a>
                             </td>
                             <td class="text-center">
                                 <a th:href="@{/deleteCart/{id}(id=${cart.id})}"> <span class="trash"><i
@@ -197,6 +197,7 @@
                         </tr>
                         </tbody>
                     </table>
+                    <a th:href="@{/buyAll}" class="btn theme-btn--dark1 btn--lg">Купить</a>
                 </div>
             </div>
         </div>
