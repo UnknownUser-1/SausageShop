@@ -6,33 +6,35 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import sausageShopBack.models.Product;
 import sausageShopBack.services.impl.ProductServiceImpl;
-import sausageShopBack.services.securityServices.UserServiceImpl;
-
-import java.security.Principal;
 
 @Controller
-public class MainController {
+@RequestMapping("/admin")
+public class AdminController {
 
     ProductServiceImpl productService;
-    UserServiceImpl user;
 
     @Autowired
-    public MainController(ProductServiceImpl productService, UserServiceImpl user) {
+    public AdminController(ProductServiceImpl productService) {
         this.productService = productService;
-        this.user = user;
     }
 
-    @GetMapping({"/"})
+    @GetMapping({""})
     public String home(Model model) {
         model.addAttribute("productList", productService.getAll());
         model.addAttribute("productToSearch", new Product());
-        return "main";
+        return "admin-main";
+    }
+
+    @GetMapping({"/shop"})
+    public String admin(Model model) {
+        model.addAttribute("productList", productService.getAll());
+        return "admin-shop-grid-list";
     }
 
     @RequestMapping(value = "/searchProduct", method = RequestMethod.POST)
     public String searchProduct(@ModelAttribute(value = "productToSearch") Product product,
                                 Model model) {
         model.addAttribute("productList", productService.search(product.getName()));
-        return "shop-grid-list";
+        return "admin-shop-grid-list";
     }
 }

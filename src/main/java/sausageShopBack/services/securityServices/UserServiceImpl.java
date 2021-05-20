@@ -9,6 +9,7 @@ import sausageShopBack.models.Role;
 import sausageShopBack.models.User;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -41,13 +42,25 @@ public class UserServiceImpl implements UserService {
         userDao.save(user);
     }
 
-    public void update(User user){
+    public void update(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userDao.update(user);
+    }
+
+    public void delete(User user) {
+        userDao.delete(user);
     }
 
     @Override
     public User findByUsername(String username) {
         return userDao.findByUsername(username);
+    }
+
+    public User getById(Long username) {
+        return userDao.getById(username);
+    }
+
+    public List<User> getAll() {
+        return userDao.getAll();
     }
 }

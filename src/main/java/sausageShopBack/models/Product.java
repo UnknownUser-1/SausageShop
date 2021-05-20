@@ -33,14 +33,14 @@ public class Product {
     private String composition;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne//(cascade = {CascadeType.ALL})
     @JoinColumn(name = "categoryid", foreignKey = @ForeignKey(name = "categoryid"))
     private Category categoryId;
 
 
     @Id
     @NotNull
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -56,6 +56,7 @@ public class Product {
 
     public Product() {
         this.allValuesInTheRating = new ArrayList<Double>();
+        this.id = null;;
     }
 
 
@@ -83,7 +84,7 @@ public class Product {
             rt += rating1;
         }
         rt = rt + rat;
-        rating = rt / this.allValuesInTheRating.size()+1;
+        rating = rt / this.allValuesInTheRating.size() + 1;
     }
 
 

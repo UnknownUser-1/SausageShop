@@ -1,9 +1,11 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Магазин мясных изделий SausageShop</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+
 
     <link rel="stylesheet" href="/css/fontawesome.min.css" type="text/css"/>
     <link rel="stylesheet" href="/css/ionicons.min.css" type="text/css"/>
@@ -13,8 +15,13 @@
     <link rel="stylesheet" href="/css/plugins/plugins.css" type="text/css"/>
     <link rel="stylesheet" href="/css/style.min.css" type="text/css"/>
     <link rel="shortcut icon" type="image/x-icon" href="/pct/icon.ico"/>
+    <title>Категорька</title>
+
+
 </head>
+
 <body>
+<!-- header start -->
 <header>
     <!-- header top start -->
     <div class="header-top theme1 bg-dark py-15">
@@ -29,8 +36,8 @@
                                 <a href="#" id="dropdown1" data-toggle="dropdown" aria-haspopup="true"
                                    aria-expanded="false">Настройки </a>
                                 <ul class="topnav-submenu dropdown-menu" aria-labelledby="dropdown1">
-                                    <li><a th:href="@{/myaccount}">Мой аккаунт</a></li>
-                                    <li><a th:href="@{/logout}">Выйти</a></li>
+                                    <li><a href="/templates/myaccount.html">Мой аккаунт</a></li>
+                                    <li><a href="/templates/login.html">Выход</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -54,10 +61,9 @@
                 </div>
                 <div class="col-lg-5 col-xl-6 order-lg-first">
                     <div class="search-form pt-30 pt-lg-0">
-                        <form class="form-inline position-relative" th:action="@{/searchProduct}"
-                              th:object="${productToSearch}" method="post">
+                        <form class="form-inline position-relative">
                             <input class="form-control theme1-border" type="search"
-                                   placeholder="Введите ключевые слова" th:field="*{name}">
+                                   placeholder="Enter your search key ...">
                             <button class="btn search-btn theme-bg btn-rounded" type="submit"><i
                                     class="icon-magnifier"></i></button>
                         </form>
@@ -75,74 +81,66 @@
                 <div class="col-lg-10 offset-lg-2 d-flex flex-wrap align-items-center position-relative">
                     <ul class="main-menu d-flex">
                         <li class="active ml-0">
-                            <a href="/" class="pl-0">Главная</a>
+                            <a href="/admin/" class="pl-0">Главная</a>
                         </li>
                         <li class="position-static">
                             <ul>
-                                <li class="mega-menu-title"><a th:href="@{/shop}">Магазин</a></li>
+                                <li class="mega-menu-title"><a th:href="@{/admin/shop}">Продукты</a></li>
                             </ul>
                         </li>
                         <li class="position-static">
                             <ul>
-                                <li class="mega-menu-title"><a th:href="@{/cart}">Корзина</a></li>
+                                <li class="mega-menu-title"><a th:href="@{/admin/categories}">Категории</a></li>
                             </ul>
                         </li>
-                        <li><a th:href="@{/contact}">Где мы</a></li>
-                        <li><a th:href="@{/categoryList}">Категории</a></li>
+                        <li><a th:href="@{/admin/userPage}">Пользователи</a></li>
                     </ul>
-
                 </div>
             </div>
         </div>
     </nav>
     <!-- header bottom end -->
 </header>
-<!-- main slider end -->
-<!-- product tab start -->
-<section class="product-tab bg-white pt-50 pb-80">
-    <div class="container">
-        <div class="product-tab-nav mb-35">
-            <div class="row align-items-center">
-                <div class="col-12">
-                    <div class="section-title text-center mb-30">
-                        <h2 class="title text-dark text-capitalize">Наши продукты</h2>
+<!-- header end -->
+<!-- product-single start -->
+<form action="#" th:action="@{/admin/editCategory}" method="post">
+    <section class="product-single theme1 pt-60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="product-sync-init mb-20">
+                        <div class="single-product">
+                            <div class="product-thumb">
+                                <img src="/pct/sos.png" alt="product-thumb">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-        <!-- product-tab-nav end -->
-        <div class="tab-content" id="pills-tabContent">
-            <!-- first tab-pane -->
-            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div class="row grid-view theme1">
-                    <div th:each="product: ${productList}" class="col-sm-6 col-lg-4 col-xl-3 mb-30">
-                        <a th:href="@{/product/{id}(id=${product.id})}">
-                            <div class="card product-card">
-                                <div class="card-body">
-                                    <!-- product links -->
-                                    <div class="product-desc py-0">
-                                        <p class="h2" th:text="${product.name}"></p>
-                                        <p class="h6" th:text="${product.description}"></p>
-                                        <div class="star-rating">
-                                            <span class="ion-ios-star"></span>
-                                            <p class="h6" th:text="${product.rating}"></p>
-                                        </div>
-                                        <div class="d-flex align-items-center justify-content-between">
-                                            <h6 class="product-price" th:text="${product.price}"></h6>
-                                            <button class="pro-btn" data-toggle="modal" data-target="#add-to-cart"><i
-                                                    class="icon-basket"></i></button>
-                                        </div>
+                <div class="col-lg-6 mt-5 mt-md-0">
+                    <div class="single-product-info">
+                        <div class="single-product-head">
+                            <input type="hidden" th:field="*{category.id}" />
+                            <input type="text" th:field="*{category.title}" class="title mb-20"/>
+                            <div class="product-footer">
+                                <div class="product-count style d-flex flex-column flex-sm-row mt-30 mb-30">
+                                    <div>
+                                        <button type="submit"
+                                                class="btn theme-btn--dark1 btn--xl mt-5 mt-sm-0 rounded-5">
+                                            <span class="mr-2"><i class="ion-android-add"></i></span>
+                                            Сохранить
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</form>
 
+<!-- ******************************************************-->
 
 <script src="/js/vendor/jquery-3.5.1.min.js"></script>
 <script src="/js/vendor/modernizr-3.7.1.min.js"></script>
@@ -152,5 +150,7 @@
 <script src="/js/plugins/plugins.js"></script>
 <script src="/js/main.js"></script>
 
+
 </body>
+
 </html>

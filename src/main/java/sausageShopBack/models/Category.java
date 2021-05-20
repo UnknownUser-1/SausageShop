@@ -27,7 +27,7 @@ public class Category implements Serializable, Comparable<Category> {
 
     @Id
     @NotNull
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id = null;
 

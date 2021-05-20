@@ -74,7 +74,7 @@
             <div class="row align-items-center">
                 <div class="col-sm-6 col-lg-2 order-first">
                     <div class="logo text-center text-sm-left mb-30 mb-sm-0">
-                        <a href="main.html"><img src="../pct/logo.png" alt="logo"></a>
+                        <a href="/"><img src="../pct/logo.png" alt="logo"></a>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-5 col-xl-4">
@@ -82,7 +82,8 @@
                 </div>
                 <div class="col-lg-5 col-xl-6 order-lg-first">
                     <div class="search-form pt-30 pt-lg-0">
-                        <form class="form-inline position-relative" th:action="@{/searchProduct}" th:object="${productToSearch}" method="post">
+                        <form class="form-inline position-relative" th:action="@{/searchProduct}"
+                              th:object="${productToSearch}" method="post">
                             <input class="form-control theme1-border" type="search"
                                    placeholder="Введите ключевые слова" th:field="*{name}">
                             <button class="btn search-btn theme-bg btn-rounded" type="submit"><i
@@ -102,7 +103,7 @@
                 <div class="col-lg-10 offset-lg-2 d-flex flex-wrap align-items-center position-relative">
                     <ul class="main-menu d-flex">
                         <li class="active ml-0">
-                            <a href="main.html" class="pl-0">Главная</a>
+                            <a href="/" class="pl-0">Главная</a>
                         </li>
                         <li class="position-static">
                             <ul>
@@ -135,7 +136,7 @@
             </div>
             <div class="col-12">
                 <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                    <li class="breadcrumb-item"><a href="/templates/main.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">my account</li>
                 </ol>
             </div>
@@ -172,19 +173,23 @@
                         <div class="myaccount-content">
                             <h3>Подробнее об аккаунте</h3>
                             <div class="account-details-form">
-                                <form action="#"  th:action="@{/myaccount/update}" th:object="${updateUser}" method="post">
+                                <form action="#" th:action="@{/myaccount/update}" th:object="${updateUser}"
+                                      method="post">
                                     <div class="row">
                                         <div class="col-lg-6 col-12 mb-30">
-                                            <label id="first-name" th:text="${userName}" type="text">Имя пользователя</label>
+                                            <label id="first-name" th:text="${userName}" type="text">Имя
+                                                пользователя</label>
                                         </div>
                                         <div class="col-lg-6 col-12 mb-30">
-                                            <input id="last-name" placeholder="Новое имя пользователя" type="text" th:field="*{username}">
+                                            <input id="last-name" placeholder="Новое имя пользователя" type="text"
+                                                   th:field="*{username}">
                                         </div>
                                         <div class="col-12 mb-30">
                                             <h4>Изменение пароля</h4>
                                         </div>
                                         <div class="col-lg-6 col-12 mb-30">
-                                            <input id="new-pwd" placeholder="Новый пароль" type="password" th:field="*{password}">
+                                            <input id="new-pwd" placeholder="Новый пароль" type="password"
+                                                   th:field="*{password}">
                                         </div>
 
                                         <div class="col-lg-6 col-12 mb-30">
@@ -211,15 +216,15 @@
 <!-- product tab end -->
 <!-- footer strat -->
 
-    <!--*********************** 
-        all js files
-     ***********************-->
+<!--***********************
+    all js files
+ ***********************-->
 
-    <!--****************************************************** 
-        jquery,modernizr ,poppe,bootstrap,plugins and main js
-     ******************************************************-->
+<!--******************************************************
+    jquery,modernizr ,poppe,bootstrap,plugins and main js
+ ******************************************************-->
 
-<script src="/js/vendor/jquery-3.5.1.min.js" ></script>
+<script src="/js/vendor/jquery-3.5.1.min.js"></script>
 <script src="/js/vendor/modernizr-3.7.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
 <script src="/js/plugins/jquery-ui.min.js"></script>
@@ -230,17 +235,17 @@
 
 <!-- Use the minified version files listed below for better performance and remove the files listed above -->
 
-    <!--*************************** 
-          Minified  js 
-     ***************************-->
+<!--***************************
+      Minified  js
+ ***************************-->
 
-    <!--*********************************** 
-         vendor,plugins and main js
-      ***********************************-->
+<!--***********************************
+     vendor,plugins and main js
+  ***********************************-->
 
-    <!-- <script src="assets/js/vendor/vendor.min.js"></script>
-    <script src="assets/js/plugins/plugins.min.js"></script>
-    <script src="assets/js/main.js"></script> -->
+<!-- <script src="assets/js/vendor/vendor.min.js"></script>
+<script src="assets/js/plugins/plugins.min.js"></script>
+<script src="assets/js/main.js"></script> -->
 
 
 </body>

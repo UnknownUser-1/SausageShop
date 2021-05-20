@@ -49,3 +49,8 @@ INSERT INTO sausageShop.product (nameProduct, price, description, composition, r
 VALUES ('Вяленое мясо', 800, 'Оно вкусное', '200% вяленого мяса', 0 , 2);
 INSERT INTO sausageShop.product (nameProduct, price, description, composition, rating, categoryId)
 VALUES ('Копченное мясо', 683, 'Оно стоит 683 рубля', 'Его ингридиенты стоили 683 рубля', 0 , 2);
+
+INSERT INTO sausageShop.roles (name) VALUES ('ROLE_USER');
+INSERT INTO sausageShop.roles (name) VALUES ('ROLE_ADMIN');
+
+

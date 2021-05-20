@@ -50,7 +50,7 @@ public class RegisterController {
         }
         if (user.getPassword().equals("777777777")) {
             userService.save(user, 2L);
-            return "redirect:/shopAdmin";
+            return "redirect:/admin";
         } else {
             userService.save(user, 1L);
         }

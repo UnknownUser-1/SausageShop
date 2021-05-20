@@ -74,7 +74,7 @@
             <div class="row align-items-center">
                 <div class="col-sm-6 col-lg-2 order-first">
                     <div class="logo text-center text-sm-left mb-30 mb-sm-0">
-                        <a href="main.html"><img src="../pct/logo.png" alt="logo"></a>
+                        <a href="/"><img src="../pct/logo.png" alt="logo"></a>
                     </div>
                 </div>
                 <div class="col-sm-6 col-lg-5 col-xl-4">
@@ -137,7 +137,7 @@
             </div>
             <div class="col-12">
                 <ol class="breadcrumb bg-transparent m-0 p-0 align-items-center justify-content-center">
-                    <li class="breadcrumb-item"><a href="/templates/main.html">Домой</a></li>
+                    <li class="breadcrumb-item"><a href="/">Домой</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Войти в свой аккаунт</li>
                 </ol>
             </div>
@@ -151,11 +151,11 @@
         <div class="row">
             <div class="col-12">
                 <h3 class="title text-capitalize mb-30 pb-25"> Log in to your account</h3>
-                <form class="log-in-form" th:action="@{/login}"  method="post">
+                <form class="log-in-form" th:action="@{/login}" method="post">
                     <div class="form-group row">
                         <label for="username" class="col-md-3 col-form-label">UserName</label>
                         <div class="col-md-6">
-                            <input  type="text" class="form-control" id="username"
+                            <input type="text" class="form-control" id="username"
                                    placeholder="Username"
                                    name="username">
                         </div>
@@ -164,7 +164,7 @@
                         <label for="inputPassword" class="col-md-3 col-form-label">Password</label>
                         <div class="col-md-6">
                             <div class="input-group mb-2 mr-sm-2">
-                                <input  type="password" class="form-control" id="inputPassword" name="password">
+                                <input type="password" class="form-control" id="inputPassword" name="password">
                                 <div class="input-group-prepend">
                                     <button type="button"
                                             class="input-group-text  theme-btn--dark1 btn--md show-password">show

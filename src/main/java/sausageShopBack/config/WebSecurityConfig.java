@@ -10,10 +10,16 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import sausageShopBack.dao.UserDao;
+import sausageShopBack.models.Role;
+import sausageShopBack.models.User;
 import sausageShopBack.services.securityServices.SecurityServiceImpl;
 import sausageShopBack.services.securityServices.UserDetailsServiceImpl;
 
@@ -27,10 +33,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder,
-                             UserDetailsServiceImpl userDetailsService){
+                             UserDetailsServiceImpl userDetailsService) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.userDetailsService = userDetailsService;
     }
+
+
+    @Autowired
+    private SpringAuthenticationSuccessHandler successHandler;
 
 
     @Bean
@@ -52,16 +62,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
-                .antMatchers("/shopAdmin/**").hasRole( "ADMIN")
+                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/myaccount").hasAnyRole("USER", "ADMIN")
                 .antMatchers("/cart").hasRole("USER")
                 .antMatchers("/product/**").hasRole("USER")
                 .antMatchers("/**").permitAll()
                 .and()
                 .formLogin().loginPage("/login")
+                .successHandler(successHandler)
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
-                ;
+        ;
     }
 
     @Override
