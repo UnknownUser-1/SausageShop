@@ -66,4 +66,32 @@ public class MyAccountController {
 
         return "redirect:/shop";
     }
+
+    @RequestMapping(value = {"/admin/myaccount"}, method = RequestMethod.GET)
+    public String homeAdmin(Model model) {
+        model.addAttribute("userName", securityService.findLoggedInUsername().getUsername());
+        model.addAttribute("updateUser", new User());
+        model.addAttribute("productToSearch", new Product());
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        model.addAttribute("purchs", purchaseService.getAllByUserId(userService.findByUsername(auth.getName()).getId()));
+        return "admin-myaccount";
+    }
+
+    @RequestMapping(value = {"/admin/myaccount/update"}, method = RequestMethod.POST)
+    public String updateUserAdmin(@ModelAttribute(value = "updateUser") User user,
+                                  BindingResult bindingResult,
+                                  Model model) {
+        userValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "redirect:/admin/myaccount";
+        }
+        user.setId(securityService.findLoggedInUsername().getId());
+        user.setRoles(securityService.findLoggedInUsername().getRoles());
+
+        userService.update(user);
+
+        securityService.updateLoggedUser(user.getUsername(), user.getPassword());
+
+        return "redirect:/shop";
+    }
 }
