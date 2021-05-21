@@ -8,9 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import sausageShopBack.models.Basket;
-import sausageShopBack.models.Category;
-import sausageShopBack.models.Product;
 
 import javax.sql.DataSource;
 import java.util.Properties;
