@@ -72,8 +72,6 @@ public class MyAccountController {
         model.addAttribute("userName", securityService.findLoggedInUsername().getUsername());
         model.addAttribute("updateUser", new User());
         model.addAttribute("productToSearch", new Product());
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("purchs", purchaseService.getAllByUserId(userService.findByUsername(auth.getName()).getId()));
         return "admin-myaccount";
     }
 

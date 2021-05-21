@@ -102,13 +102,32 @@ public class CartController {
         return "redirect:/shop";
     }
 
-    @RequestMapping(value = "/evaluate/{id}", method = RequestMethod.GET)
-    public String evaluate(@PathVariable(value = "id") Long id, @ModelAttribute(value = "evaluation") Purchase p) {
-        purchaseService.update(p);
-        return "redirect:/myaccount";
+
+    @GetMapping({"/purch/{id}"})
+    public String goToPurch(@PathVariable(value = "id") Long id, Model model) {
+        Purchase purch = purchaseService.getById(id);
+        model.addAttribute("purch", purch);
+        model.addAttribute("productToSearch", new Product());
+        return "purchase";
     }
 
-    //_____________________________________________________________
 
-
+    @PostMapping({"/evaluate"})
+    public String evaluate(@ModelAttribute("purch") Purchase purch) {
+        purch.setUserId(purchaseService.getById(purch.getId()).getUserId());
+        purch.setProductId(purchaseService.getById(purch.getId()).getProductId());
+        purchaseService.update(purch);
+        Product prod = purch.getProductId();
+        double count = 0;
+        double summ = 0;
+        for (Purchase p : purchaseService.getAll()) {
+            if (p.getProductId().getId().equals(prod.getId())) {
+                count++;
+                summ += p.getEvaluation();
+            }
+        }
+        prod.setRating(summ / count);
+        productService.update(prod);
+        return "redirect:/myaccount";
+    }
 }

@@ -244,25 +244,12 @@
                                                               th:text="${purch.productId.price}"></span>
                                                     </td>
                                                     <td class="text-center">
-                                                        <a th:href="@{/evaluate/{id}(id=${purch.id})}"
+                                                        <a th:href="@{/purch/{id}(id=${purch.id})}"
                                                            class="btn theme-btn--dark1 btn--lg">Оценить</a>
                                                     </td>
                                                     <td class="text-center">
-                                                        <div class="product-count style">
-                                                            <div class="count d-flex justify-content-center">
-                                                                <label>
-                                                                    <input type="number" min="1" max="10" step="1"
-                                                                           th:value="${purch.evaluation}">
-                                                                </label>
-                                                                <div class="button-group">
-                                                                    <button class="count-btn increment"><i
-                                                                            class="fas fa-chevron-up"></i></button>
-                                                                    <button class="count-btn decrement"><i
-                                                                            class="fas fa-chevron-down"></i>
-                                                                    </button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <span class="whish-title"
+                                                              th:text="${purch.evaluation}"></span>
                                                     </td>
                                                 </tr>
                                                 </tbody>

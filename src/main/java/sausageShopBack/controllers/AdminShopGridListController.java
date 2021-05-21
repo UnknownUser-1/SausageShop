@@ -44,7 +44,7 @@ public class AdminShopGridListController {
     @GetMapping({"/addProduct"})
     public String addProduct(Model model) {
         Product product = new Product();
-        product.setRating(0);
+        product.setRating(0.0);
         model.addAttribute("product", product);
         model.addAttribute("category", new CatId(1L));
         return "admin-product-new";
