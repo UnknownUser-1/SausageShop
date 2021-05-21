@@ -18,7 +18,7 @@ public class Comporator {
 
     @Autowired
     public Comporator(CategoryServiceImpl categoryService) {
-        Comporator.categoryService = categoryService;
+        this.categoryService = categoryService;
     }
 
     private Comporator() {
