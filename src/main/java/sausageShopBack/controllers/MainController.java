@@ -33,6 +33,6 @@ public class MainController {
     public String searchProduct(@ModelAttribute(value = "productToSearch") Product product,
                                 Model model) {
         model.addAttribute("productList", productService.search(product.getName()));
-        return "shop-grid-list";
+        return "search-product";
     }
 }

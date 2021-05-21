@@ -62,6 +62,17 @@
                 <div class="col-sm-6 col-lg-5 col-xl-4">
                     <!-- search-form end -->
                 </div>
+                <div class="col-lg-5 col-xl-6 order-lg-first">
+                    <div class="search-form pt-30 pt-lg-0">
+                        <form class="form-inline position-relative" th:action="@{/searchProduct}"
+                              th:object="${productToSearch}" method="post">
+                            <input class="form-control theme1-border" type="search"
+                                   placeholder="Введите ключевые слова" th:field="*{name}">
+                            <button class="btn search-btn theme-bg btn-rounded" type="submit"><i
+                                    class="icon-magnifier"></i></button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -74,20 +85,22 @@
                 <div class="col-lg-10 offset-lg-2 d-flex flex-wrap align-items-center position-relative">
                     <ul class="main-menu d-flex">
                         <li class="active ml-0">
-                            <a href="/admin/" class="pl-0">Главная</a>
+                            <a th:href="@{/}" class="pl-0">Главная</a>
                         </li>
                         <li class="position-static">
                             <ul>
-                                <li class="mega-menu-title"><a th:href="@{/admin/shop}">Продукты</a></li>
+                                <li class="mega-menu-title"><a th:href="@{/shop}">Магазин</a></li>
                             </ul>
                         </li>
                         <li class="position-static">
                             <ul>
-                                <li class="mega-menu-title"><a th:href="@{/admin/categories}">Категории</a></li>
+                                <li class="mega-menu-title"><a th:href="@{/cart}">Корзина</a></li>
                             </ul>
                         </li>
-                        <li><a th:href="@{/admin/userPage}">Пользователи</a></li>
+                        <li><a th:href="@{/contact}">Где мы</a></li>
+                        <li><a th:href="@{/categoryList}">Категории</a></li>
                     </ul>
+
                 </div>
             </div>
         </div>
@@ -114,14 +127,6 @@
 </nav>
 <!-- breadcrumb-section end -->
 <!-- product tab start -->
-<a th:href="@{/admin/addCategory}">
-    <button class="btn theme-btn--dark1 btn--xl rounded-5 align-self-center"
-            data-toggle="modal"
-            data-target="#add-to-cart">
-        Добавить категорию
-    </button>
-</a>
-
 <div class="product-tab bg-white pt-80 pb-80">
     <div class="container">
         <div class="grid-nav-wraper bg-lighten2 mb-30">
@@ -133,6 +138,7 @@
                                 <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
                                    aria-controls="pills-home" aria-selected="true">
                                     <i class="fa fa-th"></i>
+
                                 </a>
                             </li>
                             <li class="nav-item mr-0">
@@ -147,37 +153,68 @@
         </div>
         <!-- product-tab-nav end -->
         <div class="tab-content" id="pills-tabContent">
+            <!-- first tab-pane -->
+            <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="row grid-view theme1">
+                    <div th:each="product: ${productList}" class="col-sm-6 col-lg-4 col-xl-3 mb-30">
+                        <a th:href="@{/product/{id}(id=${product.id})}">
+                            <div class="card product-card">
+                                <div class="card-body">
+                                    <div class="product-desc py-0">
+                                        <p class="h2" th:text="${product.name}"></p>
+                                        <p class="h6" th:text="${product.description}"></p>
+                                        <div class="star-rating">
+                                            <span class="ion-ios-star"></span>
+                                            <p class="h6" th:text="${product.rating}"></p>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <h6 class="product-price" th:text="${product.price}"></h6>
+                                            <button class="pro-btn" data-toggle="modal" data-target="#add-to-cart"><i
+                                                    class="icon-basket"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <!-- second tab-pane -->
             <div class="tab-pane fade show active" id="pills-profile" role="tabpanel"
                  aria-labelledby="pills-profile-tab">
                 <div class="row grid-view-list theme1">
-                    <div th:each="category:${categories}" class="col-12 mb-30">
-                        <div class="card product-card">
-                            <div class="card-body">
-                                <div class="media flex-column flex-md-row">
-                                    <div class="media-body pl-30">
-                                        <div class="product-desc py-0">
-                                            <h3 class="title" th:text="${category.title}"><a></a></h3>
+                    <div th:each="product:${productList}" class="col-12 mb-30">
+                        <a th:href="@{/product/{id}(id=${product.id})}">
+                            <div class="card product-card">
+                                <div class="card-body">
+                                    <div class="media flex-column flex-md-row">
+                                        <div class="media-body pl-30">
+                                            <div class="product-desc py-0">
+                                                <h3 class="title" th:text="${product.name}"><a></a></h3>
+                                                <div class="star-rating mb-10">
+                                                    <span class="ion-ios-star"></span>
+                                                    <p class="h6" th:text="${product.rating}"></p>
+                                                </div>
+                                                <h6 class="product-price" th:text="${product.price}">Цена</h6>
+                                            </div>
+                                            <ul class="product-list-des">
+                                                <li th:text="${product.composition}">
+                                                    Состав
+                                                </li>
+                                                <li th:text="${product.description}">
+                                                    Описание
+                                                </li>
+                                            </ul>
+                                            <button class="btn theme-btn--dark1 btn--xl rounded-5" data-toggle="modal"
+                                                    data-target="#add-to-cart">
+                                                Добавить в корзину
+                                            </button>
                                         </div>
-                                        <a th:href="@{/admin/categoryUpdate/{id}(id=${category.id})}">
-                                            <button class="btn theme-btn--dark1 btn--xl rounded-5"
-                                                    data-toggle="modal"
-                                                    data-target="#add-to-cart">
-                                                Изменить
-                                            </button>
-                                        </a>
-                                        <a th:href="@{/admin/categoryDelete/{id}(id=${category.id})}">
-                                            <button class="btn theme-btn--dark1 btn--xl rounded-5"
-                                                    data-toggle="modal"
-                                                    data-target="#add-to-cart">
-                                                Удалить
-                                            </button>
-                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- product-list End -->
+                            <!-- product-list End -->
+                        </a>
                     </div>
                 </div>
             </div>
